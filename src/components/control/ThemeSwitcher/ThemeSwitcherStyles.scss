@@ -1,0 +1,22 @@
+@import "../../../assets/styles/designVariables";
+
+.b-themeSwitcher-dark, .b-themeSwitcher-light {
+  &__text {
+    font-size: $typography-label-md-font-size;
+    font-weight: $typography-label-md-font-weight;
+    letter-spacing: $typography-label-md-letter-spacing;
+    line-height: $typography-label-md-line-height;
+  }
+}
+
+.b-themeSwitcher-dark {
+  &__text {
+    color: $dark-text-color;
+  }
+}
+
+.b-themeSwitcher-light {
+  &__text {
+    color: $light-text-color;
+  }
+}

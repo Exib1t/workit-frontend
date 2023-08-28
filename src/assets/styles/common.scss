@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  transition: .3s background-color, color;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  background: red;
+}
+
+.outlet {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 60px;
+}
+
+.b-loader {
+  position: absolute;
+  z-index: 2;
+  top: 60px;
+  width: 100%;
+
+  &.-hidden {
+    display: none;
+  }
+}

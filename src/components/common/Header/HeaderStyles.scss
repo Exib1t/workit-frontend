@@ -1,0 +1,41 @@
+@import "../../../assets/styles/designVariables";
+
+.b-header-light, .b-header-dark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $ref-spacing-8;
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: $ref-spacing-16;
+  }
+
+  &__button {
+    font-weight: 700 !important;
+    letter-spacing: 1.3px !important;
+  }
+}
+
+.b-header-light {
+  background-color: $light-header-bg;
+}
+
+.b-header-dark {
+  background-color: $dark-header-bg;
+}

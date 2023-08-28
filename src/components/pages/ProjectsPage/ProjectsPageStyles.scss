@@ -1,0 +1,17 @@
+@import "../../../assets/styles/designVariables";
+
+.b-projectsPage-dark, .b-projectsPage-light {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: no-repeat url("../../../assets/images/pattern-bg.png") center / cover;
+}
+
+.b-projectsPage-dark {
+  background-color: $dark-page-bg;
+}
+
+.b-projectsPage-light {
+  background-color: $light-page-bg;
+}

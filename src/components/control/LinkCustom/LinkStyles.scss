@@ -1,0 +1,49 @@
+@import "../../../assets/styles/designVariables";
+
+.b-link-dark, .b-link-light {
+  position: relative;
+  font-size: $typography-body-lg-font-size;
+  font-weight: $typography-body-lg-font-weight;
+  letter-spacing: $typography-body-lg-letter-spacing;
+  text-decoration: none;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 1px;
+    transition: .3s;
+  }
+}
+
+.b-link-dark {
+  color: $dark-link-primary-color;
+
+  &::before {
+    background: $dark-link-primary-color;
+  }
+
+  &:hover::before {
+    left: 50%;
+    width: 100%;
+    height: 1px;
+  }
+}
+
+.b-link-light {
+  color: $light-link-primary-color;
+
+  &::before {
+    background: $light-link-primary-color;
+  }
+
+  &:hover::before {
+    left: 50%;
+    width: 100%;
+    height: 1px;
+  }
+}

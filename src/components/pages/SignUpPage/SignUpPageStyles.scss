@@ -1,0 +1,111 @@
+@import "../../../assets/styles/designVariables";
+
+.b-signUp-dark, .b-signUp-light {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: no-repeat url("../../../assets/images/pattern-bg.png") center / cover;
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    padding: $ref-spacing-24;
+    box-sizing: border-box;
+    border-radius: $border-radius-12;
+    gap: $ref-spacing-12;
+    box-shadow: $shadow-1;
+  }
+
+  &__title {
+    font-size: $typography-headline-md-font-size;
+    font-weight: $typography-headline-md-font-weight;
+    letter-spacing: $typography-headline-md-letter-spacing;
+    line-height: $typography-headline-md-line-height;
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: $ref-spacing-6;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $ref-spacing-6;
+  }
+
+  &__input, &__button {
+    width: 100%;
+  }
+
+  .b-input {
+    width: 100%;
+  }
+
+  &__errorLabel {
+    font-size: $typography-body-md-font-size;
+    font-weight: $typography-body-md-font-weight;
+    letter-spacing: $typography-body-md-letter-spacing;
+    line-height: $typography-body-md-line-height;
+    color: $error !important;
+  }
+}
+
+.b-signUp-light {
+  background-color: $light-page-bg;
+
+  &__card {
+    background-color: $light-card-bg;
+  }
+
+  &__title {
+    color: $light-text-color;
+  }
+
+  &__controlLabel {
+    .MuiCheckbox-root svg path {
+      fill: $light-checkbox-color;
+    }
+
+    .Mui-checked svg path {
+      fill: $primary;
+    }
+
+    .MuiTypography-root {
+      color: $light-checkbox-text-color;
+    }
+  }
+}
+
+.b-signUp-dark {
+  background-color: $dark-page-bg;
+
+  &__card {
+    background-color: $dark-card-bg;
+  }
+
+  &__title {
+    color: $dark-text-color;
+  }
+
+  &__controlLabel {
+    .MuiCheckbox-root svg path {
+      fill: $dark-checkbox-color;
+    }
+
+    .Mui-checked svg path {
+      fill: $primary;
+    }
+
+    .MuiTypography-root {
+      color: $dark-checkbox-text-color;
+    }
+  }
+}

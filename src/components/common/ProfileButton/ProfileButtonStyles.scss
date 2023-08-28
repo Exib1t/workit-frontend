@@ -1,0 +1,51 @@
+@import '../../../assets/styles/designVariables';
+
+.b-profileButton-dark, .b-profileButton-light {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: $ref-spacing-8;
+
+  &__name {
+    font-size: $typography-body-md-font-size;
+    font-weight: $typography-body-md-font-weight;
+    letter-spacing: $typography-body-md-letter-spacing;
+    line-height: 1;
+  }
+
+  &__email {
+    font-size: $typography-body-sm-font-size;
+    font-weight: $typography-body-sm-font-weight;
+    letter-spacing: $typography-body-sm-letter-spacing;
+    line-height: 1;
+  }
+
+  &__column {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: $ref-spacing-4;
+  }
+}
+
+.b-profileButton-dark {
+
+  &__name {
+    color: $dark-on-bgd-srf-2;
+  }
+
+  &__email {
+    color: $dark-on-bgd-srf-3;
+  }
+}
+
+.b-profileButton-light {
+
+  &__name {
+    color: $light-on-bgd-srf-2;
+  }
+
+  &__email {
+    color: $light-on-bgd-srf-3;
+  }
+}

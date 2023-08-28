@@ -1,0 +1,25 @@
+@import "../../../assets/styles/designVariables";
+
+.b-iconButton-dark, .b-iconButton-light {
+  border-radius: 10px !important;
+}
+
+.b-iconButton-dark {
+  &:hover {
+    background-color: $dark-ripple !important;
+  }
+
+  .MuiTouchRipple-ripple {
+    background: $dark-ripple;
+  }
+}
+
+.b-iconButton-light {
+  &:hover {
+    background-color: $light-ripple !important;
+  }
+
+  .MuiTouchRipple-ripple {
+    background: $light-ripple;
+  }
+}

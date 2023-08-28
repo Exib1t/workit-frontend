@@ -1,0 +1,42 @@
+@import "../../../assets/styles/designVariables";
+
+.b-avatar-dark, .b-avatar-light {
+  cursor: pointer;
+
+  &.small {
+    width: 24px;
+    height: 24px;
+    font-size: $typography-body-xs-font-size;
+    font-weight: $typography-body-xs-font-weight;
+    letter-spacing: $typography-body-xs-letter-spacing;
+    line-height: $typography-body-xs-line-height;
+  }
+
+  &.medium {
+    width: 36px;
+    height: 36px;
+    font-size: $typography-body-md-font-size;
+    font-weight: $typography-body-md-font-weight;
+    letter-spacing: $typography-body-md-letter-spacing;
+    line-height: $typography-body-md-line-height;
+  }
+
+  &.big {
+    width: 56px;
+    height: 56px;
+    font-size: $typography-body-lg-font-size;
+    font-weight: $typography-body-lg-font-weight;
+    letter-spacing: $typography-body-lg-letter-spacing;
+    line-height: $typography-body-lg-line-height;
+  }
+}
+
+.b-avatar-dark {
+  background-color: $dark-bgd-default !important;
+  color: $dark-on-bgd-srf-2 !important;
+}
+
+.b-avatar-light {
+  background-color: $light-bgd-default !important;
+  color: $light-on-bgd-srf-2 !important;
+}

@@ -1,0 +1,83 @@
+@import "../../../assets/styles/designVariables";
+
+.b-container-dark .b-input {
+
+  .MuiFormLabel-root {
+    color: $dark-input-label-color;
+  }
+
+  .MuiInputBase-root {
+    color: $dark-text-color;
+
+    &:hover .MuiOutlinedInput-notchedOutline {
+      border-color: $dark-input-border-color-hover;
+    }
+  }
+
+  .MuiFormHelperText-root {
+    color: $dark-helperText-color;
+  }
+
+  .Mui-focused {
+    &.MuiFormLabel-root {
+      color: $primary;
+    }
+
+    .MuiOutlinedInput-notchedOutline {
+      border-color: $primary !important;
+    }
+  }
+
+  .MuiOutlinedInput-notchedOutline {
+    border-color: $dark-input-border-color;
+  }
+
+  .MuiInputBase-input:-webkit-autofill,
+  .MuiInputBase-input:-webkit-autofill:hover,
+  .MuiInputBase-input:-webkit-autofill:focus,
+  .MuiInputBase-input:-webkit-autofill:active{
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: $dark-text-color;
+  }
+}
+
+.b-container-light .b-input {
+
+  .MuiFormLabel-root {
+    color: $light-input-label-color;
+  }
+
+  .MuiInputBase-root {
+    color: $light-text-color;
+
+    &:hover .MuiOutlinedInput-notchedOutline {
+      border-color: $light-input-border-color-hover;
+    }
+  }
+
+  .MuiFormHelperText-root {
+    color: $light-helperText-color;
+  }
+
+  .Mui-focused {
+    &.MuiFormLabel-root {
+      color: $primary;
+    }
+
+    .MuiOutlinedInput-notchedOutline {
+      border-color: $primary !important;
+    }
+  }
+
+  .MuiOutlinedInput-notchedOutline {
+    border-color: $light-input-border-color;
+  }
+
+  .MuiInputBase-input:-webkit-autofill,
+  .MuiInputBase-input:-webkit-autofill:hover,
+  .MuiInputBase-input:-webkit-autofill:focus,
+  .MuiInputBase-input:-webkit-autofill:active{
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: $light-text-color;
+  }
+}

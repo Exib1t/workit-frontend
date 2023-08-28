@@ -1,0 +1,17 @@
+@import "../../../assets/styles/designVariables";
+
+.b-icon-dark.-fill * {
+  fill: $dark-on-bgd-srf-3;
+}
+
+.b-icon-light.-fill *{
+  fill: $light-on-bgd-srf-3;
+}
+
+.b-icon-dark.-stroke * {
+  stroke: $dark-on-bgd-srf-3;
+}
+
+.b-icon-light.-stroke *{
+  stroke: $light-on-bgd-srf-3;
+}
