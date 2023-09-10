@@ -6,20 +6,20 @@
 
 .b-iconButton-dark {
   &:hover {
-    background-color: $dark-ripple !important;
+    background-color: $dark-state-bgd-variant-hover !important;
   }
 
   .MuiTouchRipple-ripple {
-    background: $dark-ripple;
+    background: $dark-state-bgd-variant-hover;
   }
 }
 
 .b-iconButton-light {
   &:hover {
-    background-color: $light-ripple !important;
+    background-color: $light-state-bgd-variant-hover !important;
   }
 
   .MuiTouchRipple-ripple {
-    background: $light-ripple;
+    background: $light-state-bgd-variant-hover;
   }
 }

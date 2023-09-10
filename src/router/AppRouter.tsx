@@ -10,14 +10,13 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store";
 import { refreshThunk } from "../store/thunks/authThunks.ts";
 import { setToken } from "../store/reducers/authSlice.ts";
-import { Box, LinearProgress } from "@mui/material";
 import ProjectsPage from "../components/pages/ProjectsPage/ProjectsPage.tsx";
 import { setTheme } from "../store/reducers/globalSlice.ts";
 
 const AppRouter = () => {
   const isAuthenticated = useAuthenticated();
   const dispatch = useAppDispatch();
-  const { token, isLoading } = useAppSelector((state) => state.auth);
+  const { token } = useAppSelector((state) => state.auth);
   const themeClass = useThemeClass("b-container");
 
   useEffect(() => {
@@ -37,6 +36,10 @@ const AppRouter = () => {
     }
   }, [dispatch, token]);
 
+  useEffect(() => {
+    document.body.className = themeClass;
+  }, [themeClass]);
+
   const privateRoutes = () => (
     <>
       <Route index element={<Navigate to={AppRoutes.projects} />} />
@@ -55,9 +58,6 @@ const AppRouter = () => {
 
   return (
     <div className={themeClass}>
-      <Box className={`b-loader ${isLoading ? "" : "-hidden"}`}>
-        <LinearProgress />
-      </Box>
       <Routes>
         <Route path="/" element={<Layout />}>
           {isAuthenticated ? privateRoutes() : authRoutes()}

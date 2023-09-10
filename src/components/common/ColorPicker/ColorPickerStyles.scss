@@ -1,0 +1,26 @@
+@import "../../../assets/styles/designVariables";
+
+.b-colorPicker-dark, .b-colorPicker-light {
+  display: flex;
+  gap: $ref-spacing-4;
+
+  &__wrapper {
+    border-radius: $border-radius-2;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+  }
+}
+
+.b-colorPicker-dark {
+  &__wrapper.-checked {
+    border-color: $dark-primary;
+  }
+}
+
+.b-colorPicker-light {
+  &__wrapper.-checked {
+    border-color: $light-primary;
+  }
+}

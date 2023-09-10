@@ -2,16 +2,21 @@
 
 .b-projectsPage-dark, .b-projectsPage-light {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: $ref-spacing-12;
   background: no-repeat url("../../../assets/images/pattern-bg.png") center / cover;
+
+  &__container {
+    width: 100%;
+    height: 100%;
+    border-radius: $border-radius-8;
+    overflow: hidden;
+  }
 }
 
 .b-projectsPage-dark {
-  background-color: $dark-page-bg;
+  background-color: $dark-bgd-variant;
 }
 
 .b-projectsPage-light {
-  background-color: $light-page-bg;
+  background-color: $light-bgd-variant;
 }

@@ -9,11 +9,24 @@ import ThemeSwitcher from "../../control/ThemeSwitcher/ThemeSwitcher.tsx";
 import ProfileButton from "../ProfileButton/ProfileButton.tsx";
 import LogoutButton from "../../control/LogoutButton/LogoutButton.tsx";
 import MoreButton from "../MoreButton/MoreButton.tsx";
+import HeaderMenu from "./parts/HeaderMenu.tsx";
+import { MouseEventHandler, useState } from "react";
 
 const Header = () => {
+  const [isHeaderMenuOpen, setIsHeaderMenuOpen] = useState<Element | null>(
+    null,
+  );
   const headerClass = useThemeClass("b-header");
   const navigate = useNavigate();
   const isAuthenticated = useAuthenticated();
+
+  const handleHeaderMenuClose = () => {
+    setIsHeaderMenuOpen(null);
+  };
+
+  const handleHeaderMenuOpen: MouseEventHandler<HTMLButtonElement> = (e) => {
+    setIsHeaderMenuOpen(e.currentTarget);
+  };
 
   return (
     <header className={headerClass}>
@@ -27,7 +40,7 @@ const Header = () => {
             email="dmaznyak2604@gmail.com"
           />
           <LogoutButton />
-          <MoreButton />
+          <MoreButton onClick={handleHeaderMenuOpen} />
         </div>
       ) : (
         <div className={`${headerClass}__buttons`}>
@@ -47,6 +60,11 @@ const Header = () => {
           </ButtonCustom>
         </div>
       )}
+      <HeaderMenu
+        isOpen={!!isHeaderMenuOpen}
+        handleClose={handleHeaderMenuClose}
+        anchorEl={isHeaderMenuOpen}
+      />
     </header>
   );
 };

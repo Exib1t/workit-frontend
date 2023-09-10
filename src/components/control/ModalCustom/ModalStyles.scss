@@ -1,0 +1,68 @@
+@import "../../../assets/styles/designVariables";
+
+.b-modal-dark, .b-modal-light {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: $ref-spacing-12 $ref-spacing-20;
+  box-sizing: border-box;
+  border-radius: $border-radius-4;
+
+  &__controls {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: $ref-spacing-6;
+  }
+
+  &__title {
+    margin-bottom: $ref-spacing-12;
+    font-size: $typography-title-lg-font-size;
+    line-height: $typography-title-lg-line-height;
+    font-weight: $typography-title-lg-font-weight;
+    letter-spacing: $typography-title-lg-letter-spacing;
+  }
+
+  &__text {
+    width: 100%;
+    text-align: left;
+    margin-bottom: $ref-spacing-20;
+    font-size: $typography-body-md-font-size;
+    line-height: $typography-body-lg-line-height;
+    font-weight: $typography-body-lg-font-weight;
+    letter-spacing: $typography-body-lg-letter-spacing;
+  }
+}
+
+.b-modal-dark {
+  background: $dark-srf-default;
+
+  &__title {
+    color: $dark-on-bgd-srf-1;
+  }
+
+  &__text {
+    color: $dark-on-bgd-srf-2;
+  }
+}
+
+.b-modal-light {
+  background: $light-srf-default;
+
+  &__title {
+    color: $light-on-bgd-srf-1;
+  }
+
+  &__text {
+    color: $light-on-bgd-srf-2;
+  }
+}

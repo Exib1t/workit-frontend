@@ -8,10 +8,26 @@
   fill: $light-on-bgd-srf-3;
 }
 
+.b-icon-dark.-svgFill {
+  fill: $dark-on-bgd-srf-3;
+}
+
+.b-icon-light.-svgFill {
+  fill: $light-on-bgd-srf-3;
+}
+
 .b-icon-dark.-stroke * {
   stroke: $dark-on-bgd-srf-3;
 }
 
 .b-icon-light.-stroke *{
   stroke: $light-on-bgd-srf-3;
+}
+
+.b-icon-dark.-fillPrimary * {
+  fill: $dark-primary;
+}
+
+.b-icon-light.-fillPrimary *{
+  fill: $light-primary;
 }

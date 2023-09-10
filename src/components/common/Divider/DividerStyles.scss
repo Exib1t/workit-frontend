@@ -1,0 +1,16 @@
+@import "../../../assets/styles/designVariables";
+
+.b-divider-dark, .b-divider-light {
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+.b-divider-dark {
+  background: $dark-on-bgd-srf-5;
+}
+
+.b-divider-light {
+  background: $light-on-bgd-srf-5;
+}

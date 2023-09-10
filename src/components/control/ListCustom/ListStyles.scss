@@ -1,0 +1,9 @@
+@import "../../../assets/styles/designVariables";
+
+.b-list-dark, .b-list-light {
+  display: flex;
+  flex-direction: column;
+  gap: $ref-spacing-0;
+  margin: $ref-spacing-0;
+  padding: $ref-spacing-0;
+}

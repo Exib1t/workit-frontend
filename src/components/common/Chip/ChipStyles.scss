@@ -1,0 +1,135 @@
+@import '../../../assets/styles/designVariables';
+
+.b-chipsDiscipline-dark,
+.b-chipsDiscipline-light {
+  padding: $ref-spacing-2 $ref-spacing-8;
+  border-radius: $border-radius-2;
+  gap: $ref-spacing-0;
+  height: $ref-sizing-24;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  user-select: none;
+  transition: all 200ms ease-out;
+
+  &__label_text {
+    font-family: $typography-body-md-font-family;
+    font-weight: $typography-body-md-font-weight;
+    line-height: $typography-body-md-line-height;
+    font-size: $typography-body-md-font-size;
+    letter-spacing: $typography-body-md-letter-spacing;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.b-chipsDiscipline-dark {
+  &.-pink {
+    background-color: $dark-tertiary-container-pink;
+  }
+  &.-peach {
+    background-color: $dark-tertiary-container-peach;
+  }
+  &.-sand {
+    background-color: $dark-tertiary-container-sand;
+  }
+  &.-lime {
+    background-color: $dark-tertiary-container-lime;
+  }
+  &.-blue {
+    background-color: $dark-tertiary-container-blue;
+  }
+  &.-indigo {
+    background-color: $dark-tertiary-container-indigo;
+  }
+  &.-purple {
+    background-color: $dark-tertiary-container-purple;
+  }
+  &.-gray {
+    background-color: $dark-tertiary-container-gray;
+  }
+  &__label_text {
+    color: $dark-on-bgd-srf-2;
+    &.-pink {
+      color: $dark-on-tertiary-container-pink-variant;
+    }
+    &.-peach {
+      color: $dark-on-tertiary-container-peach-variant;
+    }
+    &.-sand {
+      color: $dark-on-tertiary-container-sand-variant;
+    }
+    &.-lime {
+      color: $dark-on-tertiary-container-lime-variant;
+    }
+    &.-blue {
+      color: $dark-on-tertiary-container-blue-variant;
+    }
+    &.-indigo {
+      color: $dark-on-tertiary-container-indigo-variant;
+    }
+    &.-purple {
+      color: $dark-on-tertiary-container-purple-variant;
+    }
+    &.-gray {
+      color: $dark-on-tertiary-container-gray-variant;
+    }
+  }
+}
+
+.b-chipsDiscipline-light {
+  &.-pink {
+    background-color: $light-tertiary-container-pink;
+  }
+  &.-peach {
+    background-color: $light-tertiary-container-peach;
+  }
+  &.-sand {
+    background-color: $light-tertiary-container-sand;
+  }
+  &.-lime {
+    background-color: $light-tertiary-container-lime;
+  }
+  &.-blue {
+    background-color: $light-tertiary-container-blue;
+  }
+  &.-indigo {
+    background-color: $light-tertiary-container-indigo;
+  }
+  &.-purple {
+    background-color: $light-tertiary-container-purple;
+  }
+  &.-gray {
+    background-color: $light-tertiary-container-gray;
+  }
+  &__label_text {
+    color: $light-on-bgd-srf-3;
+
+    &.-pink {
+      color: $light-on-tertiary-container-pink-variant;
+    }
+    &.-peach {
+      color: $light-on-tertiary-container-pech-variant;
+    }
+    &.-sand {
+      color: $light-on-tertiary-container-sand-variant;
+    }
+    &.-lime {
+      color: $light-on-tertiary-container-lime-variant;
+    }
+    &.-blue {
+      color: $light-on-tertiary-container-blue-variant;
+    }
+    &.-indigo {
+      color: $light-on-tertiary-container-indigo-variant;
+    }
+    &.-purple {
+      color: $light-on-tertiary-container-purple-variant;
+    }
+    &.-gray {
+      color: $light-on-tertiary-container-gray-variant;
+    }
+  }
+}

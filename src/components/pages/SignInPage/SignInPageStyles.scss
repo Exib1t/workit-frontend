@@ -42,7 +42,7 @@
   }
 
   &__input, &__button {
-    width: 100%;
+    width: 100% !important;
   }
 
   &__errorLabel {
@@ -55,53 +55,53 @@
 }
 
 .b-signIn-light {
-  background-color: $light-page-bg;
+  background-color: $light-bgd-variant;
 
   &__card {
-    background-color: $light-card-bg;
+    background-color: $light-srf-variant;
   }
 
   &__title {
-    color: $light-text-color;
+    color: $light-on-bgd-srf-3;
   }
 
   &__controlLabel {
     .MuiCheckbox-root svg path {
-      fill: $light-checkbox-color;
+      fill: $light-on-bgd-srf-3;
     }
 
     .Mui-checked svg path {
-      fill: $primary;
+      fill: $light-primary;
     }
 
     .MuiTypography-root {
-      color: $light-checkbox-text-color;
+      color: $light-on-bgd-srf-3;
     }
   }
 }
 
 .b-signIn-dark {
-  background-color: $dark-page-bg;
+  background-color: $dark-bgd-variant;
 
   &__card {
-    background-color: $dark-card-bg;
+    background-color: $dark-srf-variant;
   }
 
   &__title {
-    color: $dark-text-color;
+    color: $dark-on-bgd-srf-3;
   }
 
   &__controlLabel {
     .MuiCheckbox-root svg path {
-      fill: $dark-checkbox-color;
+      fill: $dark-on-bgd-srf-3;
     }
 
     .Mui-checked svg path {
-      fill: $primary;
+      fill: $dark-primary;
     }
 
     .MuiTypography-root {
-      color: $dark-checkbox-text-color;
+      color: $dark-on-bgd-srf-3;
     }
   }
 }

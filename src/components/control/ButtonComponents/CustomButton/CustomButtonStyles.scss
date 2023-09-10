@@ -1,0 +1,578 @@
+@import '../../../../assets/styles/designVariables';
+
+.b-button-dark,
+.b-button-light {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: $border-radius-2;
+  position: relative;
+  transition: all 200ms ease-out;
+  width: max-content;
+  box-sizing: border-box;
+
+  &_customIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.-disabled {
+    pointer-events: none;
+  }
+
+  &.-loading {
+    pointer-events: none;
+
+    .buttonTitle,
+    .buttonIcon {
+      opacity: 0;
+    }
+  }
+
+  // Styles of the button by general size
+  &.-xs {
+    gap: $ref-spacing-4;
+    height: $ref-sizing-24;
+  }
+
+  &.-sm {
+    gap: $ref-spacing-4;
+    height: 28px;
+  }
+
+  &.-md {
+    gap: $ref-spacing-8;
+    height: $ref-sizing-32;
+  }
+
+  // Icon size by button size
+
+  .buttonIcon {
+    &.-xs,
+    &.-sm {
+      width: 12px;
+      height: 12px;
+    }
+
+    &.-md {
+      width: 16px;
+      height: 16px;
+    }
+
+    &.-xs,
+    &.-sm,
+    &.-md {
+      svg {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+  }
+
+  // Font size
+
+  &_primary,
+  &_secondary,
+  &_tertiary,
+  &_accept,
+  &_decline {
+    .buttonTitle {
+      &.-xs,
+      &.-sm {
+        font-family: $typography-label-md-font-family;
+        font-weight: $typography-label-md-font-weight;
+        line-height: $typography-label-md-line-height;
+        font-size: $typography-label-md-font-size;
+        letter-spacing: $typography-label-md-letter-spacing;
+      }
+
+      &.-md {
+        font-family: $typography-label-lg-font-family;
+        font-weight: $typography-label-lg-font-weight;
+        line-height: $typography-label-lg-line-height;
+        font-size: $typography-label-lg-font-size;
+        letter-spacing: $typography-label-lg-letter-spacing;
+      }
+    }
+  }
+
+  &_text-plain,
+  &_text-activated,
+  &_selection-plain,
+  &_selection-activated {
+    .buttonTitle {
+      &.-xs,
+      &.-sm {
+        font-family: $typography-body-sm-font-family;
+        font-weight: $typography-body-sm-font-weight;
+        line-height: $typography-body-sm-line-height;
+        font-size: $typography-body-sm-font-size;
+        letter-spacing: $typography-body-sm-letter-spacing;
+      }
+
+      &.-md {
+        font-family: $typography-body-md-font-family;
+        font-weight: $typography-body-md-font-weight;
+        line-height: $typography-body-md-line-height;
+        font-size: $typography-body-md-font-size;
+        letter-spacing: $typography-body-md-letter-spacing;
+      }
+    }
+  }
+
+  // CustomButton size
+
+  &.-sm {
+    padding: $ref-button-sm;
+  }
+
+  &.-md {
+    padding: $ref-button-md;
+  }
+
+  // CustomButton size with icon
+
+  &.-sm-icon {
+    padding: $ref-button-sm-icon;
+  }
+
+  &.-md-icon {
+    padding: $ref-button-md-icon;
+  }
+
+  // Text button size
+
+  &.-text-xs {
+    padding: $ref-button-text-xs;
+  }
+
+  &.-text-sm {
+    padding: $ref-button-text-sm;
+  }
+
+  &.-text-md {
+    padding: $ref-button-text-md;
+  }
+
+  // Text button with icon size
+
+  &.-text-xs-icon {
+    padding: $ref-button-text-xs-icon;
+  }
+
+  &.-text-sm-icon {
+    padding: $ref-button-text-sm-icon;
+  }
+
+  &.-text-md-icon {
+    padding: $ref-button-text-md-icon;
+  }
+}
+
+.b-button-dark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.-disabled {
+    opacity: $dark-disabled;
+  }
+
+  // CustomButton type
+
+  &_primary {
+    background-color: $dark-primary;
+
+    &:hover {
+      background-color: $dark-state-primary-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $dark-state-primary-press;
+    }
+
+    &_title {
+      color: $dark-on-primary;
+    }
+
+    &_loader_circle {
+      stroke: $dark-on-primary !important;
+    }
+  }
+
+  &_secondary {
+    background-color: $dark-secondary;
+
+    &:hover {
+      background-color: $dark-state-secondary-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $dark-state-secondary-press;
+    }
+
+    &_title {
+      color: $dark-on-secondary;
+    }
+
+    &_loader_circle {
+      stroke: $dark-on-secondary !important;
+    }
+  }
+
+  &_tertiary {
+    background-color: transparent;
+    border: 1px solid $dark-secondary;
+
+    &:hover {
+      background-color: $dark-state-secondary-container-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $dark-state-secondary-container-press;
+    }
+
+    &_title {
+      color: $dark-secondary;
+    }
+
+    &_loader_circle {
+      stroke: $dark-secondary !important;
+    }
+  }
+
+  &_text-plain {
+    background-color: transparent;
+
+    &:hover {
+      background-color: $dark-state-secondary-container-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $dark-state-secondary-container-press;
+    }
+
+    &_title {
+      color: $dark-secondary;
+    }
+
+    &_loader_circle {
+      stroke: $dark-secondary !important;
+    }
+  }
+
+  &_text-activated {
+    background-color: transparent;
+
+    &:hover {
+      background-color: $dark-state-primary-container-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $dark-state-primary-container-press;
+    }
+
+    &_title {
+      color: $dark-primary;
+    }
+
+    &_loader_circle {
+      stroke: $dark-primary !important;
+    }
+  }
+
+  &_selection-plain {
+    background-color: $dark-selection-off;
+
+    &:hover {
+      background-color: $dark-state-selection-off-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $dark-state-selection-off-press;
+    }
+
+    &_title {
+      color: $dark-secondary;
+    }
+
+    &_loader_circle {
+      stroke: $dark-secondary !important;
+    }
+  }
+
+  &_selection-activated {
+    background-color: $dark-selection-on;
+    border: 1px solid $dark-primary;
+
+    &:hover {
+      background-color: $dark-state-selection-on-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $dark-state-selection-on-press;
+    }
+
+    &_title {
+      color: $dark-primary;
+    }
+
+    &_loader_circle {
+      stroke: $dark-primary !important;
+    }
+  }
+
+  &_accept {
+    background-color: $dark-sys-success;
+
+    &:hover {
+      background-color: $dark-state-sys-success-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $dark-state-sys-success-press;
+    }
+
+    &_title {
+      color: $dark-on-sys;
+    }
+
+    &_loader_circle {
+      stroke: $dark-on-sys !important;
+    }
+  }
+
+  &_decline {
+    background-color: $dark-sys-danger;
+
+    &:hover {
+      background-color: $dark-state-sys-danger-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $dark-state-sys-danger-press;
+    }
+
+    &_title {
+      color: $dark-on-sys;
+    }
+
+    &_loader_circle {
+      stroke: $dark-on-sys !important;
+    }
+  }
+}
+
+.b-button-light {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.-disabled {
+    opacity: $light-disabled;
+  }
+
+  // CustomButton type
+
+  &_primary {
+    background-color: $light-primary;
+
+    &:hover {
+      background-color: $light-state-primary-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $light-state-primary-press;
+    }
+
+    &_title {
+      color: $light-on-primary;
+    }
+
+    &_loader_circle {
+      stroke: $light-on-primary !important;
+    }
+  }
+
+  &_secondary {
+    background-color: $light-secondary;
+
+    &:hover {
+      background-color: $light-state-secondary-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $light-state-secondary-press;
+    }
+
+    &_title {
+      color: $light-on-secondary;
+    }
+
+    &_loader_circle {
+      stroke: $light-on-secondary !important;
+    }
+  }
+
+  &_tertiary {
+    background-color: transparent;
+    border: 1px solid $light-secondary;
+
+    &:hover {
+      background-color: $light-state-secondary-container-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $light-state-secondary-container-press;
+    }
+
+    &_title {
+      color: $light-secondary;
+    }
+
+    &_loader_circle {
+      stroke: $light-secondary !important;
+    }
+  }
+
+  &_text-plain {
+    background-color: transparent;
+
+    &:hover {
+      background-color: $light-state-secondary-container-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $light-state-secondary-container-press;
+    }
+
+    &_title {
+      color: $light-secondary;
+    }
+
+    &_loader_circle {
+      stroke: $light-secondary !important;
+    }
+  }
+
+  &_text-activated {
+    background-color: transparent;
+
+    &:hover {
+      background-color: $light-state-primary-container-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $light-state-primary-container-press;
+    }
+
+    &_title {
+      color: $light-primary;
+    }
+
+    &_loader_circle {
+      stroke: $light-primary !important;
+    }
+  }
+
+  &_selection-plain {
+    background-color: $light-selection-off;
+
+    &:hover {
+      background-color: $light-state-selection-off-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $light-state-selection-off-press;
+    }
+
+    &_title {
+      color: $light-secondary;
+    }
+
+    &_loader_circle {
+      stroke: $light-secondary !important;
+    }
+  }
+
+  &_selection-activated {
+    background-color: $light-selection-on;
+    border: 1px solid $light-primary;
+
+    &:hover {
+      background-color: $light-state-selection-on-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $light-state-selection-on-press;
+    }
+
+    &_title {
+      color: $light-primary;
+    }
+
+    &_loader_circle {
+      stroke: $light-primary !important;
+    }
+  }
+
+  &_accept {
+    background-color: $light-sys-success;
+
+    &:hover {
+      background-color: $light-state-sys-success-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $light-state-sys-success-press;
+    }
+
+    &_title {
+      color: $light-on-sys;
+    }
+
+    &_loader_circle {
+      stroke: $light-on-sys !important;
+    }
+  }
+
+  &_decline {
+    background-color: $light-sys-danger;
+
+    &:hover {
+      background-color: $light-state-sys-danger-hover;
+    }
+
+    &:active,
+    &.-active {
+      background-color: $light-state-sys-danger-press;
+    }
+
+    &_title {
+      color: $light-on-sys;
+    }
+
+    &_loader_circle {
+      stroke: $light-on-sys !important;
+    }
+  }
+}

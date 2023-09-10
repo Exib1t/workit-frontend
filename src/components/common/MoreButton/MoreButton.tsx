@@ -1,12 +1,17 @@
 import useThemeClass from "../../../hooks/useThemeClass.ts";
 import Icon from "../../control/Icon/Icon.tsx";
 import IconButtonCustom from "../../control/IconButtonCustom/IconButtonCustom.tsx";
+import { FC } from "react";
+import { IconButtonProps } from "@mui/material";
 
-const MoreButton = () => {
+const MoreButton: FC<IconButtonProps> = (props) => {
   const themeClass = useThemeClass("b-moreButton");
 
   return (
-    <IconButtonCustom className={themeClass}>
+    <IconButtonCustom
+      {...props}
+      className={`${themeClass} ${props.className || ""}`}
+    >
       <Icon type={"more"} />
     </IconButtonCustom>
   );

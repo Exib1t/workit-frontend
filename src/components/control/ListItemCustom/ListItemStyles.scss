@@ -1,0 +1,25 @@
+@import "../../../assets/styles/designVariables";
+
+.b-listItem-dark, .b-listItem-light {
+  width: 100% !important;
+  height: auto !important;
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: $ref-spacing-12 $ref-spacing-16 !important;
+  gap: $ref-spacing-16 !important;
+  font-size: $typography-body-lg-font-size !important;
+  line-height: $typography-body-lg-line-height !important;
+  font-weight: $typography-body-lg-font-weight !important;
+  letter-spacing: $typography-body-lg-letter-spacing !important;
+}
+
+.b-listItem-dark {
+  color: $dark-on-bgd-srf-3 !important;
+}
+
+.b-listItem-light {
+  color: $light-on-bgd-srf-3 !important;
+}
+

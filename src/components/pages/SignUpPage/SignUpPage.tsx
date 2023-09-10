@@ -1,11 +1,11 @@
 import useThemeClass from "../../../hooks/useThemeClass.ts";
 import "./SignUpPageStyles.scss";
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
-import ButtonCustom from "../../control/ButtonCustom/ButtonCustom.tsx";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { SignUpFormDataInterface } from "../../../models/forms/SignUpForm.types.ts";
 import { useAppDispatch } from "../../../store";
 import { registerThunk } from "../../../store/thunks/authThunks.ts";
+import CustomButton from "../../control/ButtonComponents/CustomButton/CustomButton.tsx";
 
 const SignUpPage = () => {
   const themeClass = useThemeClass("b-signUp");
@@ -108,9 +108,13 @@ const SignUpPage = () => {
             {getErrorMessage()}
           </span>
         </div>
-        <ButtonCustom className={`${themeClass}__button`} type="submit">
-          Create account
-        </ButtonCustom>
+        <CustomButton
+          type={"secondary"}
+          size={"md"}
+          title={"Create account"}
+          className={`${themeClass}__button`}
+          clickHandler={handleSubmit(onSubmit)}
+        />
       </form>
     </div>
   );

@@ -1,12 +1,12 @@
 import useThemeClass from "../../../hooks/useThemeClass.ts";
 import "./SignInPageStyles.scss";
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
-import ButtonCustom from "../../control/ButtonCustom/ButtonCustom.tsx";
 import LinkCustom from "../../control/LinkCustom/LinkCustom.tsx";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { SignInFormDataInterface } from "../../../models/forms/SignInForm.types.ts";
 import { useAppDispatch } from "../../../store";
 import { loginThunk } from "../../../store/thunks/authThunks.ts";
+import CustomButton from "../../control/ButtonComponents/CustomButton/CustomButton.tsx";
 
 const SignInPage = () => {
   const themeClass = useThemeClass("b-signIn");
@@ -42,13 +42,13 @@ const SignInPage = () => {
         <h1 className={`${themeClass}__title`}>Sign In</h1>
         <div className={`${themeClass}__form`}>
           <TextField
-            size="small"
+            size="medium"
             label="Email"
             error={!!errors.email?.type}
             {...register("email", { required: true, minLength: 5 })}
           />
           <TextField
-            size="small"
+            size="medium"
             label="Password"
             type="password"
             error={!!errors.password?.type}
@@ -67,9 +67,13 @@ const SignInPage = () => {
             {getErrorMessage()}
           </span>
         </div>
-        <ButtonCustom className={`${themeClass}__button`} type={"submit"}>
-          Login
-        </ButtonCustom>
+        <CustomButton
+          type={"secondary"}
+          size={"md"}
+          title={"Login"}
+          className={`${themeClass}__button`}
+          clickHandler={handleSubmit(onSubmit)}
+        />
       </form>
     </div>
   );

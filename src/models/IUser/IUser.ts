@@ -26,3 +26,9 @@ export interface IRefreshUser {
   id: number;
   email: string;
 }
+
+export interface ICompressedUser {
+  id: number;
+  first_name: string;
+  last_name: string;
+}

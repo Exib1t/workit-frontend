@@ -1,0 +1,34 @@
+@import "../../../../assets/styles/designVariables";
+
+.b-headerMenu-dark, .b-headerMenu-light {
+  width: 250px;
+
+  &__controls {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $ref-spacing-8;
+    margin: 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+}
+
+.b-headerMenu-dark {
+  background-color: $dark-srf-default !important;
+  border: 1px solid $dark-srf-variant;
+
+  &__controls {
+    border-bottom-color: $dark-on-bgd-srf-3;
+  }
+}
+
+.b-headerMenu-light {
+  background-color: $light-srf-default !important;
+  border: 1px solid $light-srf-variant;
+
+  &__controls {
+    border-bottom-color: $light-on-bgd-srf-3;
+  }
+}

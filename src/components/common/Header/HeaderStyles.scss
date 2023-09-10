@@ -11,6 +11,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  z-index: 2;
 
   &__buttons {
     display: flex;
@@ -33,9 +34,11 @@
 }
 
 .b-header-light {
-  background-color: $light-header-bg;
+  background-color: $light-srf-variant;
+  border-bottom: 1px solid $light-on-bgd-srf-5;
 }
 
 .b-header-dark {
-  background-color: $dark-header-bg;
+  background-color: $dark-srf-variant;
+  border-bottom: 1px solid $dark-on-bgd-srf-5;
 }

@@ -21,10 +21,10 @@
 }
 
 .b-link-dark {
-  color: $dark-link-primary-color;
+  color: $dark-on-bgd-srf-3;
 
   &::before {
-    background: $dark-link-primary-color;
+    background: $dark-on-bgd-srf-3;
   }
 
   &:hover::before {
@@ -35,10 +35,10 @@
 }
 
 .b-link-light {
-  color: $light-link-primary-color;
+  color: $light-on-bgd-srf-3;
 
   &::before {
-    background: $light-link-primary-color;
+    background: $light-on-bgd-srf-3;
   }
 
   &:hover::before {

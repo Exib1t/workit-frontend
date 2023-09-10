@@ -4,13 +4,14 @@ import {
   refreshThunk,
   registerThunk,
 } from "../thunks/authThunks.ts";
+import { AuthError } from "../../models/reducers/auth.types.ts";
 
 interface IState {
   id: number | null;
   email: string | null;
   token: string | null;
   isLoading: boolean;
-  errors: any;
+  errors: AuthError | null;
 }
 
 const initialState: IState = {
@@ -26,6 +27,9 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setToken: (state, action) => {
+      if (!action.payload) {
+        localStorage.removeItem("token");
+      }
       state.token = action.payload;
     },
     logout: (state) => {
@@ -33,6 +37,9 @@ const authSlice = createSlice({
       state.token = null;
       state.email = null;
       state.id = null;
+    },
+    setErrors: (state, action) => {
+      state.errors = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -45,7 +52,7 @@ const authSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(registerThunk.rejected, (state, action) => {
-      state.errors = action.payload;
+      state.errors = action.payload as AuthError;
       state.isLoading = false;
     });
 
@@ -58,7 +65,7 @@ const authSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(loginThunk.rejected, (state, action) => {
-      state.errors = action.payload;
+      state.errors = action.payload as AuthError;
       state.isLoading = false;
     });
 
@@ -73,11 +80,11 @@ const authSlice = createSlice({
     builder.addCase(refreshThunk.rejected, (state, action) => {
       state.id = null;
       state.email = null;
-      state.errors = action.payload;
+      state.errors = action.payload as AuthError;
       state.isLoading = false;
     });
   },
 });
 
 export default authSlice.reducer;
-export const { setToken, logout } = authSlice.actions;
+export const { setToken, logout, setErrors } = authSlice.actions;
