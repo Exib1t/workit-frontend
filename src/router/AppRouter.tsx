@@ -12,6 +12,7 @@ import { refreshThunk } from "../store/thunks/authThunks.ts";
 import { setToken } from "../store/reducers/authSlice.ts";
 import ProjectsPage from "../components/pages/ProjectsPage/ProjectsPage.tsx";
 import { setTheme } from "../store/reducers/globalSlice.ts";
+import ComponentsPage from "../components/pages/ComponentsPage/ComponentsPage.tsx";
 
 const AppRouter = () => {
   const isAuthenticated = useAuthenticated();
@@ -56,11 +57,18 @@ const AppRouter = () => {
     </>
   );
 
+  const publicRoutes = () => (
+    <>
+      <Route path={AppRoutes.components} element={<ComponentsPage />} />
+    </>
+  );
+
   return (
     <div className={themeClass}>
       <Routes>
         <Route path="/" element={<Layout />}>
           {isAuthenticated ? privateRoutes() : authRoutes()}
+          {publicRoutes()}
         </Route>
       </Routes>
     </div>

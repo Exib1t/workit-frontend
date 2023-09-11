@@ -1,25 +1,36 @@
 import { FC, ReactElement } from "react";
 import useThemeClass from "../../../hooks/useThemeClass.ts";
-import "./ListItemStyles.scss";
-import { ButtonProps } from "@mui/material";
 import CustomButton from "../ButtonComponents/CustomButton/CustomButton.tsx";
+import "./ListItemStyles.scss";
 
-interface IProps extends ButtonProps {
+interface IProps {
   children: string;
   icon?: ReactElement;
+  type?: "on-bgd" | "on-srf";
+  className?: string;
+  onClick?: () => void;
+  disabled?: boolean;
 }
 
-const ListItemCustom: FC<IProps> = (props) => {
+const ListItemCustom: FC<IProps> = ({
+  type = "on-bgd",
+  icon,
+  className,
+  onClick,
+  children,
+  disabled,
+}) => {
   const themeClass = useThemeClass("b-listItem");
 
   return (
     <CustomButton
-      {...props}
       size="md"
       type={"text-plain"}
-      title={props.children}
-      icon={props.icon || undefined}
-      className={`${themeClass} ${props.className || ""}`}
+      title={children}
+      icon={icon || undefined}
+      className={`${themeClass} ${className || ""} ${type}`}
+      clickHandler={onClick}
+      disabled={disabled}
     />
   );
 };

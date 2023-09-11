@@ -11,6 +11,7 @@
   transition: all 200ms ease-out;
   width: max-content;
   box-sizing: border-box;
+  user-select: none;
 
   &_customIcon {
     display: flex;

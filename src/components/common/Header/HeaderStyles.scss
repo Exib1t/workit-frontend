@@ -1,6 +1,7 @@
 @import "../../../assets/styles/designVariables";
 
-.b-header-light, .b-header-dark {
+.b-header-light,
+.b-header-dark {
   position: absolute;
   top: 0;
   left: 0;
@@ -30,6 +31,12 @@
   &__button {
     font-weight: 700 !important;
     letter-spacing: 1.3px !important;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: $ref-spacing-24;
   }
 }
 

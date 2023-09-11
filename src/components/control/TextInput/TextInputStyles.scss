@@ -1,0 +1,300 @@
+@import '../../../assets/styles/designVariables';
+
+.b-textSearch-dark,
+.b-textSearch-light {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: $border-radius-2;
+  gap: $ref-spacing-8;
+  transition: all 200ms ease-out;
+
+  &.-sm {
+    padding: $ref-spacing-4 $ref-spacing-8 $ref-spacing-4 $ref-spacing-8;
+
+    .b-textSearch-dark_input,
+    .b-textSearch-light_input {
+      font-family: $typography-body-sm-font-family;
+      font-weight: $typography-body-sm-font-weight;
+      line-height: $typography-body-sm-line-height;
+      font-size: $typography-body-sm-font-size;
+      letter-spacing: $typography-body-sm-letter-spacing;
+    }
+  }
+
+  &.-md {
+    padding: $ref-spacing-6 $ref-spacing-8 $ref-spacing-6 $ref-spacing-8;
+
+    .b-textSearch-dark_input,
+    .b-textSearch-light_input {
+      font-family: $typography-body-md-font-family;
+      font-weight: $typography-body-md-font-weight;
+      line-height: $typography-body-md-line-height;
+      font-size: $typography-body-md-font-size;
+      letter-spacing: $typography-body-md-letter-spacing;
+    }
+  }
+
+  &_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &_input {
+    font-style: normal;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+  }
+}
+
+.b-textSearch-dark {
+  &_on-bgd {
+    background-color: $dark-bgd-default;
+  }
+
+  &_on-srf {
+    background-color: $dark-srf-default;
+  }
+
+  &_icon {
+    svg {
+      path {
+        stroke: $dark-on-bgd-srf-3;
+      }
+    }
+  }
+
+  &_input {
+    color: $dark-on-bgd-srf-1;
+
+    &::placeholder {
+      color: $dark-on-bgd-srf-4;
+    }
+  }
+}
+
+.b-textSearch-light {
+  &_on-bgd {
+    background-color: $light-bgd-default;
+  }
+
+  &_on-srf {
+    background-color: $light-srf-default;
+  }
+
+  &_icon {
+    svg {
+      path {
+        stroke: $light-on-bgd-srf-3;
+      }
+    }
+  }
+
+  &_input {
+    color: $light-on-bgd-srf-1;
+
+    &::placeholder {
+      color: $light-on-bgd-srf-4;
+    }
+  }
+}
+
+.b-textInput-dark,
+.b-textInput-light {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  box-sizing: border-box;
+  gap: $ref-spacing-4;
+
+  &_inputContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: max-content;
+    gap: $ref-spacing-0;
+  }
+
+  &_field_on-bgd,
+  &_field_on-srf {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    height: $ref-sizing-32;
+    padding: $ref-spacing-6 $ref-spacing-8 $ref-spacing-6 $ref-spacing-8;
+    border-radius: $border-radius-2;
+    border: $border-width-1 solid transparent;
+    transition: all 200ms ease-out;
+    gap: $ref-spacing-4;
+
+    &_input {
+      font-family: $typography-body-md-font-family;
+      font-weight: $typography-body-md-font-weight;
+      line-height: $typography-body-md-line-height;
+      font-size: $typography-body-md-font-size;
+      letter-spacing: $typography-body-md-letter-spacing;
+      font-style: normal;
+      background-color: transparent;
+      outline: none;
+      border: none;
+      width: 100%;
+    }
+
+    &_icon {
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &_label {
+    font-family: $typography-body-sm-font-family;
+    font-weight: $typography-body-sm-font-weight;
+    line-height: $typography-body-sm-line-height;
+    font-size: $typography-body-sm-font-size;
+    letter-spacing: $typography-body-sm-letter-spacing;
+  }
+  &_error {
+    font-family: $typography-body-md-font-family;
+    font-weight: $typography-body-md-font-weight;
+    line-height: $typography-body-md-line-height;
+    font-size: $typography-body-md-font-size;
+    letter-spacing: $typography-body-md-letter-spacing;
+  }
+}
+
+.b-textInput-dark {
+  &.-isDisabled {
+    opacity: $dark-disabled;
+    pointer-events: none;
+  }
+
+  &_field_on-bgd {
+    background-color: $dark-bgd-variant;
+
+    &.-isFocus {
+      border: $border-width-1 solid $dark-primary;
+      background-color: $dark-state-bgd-srf-container-click !important;
+    }
+
+    &.-isError {
+      border: $border-width-1 solid $dark-sys-danger;
+    }
+
+    &:hover {
+      background-color: $dark-state-bgd-srf-container-hover;
+    }
+
+    &_input {
+      color: $dark-on-bgd-srf-1;
+
+      &::placeholder {
+        color: $dark-on-bgd-srf-4;
+      }
+    }
+  }
+
+  &_field_on-srf {
+    background-color: $dark-srf-variant;
+
+    &.-isFocus {
+      border: $border-width-1 solid $dark-primary;
+      background-color: $dark-state-bgd-srf-container-click !important;
+    }
+
+    &.-isError {
+      border: $border-width-1 solid $dark-sys-danger;
+    }
+
+    &:hover {
+      background-color: $dark-state-bgd-srf-container-hover;
+    }
+
+    &_input {
+      color: $dark-on-bgd-srf-1;
+
+      &::placeholder {
+        color: $dark-on-bgd-srf-4;
+      }
+    }
+  }
+
+  &_label {
+    color: $dark-secondary;
+  }
+  &_error {
+    color: $dark-sys-danger;
+  }
+}
+
+.b-textInput-light {
+  &.-isDisabled {
+    opacity: $light-disabled;
+    pointer-events: none;
+  }
+
+  &_field_on-bgd {
+    background-color: $light-bgd-variant;
+
+    &.-isFocus {
+      border: $border-width-1 solid $light-primary;
+      background-color: $light-state-bgd-srf-container-click !important;
+    }
+
+    &.-isError {
+      border: $border-width-1 solid $light-sys-danger;
+    }
+
+    &:hover {
+      background-color: $light-state-bgd-srf-container-hover;
+    }
+
+    &_input {
+      color: $light-on-bgd-srf-1;
+
+      &::placeholder {
+        color: $light-on-bgd-srf-4;
+      }
+    }
+  }
+
+  &_field_on-srf {
+    background-color: $light-srf-variant;
+
+    &.-isFocus {
+      border: $border-width-1 solid $light-primary;
+      background-color: $light-state-bgd-srf-container-click !important;
+    }
+
+    &.-isError {
+      border: $border-width-1 solid $light-sys-danger;
+    }
+
+    &:hover {
+      background-color: $light-state-bgd-srf-container-hover;
+    }
+
+    &_input {
+      color: $light-on-bgd-srf-1;
+
+      &::placeholder {
+        color: $light-on-bgd-srf-4;
+      }
+    }
+  }
+
+  &_label {
+    color: $light-secondary;
+  }
+
+  &_error {
+    color: $light-sys-danger;
+  }
+}

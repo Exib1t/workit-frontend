@@ -1,6 +1,7 @@
 @import "../../../assets/styles/designVariables";
 
-.b-listItem-dark, .b-listItem-light {
+.b-listItem-dark,
+.b-listItem-light {
   width: 100% !important;
   height: auto !important;
   display: flex !important;
@@ -17,9 +18,24 @@
 
 .b-listItem-dark {
   color: $dark-on-bgd-srf-3 !important;
+
+  &.on-bgd {
+    background: $dark-bgd-variant;
+  }
+
+  &.on-srf {
+    background: $dark-srf-variant;
+  }
 }
 
 .b-listItem-light {
   color: $light-on-bgd-srf-3 !important;
-}
 
+  &.on-bgd {
+    background: $light-bgd-variant;
+  }
+
+  &.on-srf {
+    background: $light-srf-variant;
+  }
+}

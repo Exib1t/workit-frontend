@@ -1,6 +1,6 @@
 import React from "react";
-import "./CustomRadioButtonStyles.scss";
 import useThemeClass from "../../../../hooks/useThemeClass.ts";
+import "./CustomRadioButtonStyles.scss";
 
 interface CustomRadioButtonProps {
   value: string | number;

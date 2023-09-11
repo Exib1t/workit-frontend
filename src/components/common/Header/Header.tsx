@@ -11,6 +11,7 @@ import LogoutButton from "../../control/LogoutButton/LogoutButton.tsx";
 import MoreButton from "../MoreButton/MoreButton.tsx";
 import HeaderMenu from "./parts/HeaderMenu.tsx";
 import { MouseEventHandler, useState } from "react";
+import CustomButton from "../../control/ButtonComponents/CustomButton/CustomButton.tsx";
 
 const Header = () => {
   const [isHeaderMenuOpen, setIsHeaderMenuOpen] = useState<Element | null>(
@@ -30,7 +31,15 @@ const Header = () => {
 
   return (
     <header className={headerClass}>
-      <Logo />
+      <div className={`${headerClass}__left`}>
+        <Logo />
+        <CustomButton
+          type="selection-activated"
+          size="md"
+          title={"Components Page"}
+          clickHandler={() => navigate(AppRoutes.components)}
+        />
+      </div>
       {isAuthenticated ? (
         <div className={`${headerClass}__controls`}>
           <ThemeSwitcher />

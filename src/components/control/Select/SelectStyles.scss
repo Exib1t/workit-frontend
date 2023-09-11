@@ -1,0 +1,143 @@
+@import "../../../assets/styles/designVariables";
+
+.b-select-dark,
+.b-select-light {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: $ref-spacing-4 $ref-spacing-24 $ref-spacing-4 $ref-spacing-6;
+  min-width: $ref-sizing-140;
+  height: 32px;
+  border-radius: $border-radius-2;
+  cursor: pointer;
+
+  &__icon .b-icon-dark,
+  .b-icon-light {
+    position: absolute;
+    width: 12px;
+    right: 4px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__placeholder,
+  &__selected {
+    font-weight: $typography-body-md-font-weight;
+    line-height: $typography-body-md-line-height;
+    font-size: $typography-body-md-font-size;
+    letter-spacing: $typography-body-md-letter-spacing;
+  }
+
+  &__paper {
+    border-radius: $border-radius-2 !important;
+    margin-top: 10px !important;
+    background: transparent !important;
+  }
+
+  &__item {
+    border-radius: 0 !important;
+    height: 32px !important;
+  }
+}
+
+.b-select-dark {
+  &.on-bgd {
+    background: $dark-bgd-variant;
+
+    &:hover {
+      background: $dark-state-bgd-default-hover;
+    }
+  }
+
+  &.on-srf {
+    background: $dark-srf-variant;
+
+    &:hover {
+      background: $dark-state-bgd-variant-hover;
+    }
+  }
+
+  &__placeholder {
+    color: $dark-on-bgd-srf-4;
+  }
+
+  &__selected {
+    color: $dark-on-bgd-srf-2;
+  }
+
+  &__item {
+    &.on-bgd {
+      &.-selected {
+        background: $dark-state-bgd-variant-active;
+      }
+      &:hover {
+        background: $dark-state-bgd-variant-hover;
+      }
+      & + & {
+        border-top: 1px solid $dark-on-bgd-srf-5;
+      }
+    }
+    &.on-srf {
+      &.-selected {
+        background: $dark-state-srf-variant-active;
+      }
+      &:hover {
+        background: $dark-state-srf-variant-hover;
+      }
+      & + & {
+        border-top: 1px solid $dark-on-bgd-srf-4;
+      }
+    }
+  }
+}
+
+.b-select-light {
+  &.on-bgd {
+    background: $light-bgd-variant;
+
+    &:hover {
+      background: $light-state-bgd-default-hover;
+    }
+  }
+
+  &.on-srf {
+    background: $light-srf-variant;
+
+    &:hover {
+      background: $light-state-bgd-default-hover;
+    }
+  }
+
+  &__placeholder {
+    color: $light-on-bgd-srf-4;
+  }
+
+  &__selected {
+    color: $light-on-bgd-srf-2;
+  }
+
+  &__item {
+    &.on-bgd {
+      &.-selected {
+        background: $light-state-bgd-variant-active;
+      }
+      &:hover {
+        background: $light-state-bgd-variant-hover;
+      }
+      & + & {
+        border-top: 1px solid $light-on-bgd-srf-5;
+      }
+    }
+    &.on-srf {
+      &.-selected {
+        background: $light-state-srf-variant-active;
+      }
+      &:hover {
+        background: $light-state-srf-variant-hover;
+      }
+      & + & {
+        border-top: 1px solid $light-on-bgd-srf-4;
+      }
+    }
+  }
+}

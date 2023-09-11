@@ -1,0 +1,44 @@
+@import "../../../assets/styles/designVariables";
+
+.b-componentsPage-dark,
+.b-componentsPage-light {
+  display: flex;
+  flex-direction: column;
+  gap: $ref-spacing-24;
+  width: 100%;
+  padding: $ref-spacing-24;
+
+  &__title {
+    font-size: $typography-title-lg-font-size;
+    font-weight: $typography-title-lg-font-weight;
+    letter-spacing: $typography-title-lg-letter-spacing;
+    line-height: $typography-title-lg-line-height;
+  }
+
+  &__row {
+    display: flex;
+    gap: $ref-spacing-12;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: $ref-spacing-12;
+  }
+}
+
+.b-componentsPage-dark {
+  background-color: $dark-bgd-default;
+
+  &__title {
+    color: $dark-on-bgd-srf-3;
+  }
+}
+
+.b-componentsPage-light {
+  background-color: $light-bgd-default;
+
+  &__title {
+    color: $light-on-bgd-srf-3;
+  }
+}
