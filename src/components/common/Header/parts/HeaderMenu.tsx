@@ -26,10 +26,10 @@ const HeaderMenu: FC<IProps> = ({ handleClose, isOpen, anchorEl }) => {
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
     >
       <ListCustom>
-        <ListItemCustom icon={<Icon type={"settings"} />}>
+        <ListItemCustom icon={<Icon type={"settings"} size={24} />}>
           Preferences
         </ListItemCustom>
-        <ListItemCustom icon={<Icon type={"settings"} />}>
+        <ListItemCustom icon={<Icon type={"settings"} size={24} />}>
           Preferences
         </ListItemCustom>
       </ListCustom>

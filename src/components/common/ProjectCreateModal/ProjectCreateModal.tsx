@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, SyntheticEvent, useEffect, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import ModalCustom from "../../control/ModalCustom/ModalCustom.tsx";
 import useThemeClass from "../../../hooks/useThemeClass.ts";
 import "./ProjectCreateModalStyles.scss";
@@ -6,11 +6,15 @@ import ColorPicker from "../ColorPicker/ColorPicker.tsx";
 import { IProjectCreate } from "../../../models/IProject/IProject.ts";
 import { IColors } from "../../../models/IColors/IColors.ts";
 import { useAppDispatch, useAppSelector } from "../../../store";
-import { fetchProjectUsers } from "../../../store/thunks/projectsThunks.ts";
-import { ICompressedUser } from "../../../models/IUser/IUser.ts";
+import {
+  createProject,
+  fetchProjects,
+  fetchProjectUsers,
+} from "../../../store/thunks/projectsThunks.ts";
 import CustomButton from "../../control/ButtonComponents/CustomButton/CustomButton.tsx";
 import TextInput from "../../control/TextInput/TextInput.tsx";
-import Select from "../../control/Select/Select.tsx";
+import MultiSelect from "../../control/MultiSelect/MultiSelect.tsx";
+import { ISelectItem } from "../../../models/Select/Select.types.ts";
 
 interface IProps {
   isOpen: boolean;
@@ -31,8 +35,26 @@ const ProjectCreateModal: FC<IProps> = ({ isOpen, handleClose }) => {
     dispatch(fetchProjectUsers());
   }, [dispatch]);
 
-  const handleSubmit = () => {
-    console.log("submit", newProject);
+  const validateProject = () => {
+    return !!newProject.title.trim() && !!newProject.link.trim();
+  };
+
+  const resetForm = () => {
+    setNewProject({
+      title: "",
+      link: "",
+      color: "pink",
+      userIds: [],
+    });
+  };
+
+  const handleSubmit = async () => {
+    if (validateProject()) {
+      await dispatch(createProject(newProject));
+      await dispatch(fetchProjects());
+      resetForm();
+      handleClose();
+    }
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,10 +64,10 @@ const ProjectCreateModal: FC<IProps> = ({ isOpen, handleClose }) => {
     }));
   };
 
-  const handleUsersChange = (_: SyntheticEvent, value: ICompressedUser[]) => {
+  const handleUsersChange = (selected: ISelectItem[]) => {
     setNewProject((prevState) => ({
       ...prevState,
-      userIds: value.map((user) => user.id),
+      userIds: selected.map((user) => user.id),
     }));
   };
 
@@ -53,6 +75,12 @@ const ProjectCreateModal: FC<IProps> = ({ isOpen, handleClose }) => {
     setNewProject((prevState) => ({ ...prevState, color }));
   };
 
+  const allUsers = availableUsers.map(
+    (user): ISelectItem => ({
+      id: user.id,
+      title: `${user.first_name} ${user.last_name}`,
+    }),
+  );
   const themeClass = useThemeClass("b-createProjectModal");
 
   return (
@@ -70,7 +98,7 @@ const ProjectCreateModal: FC<IProps> = ({ isOpen, handleClose }) => {
             <span className={`${themeClass}__fieldLabel`}>Title</span>
             <TextInput
               type="on-bgd"
-              placeholder="Project name"
+              placeholder="Enter project name"
               name="title"
               value={newProject.title}
               onChange={handleInputChange}
@@ -80,24 +108,21 @@ const ProjectCreateModal: FC<IProps> = ({ isOpen, handleClose }) => {
             <span className={`${themeClass}__fieldLabel`}>Link</span>
             <TextInput
               type="on-bgd"
-              placeholder="Link"
+              placeholder="Enter project link"
               name="link"
               value={newProject.link}
               onChange={handleInputChange}
             />
           </div>
           <div className={`${themeClass}__field`}>
-            <span className={`${themeClass}__fieldLabel`}>Users</span>
-            <Select
-              items={availableUsers}
+            <span className={`${themeClass}__fieldLabel`}>Members</span>
+            <MultiSelect
+              items={allUsers}
               onChange={handleUsersChange}
-              getTitle={(option: ICompressedUser) =>
-                `${option.first_name} ${option.last_name}`
-              }
               type={"on-bgd"}
-              placeholder="Select users"
-              selected={availableUsers.filter((item) =>
-                availableUsers.includes(item.id),
+              placeholder="Select members"
+              selected={allUsers.filter((user) =>
+                newProject.userIds.includes(user.id),
               )}
             />
           </div>

@@ -10,7 +10,7 @@ import ListItemCustom from "../ListItemCustom/ListItemCustom.tsx";
 interface IProps {
   type: "on-bgd" | "on-srf";
   placeholder?: string;
-  selected?: ISelectItem;
+  selected: ISelectItem | null;
   onChange: (item: ISelectItem) => void;
   items: ISelectItem[];
   disabled?: boolean;

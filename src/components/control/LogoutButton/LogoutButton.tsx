@@ -15,7 +15,7 @@ const LogoutButton = () => {
 
   return (
     <IconButtonCustom className={themeClass} onClick={handleClick}>
-      <Icon type={"logout"} />
+      <Icon type={"logout"} size={24} />
     </IconButtonCustom>
   );
 };

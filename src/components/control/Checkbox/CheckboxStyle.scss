@@ -1,0 +1,82 @@
+@import "../../../assets/styles/designVariables";
+
+.b-check-box-dark,
+.b-check-box-light {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  cursor: pointer;
+
+  &_btn,
+  &_btn-empty {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    width: 16px;
+    height: 16px;
+    box-sizing: border-box;
+    border-radius: $border-radius-2;
+  }
+}
+
+.b-check-box-dark {
+  &_btn {
+    background-color: $dark-primary;
+    &:hover {
+      background-color: $dark-state-primary-hover;
+    }
+    &:active {
+      background-color: $dark-state-primary-press;
+    }
+    &_icon {
+      path {
+        stroke: $dark-on-primary;
+      }
+    }
+  }
+  &_btn-empty {
+    border: 1px solid $dark-on-bgd-srf-3;
+    &:hover {
+      background-color: $dark-state-bgd-srf-container-hover;
+    }
+    &:active {
+      background-color: $dark-state-bgd-srf-container-click;
+    }
+  }
+  &.-disabled {
+    opacity: $dark-disabled;
+  }
+}
+
+.b-check-box-light {
+  &_btn {
+    background-color: $light-primary;
+    &:hover {
+      background-color: $light-state-primary-hover;
+    }
+    &:active {
+      background-color: $light-state-primary-press;
+    }
+    &_icon {
+      path {
+        stroke: $light-on-primary;
+      }
+    }
+  }
+  &_btn-empty {
+    border: 1px solid $light-on-bgd-srf-3;
+    &:hover {
+      background-color: $light-state-bgd-srf-container-hover;
+    }
+    &:active {
+      background-color: $light-state-bgd-srf-container-click;
+    }
+  }
+  &.-disabled {
+    opacity: $light-disabled;
+  }
+}

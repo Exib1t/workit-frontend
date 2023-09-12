@@ -1,33 +1,177 @@
 @import "../../../assets/styles/designVariables";
 
-.b-icon-dark.-fill * {
-  fill: $dark-on-bgd-srf-3;
+.b-icon-dark,
+.b-icon-light {
+  fill: transparent !important;
+
+  &.size-12 {
+    width: 12px;
+    height: 12px;
+  }
+
+  &.size-16 {
+    width: 16px;
+    height: 16px;
+  }
+
+  &.size-20 {
+    width: 20px;
+    height: 20px;
+  }
+
+  &.size-24 {
+    width: 24px;
+    height: 24px;
+  }
+
+  &.size-32 {
+    width: 32px;
+    height: 32px;
+  }
+
+  &.size-64 {
+    width: 62px;
+    height: 62px;
+  }
+
+  &.size-128 {
+    width: 128px;
+    height: 128px;
+  }
 }
 
-.b-icon-light.-fill *{
-  fill: $light-on-bgd-srf-3;
+.b-icon-dark {
+  &.color-primary {
+    &.-fill * {
+      fill: $dark-primary;
+    }
+
+    &.-svgFill {
+      fill: $dark-primary;
+    }
+
+    &.-stroke * {
+      stroke: $dark-primary;
+    }
+
+    &.-strokeCheckbox * {
+      stroke: $dark-primary;
+    }
+
+    &.-fillPrimary * {
+      fill: $dark-primary;
+    }
+  }
+
+  &.color-secondary {
+    &.-fill * {
+      fill: $dark-on-bgd-srf-3;
+    }
+
+    &.-svgFill {
+      fill: $dark-on-bgd-srf-3;
+    }
+
+    &.-stroke * {
+      stroke: $dark-on-bgd-srf-3;
+    }
+
+    &.-strokeCheckbox * {
+      stroke: $dark-on-bgd-srf-3;
+    }
+
+    &.-fillPrimary * {
+      fill: $dark-on-bgd-srf-3;
+    }
+  }
+
+  &.color-tick {
+    &.-fill * {
+      fill: $dark-on-bgd-srf-1;
+    }
+
+    &.-svgFill {
+      fill: $dark-on-bgd-srf-1;
+    }
+
+    &.-stroke * {
+      stroke: $dark-on-bgd-srf-1;
+    }
+
+    &.-strokeCheckbox * {
+      stroke: $dark-on-bgd-srf-1;
+    }
+
+    &.-fillPrimary * {
+      fill: $dark-on-bgd-srf-1;
+    }
+  }
 }
 
-.b-icon-dark.-svgFill {
-  fill: $dark-on-bgd-srf-3;
-}
+.b-icon-light {
+  &.color-primary {
+    &.-fill * {
+      fill: $light-primary;
+    }
 
-.b-icon-light.-svgFill {
-  fill: $light-on-bgd-srf-3;
-}
+    &.-svgFill {
+      fill: $light-primary;
+    }
 
-.b-icon-dark.-stroke * {
-  stroke: $dark-on-bgd-srf-3;
-}
+    &.-stroke * {
+      stroke: $light-primary;
+    }
 
-.b-icon-light.-stroke *{
-  stroke: $light-on-bgd-srf-3;
-}
+    &.-strokeCheckbox * {
+      stroke: $light-primary;
+    }
 
-.b-icon-dark.-fillPrimary * {
-  fill: $dark-primary;
-}
+    &.-fillPrimary * {
+      fill: $light-primary;
+    }
+  }
 
-.b-icon-light.-fillPrimary *{
-  fill: $light-primary;
+  &.color-secondary {
+    &.-fill * {
+      fill: $light-on-bgd-srf-3;
+    }
+
+    &.-svgFill {
+      fill: $light-on-bgd-srf-3;
+    }
+
+    &.-stroke * {
+      stroke: $light-on-bgd-srf-3;
+    }
+
+    &.-strokeCheckbox * {
+      stroke: $light-on-bgd-srf-3;
+    }
+
+    &.-fillPrimary * {
+      fill: $light-on-bgd-srf-3;
+    }
+  }
+
+  &.color-tick {
+    &.-fill * {
+      fill: $light-on-bgd-srf-1;
+    }
+
+    &.-svgFill {
+      fill: $light-on-bgd-srf-1;
+    }
+
+    &.-stroke * {
+      stroke: $light-on-bgd-srf-1;
+    }
+
+    &.-strokeCheckbox * {
+      stroke: $light-on-bgd-srf-1;
+    }
+
+    &.-fillPrimary * {
+      fill: $light-on-bgd-srf-1;
+    }
+  }
 }

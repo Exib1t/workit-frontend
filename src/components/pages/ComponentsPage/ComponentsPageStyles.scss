@@ -15,6 +15,13 @@
     line-height: $typography-title-lg-line-height;
   }
 
+  &__label {
+    font-size: $typography-label-md-font-size;
+    font-weight: $typography-label-md-font-weight;
+    letter-spacing: $typography-label-md-letter-spacing;
+    line-height: $typography-label-md-line-height;
+  }
+
   &__row {
     display: flex;
     gap: $ref-spacing-12;
@@ -30,7 +37,8 @@
 .b-componentsPage-dark {
   background-color: $dark-bgd-default;
 
-  &__title {
+  &__title,
+  &__label {
     color: $dark-on-bgd-srf-3;
   }
 }
@@ -38,7 +46,8 @@
 .b-componentsPage-light {
   background-color: $light-bgd-default;
 
-  &__title {
+  &__title,
+  &__label {
     color: $light-on-bgd-srf-3;
   }
 }

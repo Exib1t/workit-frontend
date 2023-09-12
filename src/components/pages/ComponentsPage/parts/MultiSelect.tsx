@@ -1,26 +1,28 @@
 import useThemeClass from "../../../../hooks/useThemeClass.ts";
-import Select from "../../../control/Select/Select.tsx";
 import { ISelectItem } from "../../../../models/Select/Select.types.ts";
 import { useState } from "react";
+import MultiSelect from "../../../control/MultiSelect/MultiSelect.tsx";
 
-const ComponentsPageSelect = () => {
+const ComponentsPageMultiSelect = () => {
   const themeClass = useThemeClass("b-componentsPage");
-  const [selected, setSelected] = useState<ISelectItem>({
-    id: 1,
-    title: "Item 1",
-  });
-  const handleChange = (item: ISelectItem) => {
-    setSelected(item);
+  const [selected, setSelected] = useState<ISelectItem[]>([
+    {
+      id: 1,
+      title: "Item 1",
+    },
+  ]);
+  const handleChange = (items: ISelectItem[]) => {
+    setSelected(items);
   };
 
   return (
     <>
-      <h3 className={`${themeClass}__title`}>Select</h3>
+      <h3 className={`${themeClass}__title`}>Multi Select</h3>
       <div className={`${themeClass}__row`}>
-        <Select
+        <MultiSelect
           placeholder={"Select"}
           type={"on-bgd"}
-          selected={null}
+          selected={[]}
           items={[
             { id: 1, title: "Item 1" },
             { id: 2, title: "Item 2" },
@@ -29,10 +31,10 @@ const ComponentsPageSelect = () => {
           ]}
           onChange={() => {}}
         />
-        <Select
+        <MultiSelect
           placeholder={"Select"}
           type={"on-srf"}
-          selected={null}
+          selected={[]}
           items={[
             { id: 1, title: "Item 1" },
             { id: 2, title: "Item 2" },
@@ -43,7 +45,7 @@ const ComponentsPageSelect = () => {
         />
       </div>
       <div className={`${themeClass}__row`}>
-        <Select
+        <MultiSelect
           placeholder={"Select"}
           type={"on-bgd"}
           items={[
@@ -55,7 +57,7 @@ const ComponentsPageSelect = () => {
           selected={selected}
           onChange={handleChange}
         />
-        <Select
+        <MultiSelect
           placeholder={"Select"}
           type={"on-srf"}
           items={[
@@ -71,4 +73,4 @@ const ComponentsPageSelect = () => {
     </>
   );
 };
-export default ComponentsPageSelect;
+export default ComponentsPageMultiSelect;

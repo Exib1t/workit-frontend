@@ -4,7 +4,7 @@ import CustomButton from "../ButtonComponents/CustomButton/CustomButton.tsx";
 import "./ListItemStyles.scss";
 
 interface IProps {
-  children: string;
+  children: any;
   icon?: ReactElement;
   type?: "on-bgd" | "on-srf";
   className?: string;
