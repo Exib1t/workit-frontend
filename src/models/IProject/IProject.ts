@@ -19,3 +19,7 @@ export interface IProjectCreate {
   color: IColors;
   userIds: number[];
 }
+
+export interface IProjectUpdate extends IProjectCreate {
+  id: number;
+}

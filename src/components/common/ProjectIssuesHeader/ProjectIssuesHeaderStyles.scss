@@ -1,0 +1,57 @@
+@import "../../../assets/styles/designVariables";
+
+.b-projectIssuesHeader-dark,
+.b-projectIssuesHeader-light {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $ref-spacing-8;
+  padding: $ref-spacing-12 $ref-spacing-20;
+
+  &__breadcrumbs {
+    display: flex;
+    align-items: flex-end;
+    gap: $ref-spacing-12;
+
+    &.-big {
+      font-size: $typography-title-lg-font-size;
+      font-weight: $typography-title-lg-font-weight;
+      letter-spacing: $typography-title-lg-letter-spacing;
+      line-height: $typography-title-lg-line-height;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    &.-medium {
+      font-size: $typography-body-lg-font-size;
+      font-weight: $typography-body-lg-font-weight;
+      letter-spacing: $typography-body-lg-letter-spacing;
+      line-height: $typography-body-lg-line-height;
+    }
+  }
+}
+
+.b-projectIssuesHeader-dark {
+  background: $dark-srf-default;
+
+  &__breadcrumbs {
+    color: $dark-on-bgd-srf-2;
+
+    &.-big:hover {
+      color: $dark-primary;
+    }
+  }
+}
+
+.b-projectIssuesHeader-light {
+  background: $light-srf-default;
+
+  &__breadcrumbs {
+    color: $light-on-bgd-srf-2;
+
+    &.-big:hover {
+      color: $light-primary;
+    }
+  }
+}

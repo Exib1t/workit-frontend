@@ -6,6 +6,7 @@
   flex-direction: column;
   gap: $ref-spacing-24;
   width: 100%;
+  height: max-content;
   padding: $ref-spacing-24;
 
   &__title {

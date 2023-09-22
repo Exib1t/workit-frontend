@@ -89,7 +89,7 @@ const MultiSelect: FC<IProps> = ({
         {!!selected.length && (
           <div className={`${themeClass}__selectedItems`}>
             {selected.map((item) => (
-              <span className={`${themeClass}__selected`}>
+              <span className={`${themeClass}__selected`} key={item.id}>
                 {item.title}
                 <div
                   className={`${themeClass}__selectedIcon`}

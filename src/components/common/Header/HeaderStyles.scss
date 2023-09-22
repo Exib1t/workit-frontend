@@ -2,7 +2,7 @@
 
 .b-header-light,
 .b-header-dark {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -11,21 +11,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
   z-index: 2;
 
-  &__buttons {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: $ref-spacing-8;
-  }
-
   &__controls {
+    flex: 1;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: $ref-spacing-16;
+    padding: 10px 20px;
   }
 
   &__button {
@@ -33,19 +27,55 @@
     letter-spacing: 1.3px !important;
   }
 
+  &__nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  &__navItem {
+    width: $ref-sizing-60;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+
+    &.-disabled {
+      pointer-events: none;
+      opacity: 0.3;
+    }
+  }
+
   &__left {
+    flex: 1;
     display: flex;
     align-items: center;
     gap: $ref-spacing-24;
+    padding: 10px 20px;
+  }
+}
+
+.b-header-dark {
+  background-color: $dark-srf-variant;
+  border-bottom: 1px solid $dark-on-bgd-srf-5;
+
+  &__navItem {
+    &:hover {
+      background: $dark-state-srf-variant-hover;
+    }
   }
 }
 
 .b-header-light {
   background-color: $light-srf-variant;
   border-bottom: 1px solid $light-on-bgd-srf-5;
-}
 
-.b-header-dark {
-  background-color: $dark-srf-variant;
-  border-bottom: 1px solid $dark-on-bgd-srf-5;
+  &__navItem {
+    &:hover {
+      background: $light-state-srf-variant-hover;
+    }
+  }
 }

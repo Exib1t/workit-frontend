@@ -1,0 +1,38 @@
+@import "../../../assets/styles/designVariables";
+
+.b-notFoundPage-dark,
+.b-notFoundPage-light {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: $ref-spacing-8;
+  width: 100%;
+  height: 100%;
+  background: no-repeat url("../../../assets/images/pattern-bg.png") center /
+    cover;
+
+  &__title {
+    text-align: center;
+    font-size: $typography-display-lg-font-size;
+    font-weight: $typography-display-lg-font-weight;
+    letter-spacing: $typography-display-lg-letter-spacing;
+    line-height: $typography-display-lg-line-height;
+  }
+}
+
+.b-notFoundPage-dark {
+  background-color: $dark-bgd-variant;
+
+  &__title {
+    color: $dark-on-bgd-srf-1;
+  }
+}
+
+.b-notFoundPage-light {
+  background-color: $light-bgd-variant;
+
+  &__title {
+    color: $light-on-bgd-srf-1;
+  }
+}

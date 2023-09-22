@@ -13,6 +13,9 @@ import { setToken } from "../store/reducers/authSlice.ts";
 import ProjectsPage from "../components/pages/ProjectsPage/ProjectsPage.tsx";
 import { setTheme } from "../store/reducers/globalSlice.ts";
 import ComponentsPage from "../components/pages/ComponentsPage/ComponentsPage.tsx";
+import ProjectPage from "../components/pages/ProjectPage/ProjectPage.tsx";
+import NotFoundPage from "../components/pages/NotFoundPage/NotFoundPage.tsx";
+import ProjectIssues from "../components/pages/ProjectIssues/ProjectIssues.tsx";
 
 const AppRouter = () => {
   const isAuthenticated = useAuthenticated();
@@ -45,7 +48,9 @@ const AppRouter = () => {
     <>
       <Route index element={<Navigate to={AppRoutes.projects} />} />
       <Route path={AppRoutes.projects} element={<ProjectsPage />} />
-      <Route path="*" element={<Navigate to={AppRoutes.projects} />} />
+      <Route path={AppRoutes.project} element={<ProjectPage />} />
+      <Route path={AppRoutes.projectIssues} element={<ProjectIssues />} />
+      <Route path="*" element={<NotFoundPage />} />
     </>
   );
   const authRoutes = () => (
@@ -53,7 +58,7 @@ const AppRouter = () => {
       <Route index element={<Navigate to={AppRoutes.signIn} />} />
       <Route path={AppRoutes.signIn} element={<SignInPage />} />
       <Route path={AppRoutes.signUp} element={<SignUpPage />} />
-      <Route path="*" element={<Navigate to={AppRoutes.signIn} />} />
+      <Route path="*" element={<NotFoundPage />} />
     </>
   );
 

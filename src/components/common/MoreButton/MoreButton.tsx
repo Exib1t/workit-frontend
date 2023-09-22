@@ -12,7 +12,10 @@ const MoreButton: FC<IconButtonProps> = (props) => {
       {...props}
       className={`${themeClass} ${props.className || ""}`}
     >
-      <Icon type={"more"} size={24} />
+      <Icon
+        type={"more"}
+        size={props.size === "medium" ? 20 : props.size === "small" ? 16 : 24}
+      />
     </IconButtonCustom>
   );
 };

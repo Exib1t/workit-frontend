@@ -1,9 +1,43 @@
+@import "./designVariables";
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
-  transition: .3s background-color, color;
+  font-family: "Roboto", sans-serif;
+  scroll-behavior: smooth;
+  transition:
+    0.3s background-color,
+    color;
+
+  &:has(.b-container-dark) {
+    *::-webkit-scrollbar {
+      background: $dark-bgd-default;
+      width: 8px;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background: $dark-on-bgd-srf-5;
+      border-radius: 5px;
+    }
+  }
+
+  &:has(.b-container-light) {
+    *::-webkit-scrollbar {
+      background: $light-bgd-default;
+      width: 8px;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background: $light-on-bgd-srf-5;
+      border-radius: 5px;
+    }
+  }
+}
+
+.b-container-light,
+.b-container-dark {
+  overflow-y: hidden;
 }
 
 #root {
@@ -14,8 +48,9 @@
 
 .outlet {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   padding-top: 60px;
+  overflow-y: auto;
 }
 
 .b-loader {

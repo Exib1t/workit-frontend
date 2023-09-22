@@ -10,20 +10,30 @@ import {
   createProject,
   fetchProjects,
   fetchProjectUsers,
+  updateProject,
 } from "../../../store/thunks/projectsThunks.ts";
 import CustomButton from "../../control/ButtonComponents/CustomButton/CustomButton.tsx";
 import TextInput from "../../control/TextInput/TextInput.tsx";
 import MultiSelect from "../../control/MultiSelect/MultiSelect.tsx";
 import { ISelectItem } from "../../../models/Select/Select.types.ts";
+import { setProjectsError } from "../../../store/reducers/projectsSlice.ts";
 
 interface IProps {
   isOpen: boolean;
   handleClose: () => void;
+  editableProjectId: number | null;
 }
 
-const ProjectCreateModal: FC<IProps> = ({ isOpen, handleClose }) => {
+const ProjectCreateModal: FC<IProps> = ({
+  isOpen,
+  handleClose,
+  editableProjectId,
+}) => {
   const dispatch = useAppDispatch();
-  const { availableUsers } = useAppSelector((state) => state.projects);
+  const { availableUsers, errors, data } = useAppSelector(
+    (state) => state.projects,
+  );
+  const [isEditable, setIsEditable] = useState(false);
   const [newProject, setNewProject] = useState<IProjectCreate>({
     title: "",
     link: "",
@@ -35,7 +45,46 @@ const ProjectCreateModal: FC<IProps> = ({ isOpen, handleClose }) => {
     dispatch(fetchProjectUsers());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (editableProjectId) {
+      const editableProject = data.find(
+        (project) => project.id === editableProjectId,
+      );
+      if (editableProject) {
+        setNewProject({
+          title: editableProject.title,
+          link: editableProject.link,
+          color: editableProject.color,
+          userIds: editableProject.userIds,
+        });
+        setIsEditable(true);
+      }
+    } else {
+      setIsEditable(false);
+    }
+  }, [editableProjectId, data]);
+
+  const onClose = () => {
+    resetForm();
+    handleClose();
+  };
+
   const validateProject = () => {
+    if (!newProject.title.trim()) {
+      dispatch(
+        setProjectsError({
+          statusCode: 500,
+          message: "Field title is required",
+        }),
+      );
+    } else if (!newProject.link.trim()) {
+      dispatch(
+        setProjectsError({
+          statusCode: 500,
+          message: "Field link is required",
+        }),
+      );
+    }
     return !!newProject.title.trim() && !!newProject.link.trim();
   };
 
@@ -48,20 +97,45 @@ const ProjectCreateModal: FC<IProps> = ({ isOpen, handleClose }) => {
     });
   };
 
+  const onCreateSuccess = () => {
+    dispatch(fetchProjects());
+    resetForm();
+    handleClose();
+  };
+
   const handleSubmit = async () => {
     if (validateProject()) {
-      await dispatch(createProject(newProject));
-      await dispatch(fetchProjects());
-      resetForm();
-      handleClose();
+      if (isEditable && editableProjectId) {
+        dispatch(
+          updateProject({
+            data: { ...newProject, id: editableProjectId },
+            callbacks: { onSuccess: onCreateSuccess },
+          }),
+        );
+      } else {
+        dispatch(
+          createProject({
+            data: newProject,
+            callbacks: { onSuccess: onCreateSuccess },
+          }),
+        );
+      }
     }
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewProject((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+    if (e.target.name === "link") {
+      dispatch(setProjectsError(null));
+      setNewProject((prevState) => ({
+        ...prevState,
+        link: e.target.value.toUpperCase(),
+      }));
+    } else {
+      setNewProject((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }));
+    }
   };
 
   const handleUsersChange = (selected: ISelectItem[]) => {
@@ -84,11 +158,7 @@ const ProjectCreateModal: FC<IProps> = ({ isOpen, handleClose }) => {
   const themeClass = useThemeClass("b-createProjectModal");
 
   return (
-    <ModalCustom
-      isOpen={isOpen}
-      handleClose={handleClose}
-      className={themeClass}
-    >
+    <ModalCustom isOpen={isOpen} handleClose={onClose} className={themeClass}>
       <div className={`${themeClass}__header`}>
         <h2 className={`${themeClass}__title`}>Project Create</h2>
       </div>
@@ -112,6 +182,7 @@ const ProjectCreateModal: FC<IProps> = ({ isOpen, handleClose }) => {
               name="link"
               value={newProject.link}
               onChange={handleInputChange}
+              error={errors?.message}
             />
           </div>
           <div className={`${themeClass}__field`}>
@@ -127,9 +198,11 @@ const ProjectCreateModal: FC<IProps> = ({ isOpen, handleClose }) => {
             />
           </div>
         </div>
-        <div className={`${themeClass}__field`}>
-          <span className={`${themeClass}__fieldLabel`}>Color</span>
-          <ColorPicker onChange={handleColorChange} />
+        <div className={`${themeClass}__column`}>
+          <div className={`${themeClass}__field`}>
+            <span className={`${themeClass}__fieldLabel`}>Color</span>
+            <ColorPicker onChange={handleColorChange} />
+          </div>
         </div>
       </div>
       <div className={`${themeClass}__footer`}>
@@ -137,11 +210,11 @@ const ProjectCreateModal: FC<IProps> = ({ isOpen, handleClose }) => {
           type="tertiary"
           title={"Cancel"}
           size={"md"}
-          clickHandler={handleClose}
+          clickHandler={onClose}
         />
         <CustomButton
           type="secondary"
-          title={"Create"}
+          title={isEditable ? "Save" : "Create"}
           size={"md"}
           clickHandler={handleSubmit}
         />

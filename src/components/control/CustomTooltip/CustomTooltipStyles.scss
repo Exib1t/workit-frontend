@@ -1,0 +1,19 @@
+@import "../../../assets/styles/designVariables";
+
+.b-tooltip-dark,
+.b-tooltip-light {
+  font-size: $typography-body-sm-font-size;
+  font-weight: $typography-body-sm-font-weight;
+  letter-spacing: $typography-body-sm-letter-spacing;
+  line-height: $typography-body-sm-line-height;
+}
+
+.b-tooltip-dark {
+  background: $dark-tooltip;
+  color: $dark-on-tooltip-default;
+}
+
+.b-tooltip-light {
+  background: $light-tooltip;
+  color: $light-on-tooltip-default;
+}

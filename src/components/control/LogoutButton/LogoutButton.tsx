@@ -4,13 +4,17 @@ import "./LogoutButtonStyles.scss";
 import { useAppDispatch } from "../../../store";
 import { logout } from "../../../store/reducers/authSlice.ts";
 import IconButtonCustom from "../IconButtonCustom/IconButtonCustom.tsx";
+import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "../../../router/Routes.ts";
 
 const LogoutButton = () => {
   const themeClass = useThemeClass("b-logoutButton");
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
     dispatch(logout());
+    navigate(AppRoutes.signIn);
   };
 
   return (

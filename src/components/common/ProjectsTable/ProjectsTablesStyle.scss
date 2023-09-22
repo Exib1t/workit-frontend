@@ -1,9 +1,16 @@
 @import "../../../assets/styles/designVariables";
 
-.b-projectsTable-dark, .b-projectsTable-light {
-  border-top-left-radius: 0 !important;
-  border-top-right-radius: 0 !important;
-  backdrop-filter: blur(5px);
+.b-projectsTable-dark,
+.b-projectsTable-light {
+  height: calc(100% - 12px);
+  overflow-y: auto;
+
+  &__table {
+    height: max-content !important;
+    backdrop-filter: blur(5px);
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
 
   &__headerTitle {
     padding: 0 $ref-spacing-24 !important;
@@ -21,6 +28,13 @@
     line-height: $typography-body-md-line-height;
   }
 
+  &__options {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $ref-spacing-4;
+  }
+
   .MuiDataGrid-root {
     .MuiDataGrid-cell:focus,
     .MuiDataGrid-cell:focus-within,
@@ -32,8 +46,10 @@
 }
 
 .b-projectsTable-dark {
-  border-color: $dark-on-bgd-srf-5 !important;
-  background-color: $dark-datagrid-header-bg;
+  &__table {
+    background-color: $dark-datagrid-header-bg;
+    border-color: $dark-on-bgd-srf-5 !important;
+  }
 
   &__headerTitle {
     color: $dark-on-bgd-srf-2;
@@ -50,8 +66,10 @@
 }
 
 .b-projectsTable-light {
-  border-color: $light-on-bgd-srf-5 !important;
-  background-color: $light-datagrid-header-bg;
+  &__table {
+    background-color: $light-datagrid-header-bg;
+    border-color: $light-on-bgd-srf-5 !important;
+  }
 
   &__headerTitle {
     color: $light-on-bgd-srf-2;

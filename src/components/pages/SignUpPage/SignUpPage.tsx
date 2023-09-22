@@ -6,9 +6,13 @@ import { SignUpFormDataInterface } from "../../../models/forms/SignUpForm.types.
 import { useAppDispatch } from "../../../store";
 import { registerThunk } from "../../../store/thunks/authThunks.ts";
 import CustomButton from "../../control/ButtonComponents/CustomButton/CustomButton.tsx";
+import Page from "../../common/Page/Page.tsx";
+import { AppRoutes } from "../../../router/Routes.ts";
+import { useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
   const themeClass = useThemeClass("b-signUp");
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const {
     handleSubmit,
@@ -42,6 +46,7 @@ const SignUpPage = () => {
         }),
       );
       reset();
+      navigate(AppRoutes.projects);
     } else {
       setError("confirmationPassword", {
         type: "validate",
@@ -51,72 +56,77 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className={themeClass}>
-      <form className={`${themeClass}__card`} onSubmit={handleSubmit(onSubmit)}>
-        <h1 className={`${themeClass}__title`}>Sign Up</h1>
-        <div className={`${themeClass}__form`}>
-          <div className={`${themeClass}__row`}>
+    <Page>
+      <div className={themeClass}>
+        <form
+          className={`${themeClass}__card`}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <h1 className={`${themeClass}__title`}>Sign Up</h1>
+          <div className={`${themeClass}__form`}>
+            <div className={`${themeClass}__row`}>
+              <TextField
+                size="small"
+                label="First Name"
+                placeholder="John"
+                error={!!errors.firstName?.type}
+                {...register("firstName", { required: true })}
+              />
+              <TextField
+                size="small"
+                label="Last Name"
+                placeholder="Doe"
+                error={!!errors.lastName?.type}
+                {...register("lastName", { required: true })}
+              />
+            </div>
             <TextField
               size="small"
-              label="First Name"
-              placeholder="John"
-              error={!!errors.firstName?.type}
-              {...register("firstName", { required: true })}
+              label="Email"
+              error={!!errors.email?.type}
+              {...register("email", { required: true })}
             />
-            <TextField
-              size="small"
-              label="Last Name"
-              placeholder="Doe"
-              error={!!errors.lastName?.type}
-              {...register("lastName", { required: true })}
-            />
+            <div className={`${themeClass}__row`}>
+              <TextField
+                size="small"
+                label="Password"
+                type="password"
+                error={!!errors.password?.type}
+                {...register("password", { required: true, minLength: 6 })}
+              />
+              <TextField
+                size="small"
+                label="Confirm"
+                type="password"
+                error={!!errors.confirmationPassword?.type}
+                {...register("confirmationPassword", {
+                  required: true,
+                  minLength: 6,
+                })}
+              />
+            </div>
+            <div className={`${themeClass}__row`}>
+              <FormControlLabel
+                control={<Checkbox />}
+                className={`${themeClass}__controlLabel`}
+                label="Do you accept privacy policy?"
+                {...register("privacyPolicy", { required: true })}
+              />
+            </div>
+            <span className={`${themeClass}__errorLabel`}>
+              {getErrorMessage()}
+            </span>
           </div>
-          <TextField
-            size="small"
-            label="Email"
-            error={!!errors.email?.type}
-            {...register("email", { required: true })}
+          <CustomButton
+            type={"secondary"}
+            size={"md"}
+            title={"Create account"}
+            className={`${themeClass}__button`}
+            clickHandler={handleSubmit(onSubmit)}
           />
-          <div className={`${themeClass}__row`}>
-            <TextField
-              size="small"
-              label="Password"
-              type="password"
-              error={!!errors.password?.type}
-              {...register("password", { required: true, minLength: 6 })}
-            />
-            <TextField
-              size="small"
-              label="Confirm"
-              type="password"
-              error={!!errors.confirmationPassword?.type}
-              {...register("confirmationPassword", {
-                required: true,
-                minLength: 6,
-              })}
-            />
-          </div>
-          <div className={`${themeClass}__row`}>
-            <FormControlLabel
-              control={<Checkbox />}
-              className={`${themeClass}__controlLabel`}
-              label="Do you accept privacy policy?"
-              {...register("privacyPolicy", { required: true })}
-            />
-          </div>
-          <span className={`${themeClass}__errorLabel`}>
-            {getErrorMessage()}
-          </span>
-        </div>
-        <CustomButton
-          type={"secondary"}
-          size={"md"}
-          title={"Create account"}
-          className={`${themeClass}__button`}
-          clickHandler={handleSubmit(onSubmit)}
-        />
-      </form>
-    </div>
+        </form>
+      </div>
+    </Page>
   );
 };
 export default SignUpPage;

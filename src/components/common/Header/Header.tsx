@@ -9,9 +9,10 @@ import ThemeSwitcher from "../../control/ThemeSwitcher/ThemeSwitcher.tsx";
 import ProfileButton from "../ProfileButton/ProfileButton.tsx";
 import LogoutButton from "../../control/LogoutButton/LogoutButton.tsx";
 import MoreButton from "../MoreButton/MoreButton.tsx";
-import HeaderMenu from "./parts/HeaderMenu.tsx";
+import HeaderMenu from "./parts/HeaderMenu/HeaderMenu.tsx";
 import { MouseEventHandler, useState } from "react";
 import CustomButton from "../../control/ButtonComponents/CustomButton/CustomButton.tsx";
+import HeaderNavigation from "./parts/HeaderNavigation/HeaderNavigation.tsx";
 
 const Header = () => {
   const [isHeaderMenuOpen, setIsHeaderMenuOpen] = useState<Element | null>(
@@ -41,19 +42,21 @@ const Header = () => {
         />
       </div>
       {isAuthenticated ? (
-        <div className={`${headerClass}__controls`}>
-          <ThemeSwitcher />
-          <ProfileButton
-            first_name="Dmitriy"
-            last_name="Maznyak"
-            email="dmaznyak2604@gmail.com"
-          />
-          <LogoutButton />
-          <MoreButton onClick={handleHeaderMenuOpen} />
-        </div>
+        <>
+          <HeaderNavigation />
+          <div className={`${headerClass}__controls`}>
+            <ThemeSwitcher />
+            <ProfileButton
+              first_name="Dmitriy"
+              last_name="Maznyak"
+              email="dmaznyak2604@gmail.com"
+            />
+            <LogoutButton />
+            <MoreButton onClick={handleHeaderMenuOpen} />
+          </div>
+        </>
       ) : (
-        <div className={`${headerClass}__buttons`}>
-          <ThemeSwitcher />
+        <div className={`${headerClass}__controls`}>
           <ButtonCustom
             variant="text"
             className={`${headerClass}__button`}

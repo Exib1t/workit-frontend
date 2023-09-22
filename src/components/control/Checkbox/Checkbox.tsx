@@ -21,7 +21,7 @@ const Checkbox: FC<{
       >
         {checked ? (
           <div className={`${themeClass}_btn ${btnClassName || ""}`}>
-            <Icon type={"tick"} size={20} />
+            <Icon type={"tick"} size={20} color={"tick"} />
           </div>
         ) : (
           <div className={`${themeClass}_btn-empty`}></div>

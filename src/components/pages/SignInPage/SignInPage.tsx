@@ -7,9 +7,13 @@ import { SignInFormDataInterface } from "../../../models/forms/SignInForm.types.
 import { useAppDispatch } from "../../../store";
 import { loginThunk } from "../../../store/thunks/authThunks.ts";
 import CustomButton from "../../control/ButtonComponents/CustomButton/CustomButton.tsx";
+import Page from "../../common/Page/Page.tsx";
+import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "../../../router/Routes.ts";
 
 const SignInPage = () => {
   const themeClass = useThemeClass("b-signIn");
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const {
     handleSubmit,
@@ -34,48 +38,54 @@ const SignInPage = () => {
   const onSubmit: SubmitHandler<SignInFormDataInterface> = async (data) => {
     await dispatch(loginThunk(data));
     reset();
+    navigate(AppRoutes.projects);
   };
 
   return (
-    <div className={themeClass}>
-      <form className={`${themeClass}__card`} onSubmit={handleSubmit(onSubmit)}>
-        <h1 className={`${themeClass}__title`}>Sign In</h1>
-        <div className={`${themeClass}__form`}>
-          <TextField
-            size="medium"
-            label="Email"
-            error={!!errors.email?.type}
-            {...register("email", { required: true, minLength: 5 })}
-          />
-          <TextField
-            size="medium"
-            label="Password"
-            type="password"
-            error={!!errors.password?.type}
-            {...register("password", { required: true, minLength: 6 })}
-          />
-          <div className={`${themeClass}__row`}>
-            <FormControlLabel
-              control={<Checkbox />}
-              className={`${themeClass}__controlLabel`}
-              label="Remember me"
-              {...register("isRemember")}
+    <Page>
+      <div className={themeClass}>
+        <form
+          className={`${themeClass}__card`}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <h1 className={`${themeClass}__title`}>Sign In</h1>
+          <div className={`${themeClass}__form`}>
+            <TextField
+              size="medium"
+              label="Email"
+              error={!!errors.email?.type}
+              {...register("email", { required: true, minLength: 5 })}
             />
-            <LinkCustom to={"/password-reset"}>Forgot password?</LinkCustom>
+            <TextField
+              size="medium"
+              label="Password"
+              type="password"
+              error={!!errors.password?.type}
+              {...register("password", { required: true, minLength: 6 })}
+            />
+            <div className={`${themeClass}__row`}>
+              <FormControlLabel
+                control={<Checkbox />}
+                className={`${themeClass}__controlLabel`}
+                label="Remember me"
+                {...register("isRemember")}
+              />
+              <LinkCustom to={"/password-reset"}>Forgot password?</LinkCustom>
+            </div>
+            <span className={`${themeClass}__errorLabel`}>
+              {getErrorMessage()}
+            </span>
           </div>
-          <span className={`${themeClass}__errorLabel`}>
-            {getErrorMessage()}
-          </span>
-        </div>
-        <CustomButton
-          type={"secondary"}
-          size={"md"}
-          title={"Login"}
-          className={`${themeClass}__button`}
-          clickHandler={handleSubmit(onSubmit)}
-        />
-      </form>
-    </div>
+          <CustomButton
+            type={"secondary"}
+            size={"md"}
+            title={"Login"}
+            className={`${themeClass}__button`}
+            clickHandler={handleSubmit(onSubmit)}
+          />
+        </form>
+      </div>
+    </Page>
   );
 };
 export default SignInPage;

@@ -1,26 +1,38 @@
 @import "../../../assets/styles/designVariables";
 
-.b-colorPicker-dark, .b-colorPicker-light {
+.b-colorPicker-dark,
+.b-colorPicker-light {
+  width: 100%;
   display: flex;
-  gap: $ref-spacing-4;
 
   &__wrapper {
     border-radius: $border-radius-2;
     cursor: pointer;
-    border-width: 1px;
-    border-style: solid;
-    border-color: transparent;
+    flex: 1;
+    opacity: 0.5;
+    transition: 0.3s all;
+
+    &:hover {
+      flex: 2;
+      opacity: 1;
+    }
+
+    &.-checked {
+      flex: 2;
+      opacity: 1;
+    }
+  }
+
+  .b-chipsDiscipline-dark,
+  .b-chipsDiscipline-light {
+    width: 100%;
+    height: 32px;
+    border-radius: 0;
   }
 }
 
 .b-colorPicker-dark {
-  &__wrapper.-checked {
-    border-color: $dark-primary;
-  }
 }
 
 .b-colorPicker-light {
-  &__wrapper.-checked {
-    border-color: $light-primary;
-  }
 }

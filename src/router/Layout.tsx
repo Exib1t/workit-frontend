@@ -5,17 +5,25 @@ import { Box, LinearProgress } from "@mui/material";
 import ErrorModal from "../components/common/ErrorModal/ErrorModal.tsx";
 
 const Layout = () => {
-  const { isLoading } = useAppSelector((state) => state.auth);
+  const { isLoading: isLoadingAuth } = useAppSelector((state) => state.auth);
+  const { isLoading: isLoadingProjects } = useAppSelector(
+    (state) => state.projects,
+  );
+  const { isLoading: isLoadingGlobal } = useAppSelector(
+    (state) => state.global,
+  );
+
+  const isLoading = isLoadingAuth || isLoadingProjects || isLoadingGlobal;
 
   return (
     <>
       <Header />
+      <Box className={`b-loader ${isLoading ? "" : "-hidden"}`}>
+        <LinearProgress sx={{ background: "none" }} />
+      </Box>
       <div className="outlet">
         <Outlet />
       </div>
-      <Box className={`b-loader ${isLoading ? "" : "-hidden"}`}>
-        <LinearProgress />
-      </Box>
       <ErrorModal />
     </>
   );

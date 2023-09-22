@@ -1,0 +1,115 @@
+@import "../../../assets/styles/designVariables";
+
+.b-projectPage-dark,
+.b-projectPage-light {
+  width: 100%;
+  height: 100%;
+  padding: $ref-spacing-12;
+
+  &__noExist {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: no-repeat url("../../../assets/images/pattern-bg.png") center /
+      cover;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    border-radius: $border-radius-8;
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+  }
+
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $ref-spacing-8;
+    padding: $ref-spacing-12 $ref-spacing-20;
+  }
+
+  &__title {
+    font-size: $typography-title-lg-font-size;
+    font-weight: $typography-title-lg-font-weight;
+    letter-spacing: $typography-title-lg-letter-spacing;
+    line-height: $typography-title-lg-line-height;
+  }
+
+  &__noExistTitle {
+    text-align: center;
+    font-size: $typography-display-md-font-size;
+    font-weight: $typography-display-md-font-weight;
+    letter-spacing: $typography-display-md-letter-spacing;
+    line-height: $typography-display-md-line-height;
+  }
+
+  &__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: $ref-spacing-8;
+    padding: $ref-spacing-20 $ref-spacing-12;
+  }
+}
+
+.b-projectPage-dark {
+  &__wrapper {
+    background: $dark-datagrid-header-bg;
+  }
+
+  &__header {
+    background: $dark-srf-default;
+  }
+
+  &__title,
+  &__noExistTitle {
+    color: $dark-on-bgd-srf-1;
+  }
+
+  &__card {
+    background: $dark-srf-default;
+
+    &:hover {
+      background: $dark-state-srf-default-hover;
+    }
+  }
+
+  &__cardTitle {
+    color: $dark-on-bgd-srf-2;
+  }
+}
+
+.b-projectPage-light {
+  &__wrapper {
+    background: $light-datagrid-header-bg;
+  }
+
+  &__header {
+    background: $light-srf-default;
+  }
+
+  &__title,
+  &__noExistTitle {
+    color: $light-on-bgd-srf-1;
+  }
+
+  &__card {
+    background: $light-srf-default;
+
+    &:hover {
+      background: $light-state-srf-default-hover;
+    }
+  }
+
+  &__cardTitle {
+    color: $light-on-bgd-srf-2;
+  }
+}
