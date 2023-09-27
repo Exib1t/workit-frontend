@@ -9,6 +9,8 @@ import "./IssueMenuStyles.scss";
 import { IIssue } from "../../../../models/IIssue/IIssue.ts";
 import { useAppDispatch } from "../../../../store";
 import { deleteIssue } from "../../../../store/thunks/issuesThunks.ts";
+import { AppRoutes } from "../../../../router/Routes.ts";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface IProps {
   isOpen: boolean;
@@ -26,6 +28,8 @@ const IssueMenu: FC<IProps> = ({
   onIssueUpdate,
 }) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { projectLink } = useParams();
   const themeClass = useThemeClass("b-issueMenu");
 
   const onSuccess = () => {
@@ -42,6 +46,16 @@ const IssueMenu: FC<IProps> = ({
     );
   };
 
+  const handleOpen = () => {
+    if (projectLink) {
+      navigate(
+        AppRoutes.issue
+          .replace(":projectLink", String(projectLink))
+          .replace(":issueLink", String(selectedIssue.link)),
+      );
+    }
+  };
+
   return (
     <Popover
       open={isOpen}
@@ -54,11 +68,11 @@ const IssueMenu: FC<IProps> = ({
       }}
     >
       <ListCustom className={themeClass}>
-        <ListItemCustom icon={<Icon type={"open"} size={16} />}>
+        <ListItemCustom
+          icon={<Icon type={"open"} size={16} />}
+          onClick={handleOpen}
+        >
           Open
-        </ListItemCustom>
-        <ListItemCustom icon={<Icon type={"edit"} size={16} />}>
-          Edit
         </ListItemCustom>
         <ListItemCustom
           icon={<Icon type={"delete"} size={16} color={"error"} />}

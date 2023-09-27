@@ -1,7 +1,10 @@
 import { useAppSelector } from "../store";
 
-export default function useAuthenticated(): boolean {
-  const { id } = useAppSelector((state) => state.auth);
+export default function useAuthenticated() {
+  const { id, isLoading } = useAppSelector((state) => state.auth);
 
-  return !!id;
+  return {
+    isAuthenticated: !!id,
+    isLoading,
+  };
 }

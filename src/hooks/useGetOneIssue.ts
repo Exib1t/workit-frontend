@@ -14,9 +14,7 @@ export default function (
   const [issue, setIssue] = useState<IIssue | undefined>(undefined);
 
   useEffect(() => {
-    if (project) {
-      dispatch(fetchIssuesByProjectId(project?.id));
-    }
+    fetchIssues();
   }, [dispatch, project]);
 
   useEffect(() => {
@@ -25,9 +23,16 @@ export default function (
     }
   }, [issues, issueLink]);
 
+  const fetchIssues = () => {
+    if (project) {
+      dispatch(fetchIssuesByProjectId(project?.id));
+    }
+  };
+
   return {
     issue,
     project,
     isLoading,
+    refresh: fetchIssues,
   };
 }

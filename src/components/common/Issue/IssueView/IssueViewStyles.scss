@@ -7,9 +7,10 @@
   flex-direction: column;
   padding: $ref-spacing-20;
   box-sizing: border-box;
+  overflow: auto;
 
   &__row {
-    width: 60%;
+    width: 100%;
     display: flex;
     gap: $ref-spacing-32;
     margin: 0;
@@ -19,9 +20,28 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: $ref-spacing-12;
+    gap: $ref-spacing-32;
     padding: $ref-spacing-24;
     margin: 0;
+
+    &.-fixed {
+      position: fixed;
+    }
+  }
+
+  &__left {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: $ref-spacing-16;
+  }
+
+  &__right {
+    position: relative;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: $ref-spacing-32;
   }
 
   &__title {
@@ -34,31 +54,35 @@
     line-height: $typography-title-md-line-height;
   }
 
-  &__item {
-    width: max-content;
+  &__group {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: $ref-spacing-24;
+    flex-direction: column;
+    gap: $ref-spacing-16;
   }
 
-  &__label {
-    width: 80px;
-    font-size: $typography-body-md-font-size;
-    font-weight: $typography-body-md-font-weight;
-    letter-spacing: $typography-body-md-letter-spacing;
-    line-height: $typography-body-md-line-height;
-  }
-
-  &__labelText {
-    width: 200px;
+  &__groupTitle {
     display: flex;
     align-items: center;
     gap: $ref-spacing-4;
-    font-size: $typography-body-md-font-size;
-    font-weight: $typography-body-md-font-weight;
-    letter-spacing: $typography-body-md-letter-spacing;
-    line-height: $typography-body-md-line-height;
+    font-size: $typography-label-lg-font-size;
+    font-weight: $typography-label-lg-font-weight;
+    letter-spacing: $typography-label-lg-letter-spacing;
+    line-height: $typography-label-lg-line-height;
+  }
+
+  &__groupContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: $ref-spacing-12;
+    margin: 0;
+  }
+
+  &__attachments {
+    width: 100%;
+    height: 200px;
+    border-radius: $border-radius-4;
   }
 }
 
@@ -67,12 +91,13 @@
     color: $dark-on-bgd-srf-3;
   }
 
-  &__label {
-    color: $dark-on-bgd-srf-3;
+  &__groupTitle {
+    color: $dark-on-bgd-srf-2;
   }
 
-  &__labelText {
-    color: $dark-on-bgd-srf-2;
+  &__attachments {
+    background: $dark-bgd-variant;
+    border: 1px solid $dark-on-bgd-srf-5;
   }
 }
 
@@ -81,11 +106,12 @@
     color: $light-on-bgd-srf-3;
   }
 
-  &__label {
-    color: $dark-on-bgd-srf-3;
+  &__groupTitle {
+    color: $light-on-bgd-srf-2;
   }
 
-  &__labelText {
-    color: $dark-on-bgd-srf-2;
+  &__attachments {
+    background: $light-bgd-variant;
+    border: 1px solid $light-on-bgd-srf-5;
   }
 }

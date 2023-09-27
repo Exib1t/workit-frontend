@@ -7,6 +7,7 @@ import { FC } from "react";
 import { IProject } from "../../../../models/IProject/IProject.ts";
 import CustomButton from "../../../control/ButtonComponents/CustomButton/CustomButton.tsx";
 import Icon from "../../../control/Icon/Icon.tsx";
+import BreadcrumbsCustom from "../../../control/BreadcrumbsCustom/BreadcrumbsCustom.tsx";
 
 interface IProps {
   project: IProject;
@@ -20,18 +21,16 @@ const IssuesHeader: FC<IProps> = ({ project, handleCreateNewOpen }) => {
 
   return (
     <div className={themeClass}>
-      <h2 className={`${themeClass}__breadcrumbs`}>
+      <BreadcrumbsCustom>
         <span
-          className={`${themeClass}__breadcrumbs -big`}
           onClick={() =>
             navigate(AppRoutes.project.replace(":projectLink", project.link))
           }
         >
           {project.title}
         </span>
-        <span className={`${themeClass}__breadcrumbs -medium`}>{">"}</span>
-        <span className={`${themeClass}__breadcrumbs -medium`}>Issues</span>
-      </h2>
+        <p>Issues</p>
+      </BreadcrumbsCustom>
       <div className={`${themeClass}__controls`}>
         <CustomButton
           type={"selection-activated"}

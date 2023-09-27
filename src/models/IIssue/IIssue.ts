@@ -24,6 +24,16 @@ export interface IIssueCreate {
   projectId: number;
 }
 
+export interface IIssueUpdate {
+  id: number;
+  title?: string;
+  description?: string;
+  status?: IssueStatusType;
+  priority?: IssuePriorityType;
+  type?: IssueType;
+  assignee?: ICompressedUser;
+}
+
 export type IssueStatusType = "Done" | "To Estimate" | "In Progress";
 export type IssuePriorityType = "High" | "Medium" | "Low";
 export type IssueType = "Task" | "Bug" | "Subtask";

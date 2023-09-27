@@ -1,0 +1,129 @@
+@import "../../../assets/styles/designVariables";
+
+.b-systemButton-dark,
+.b-systemButton-light {
+  cursor: pointer;
+  display: flex;
+  transition: all 200ms ease-out;
+  width: max-content;
+  height: max-content;
+  position: relative;
+
+  &.-disabled {
+    pointer-events: none;
+  }
+
+  &.-loading {
+    pointer-events: none;
+
+    .b-systemButton-dark,
+    .b-systemButton-light {
+      &_icon {
+        opacity: 0;
+      }
+    }
+  }
+
+  &.-sm {
+    padding: $ref-spacing-0;
+    border-radius: $border-radius-1;
+  }
+
+  &.-md,
+  &.-lg {
+    padding: $ref-spacing-2;
+    border-radius: $border-radius-2;
+  }
+
+  &_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    height: max-content;
+  }
+}
+
+.b-systemButton-dark {
+  &.-disabled {
+    opacity: $dark-disabled;
+  }
+
+  &_loaderCircle {
+    stroke: $dark-secondary !important;
+  }
+
+  &_transparent {
+    background-color: transparent;
+
+    &:hover {
+      background-color: $dark-state-bgd-srf-container-hover;
+    }
+
+    &_icon {
+      svg {
+        path {
+          stroke: $dark-secondary;
+        }
+      }
+    }
+  }
+
+  &_filled {
+    background-color: $dark-srf-variant;
+
+    &:hover {
+      background-color: $dark-state-srf-variant-hover;
+    }
+
+    &_icon {
+      svg {
+        path {
+          stroke: $dark-on-bgd-srf-2;
+        }
+      }
+    }
+  }
+}
+
+.b-systemButton-light {
+  &.-disabled {
+    opacity: $light-disabled;
+  }
+
+  &_loaderCircle {
+    stroke: $light-secondary !important;
+  }
+
+  &_transparent {
+    background-color: transparent;
+
+    &:hover {
+      background-color: $light-state-bgd-srf-container-hover;
+    }
+
+    &_icon {
+      svg {
+        path {
+          stroke: $light-secondary;
+        }
+      }
+    }
+  }
+
+  &_filled {
+    background-color: $light-srf-variant;
+
+    &:hover {
+      background-color: $light-state-srf-variant-hover;
+    }
+
+    &_icon {
+      svg {
+        path {
+          stroke: $light-on-bgd-srf-2;
+        }
+      }
+    }
+  }
+}

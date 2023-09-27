@@ -17,9 +17,10 @@ import ProjectPage from "../components/pages/ProjectPage/ProjectPage.tsx";
 import NotFoundPage from "../components/pages/NotFoundPage/NotFoundPage.tsx";
 import IssuesPage from "../components/pages/IssuesPage/IssuesPage.tsx";
 import IssuePage from "../components/pages/IssuePage/IssuePage.tsx";
+import Page from "../components/common/Page/Page.tsx";
 
 const AppRouter = () => {
-  const isAuthenticated = useAuthenticated();
+  const { isAuthenticated, isLoading } = useAuthenticated();
   const dispatch = useAppDispatch();
   const { token } = useAppSelector((state) => state.auth);
   const themeClass = useThemeClass("b-container");
@@ -69,6 +70,8 @@ const AppRouter = () => {
       <Route path={AppRoutes.components} element={<ComponentsPage />} />
     </>
   );
+
+  if (isLoading) return <Page>Loading</Page>;
 
   return (
     <div className={themeClass}>

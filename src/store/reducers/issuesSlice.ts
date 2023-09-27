@@ -28,6 +28,7 @@ const issuesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchIssuesByProjectId.pending, (state) => {
       state.isLoading = true;
+      state.issues = [];
       state.errors = null;
     });
     builder.addCase(fetchIssuesByProjectId.fulfilled, (state, action) => {

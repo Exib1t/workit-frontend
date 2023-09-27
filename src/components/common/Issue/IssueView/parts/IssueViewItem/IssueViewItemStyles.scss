@@ -1,0 +1,49 @@
+@import "../../../../../../assets/styles/designVariables";
+
+.b-issueViewItem-dark,
+.b-issueViewItem-light {
+  width: max-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $ref-spacing-24;
+
+  &__label {
+    width: 80px;
+    font-size: $typography-body-md-font-size;
+    font-weight: $typography-body-md-font-weight;
+    letter-spacing: $typography-body-md-letter-spacing;
+    line-height: $typography-body-md-line-height;
+  }
+
+  &__labelText {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    gap: $ref-spacing-4;
+    font-size: $typography-body-md-font-size;
+    font-weight: $typography-body-md-font-weight;
+    letter-spacing: $typography-body-md-letter-spacing;
+    line-height: $typography-body-md-line-height;
+  }
+}
+
+.b-issueViewItem-dark {
+  &__label {
+    color: $dark-on-bgd-srf-3;
+  }
+
+  &__labelText {
+    color: $dark-on-bgd-srf-2;
+  }
+}
+
+.b-issueViewItem-light {
+  &__label {
+    color: $light-on-bgd-srf-3;
+  }
+
+  &__labelText {
+    color: $light-on-bgd-srf-2;
+  }
+}

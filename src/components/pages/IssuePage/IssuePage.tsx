@@ -9,7 +9,10 @@ import IssueView from "../../common/Issue/IssueView/IssueView.tsx";
 
 const IssuePage = () => {
   const { projectLink, issueLink } = useParams();
-  const { issue, project } = useGetOneIssue(projectLink, issueLink);
+  const { issue, project, isLoading, refresh } = useGetOneIssue(
+    projectLink,
+    issueLink,
+  );
   const themeClass = useThemeClass("b-issuePage");
 
   if (!project || !issue) return null;
@@ -19,7 +22,7 @@ const IssuePage = () => {
       <div className={themeClass}>
         <div className={`${themeClass}__container`}>
           <IssueHeader project={project} issue={issue} />
-          <IssueView issue={issue} />
+          <IssueView issue={issue} isLoading={isLoading} onSuccess={refresh} />
         </div>
       </div>
     </Page>
