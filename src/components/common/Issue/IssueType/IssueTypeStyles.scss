@@ -1,0 +1,19 @@
+@import "../../../../assets/styles/designVariables";
+
+.b-issueType-dark,
+.b-issueType-light {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: $border-radius-2;
+  width: $ref-sizing-16;
+  height: $ref-sizing-16;
+}
+
+.b-issueType-dark {
+  background: $dark-primary;
+}
+
+.b-issueType-light {
+  background: $light-primary;
+}

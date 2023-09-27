@@ -1,0 +1,41 @@
+@import "../../../../assets/styles/designVariables";
+
+.b-issuePriority-dark,
+.b-issuePriority-light {
+  display: flex;
+  align-items: center;
+  gap: $ref-spacing-2;
+  font-family: $typography-label-lg-font-family;
+  font-weight: $typography-body-lg-font-weight;
+  line-height: $typography-label-lg-line-height;
+  font-size: $typography-label-lg-font-size;
+  letter-spacing: $typography-label-lg-letter-spacing;
+
+  &.-table {
+    font-weight: $typography-label-lg-font-weight;
+  }
+
+  &__skeleton {
+    display: flex;
+    align-items: center;
+    gap: $ref-spacing-2;
+    width: 100%;
+    padding: $ref-spacing-0 $ref-spacing-24;
+  }
+}
+
+.b-issuePriority-dark {
+  color: $dark-on-bgd-srf-2;
+
+  &.-table {
+    color: $dark-on-bgd-srf-3;
+  }
+}
+
+.b-issuePriority-light {
+  color: $light-on-bgd-srf-2;
+
+  &.-table {
+    color: $light-on-bgd-srf-3;
+  }
+}

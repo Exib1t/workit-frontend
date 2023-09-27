@@ -1,0 +1,25 @@
+@import "../../../../assets/styles/designVariables";
+
+.b-projectsTable-dark,
+.b-projectsTable-light {
+  height: calc(100% - 12px);
+  overflow-y: auto;
+
+  &__table {
+    height: max-content !important;
+    backdrop-filter: blur(5px);
+  }
+
+  &__options {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $ref-spacing-4;
+  }
+}
+
+.b-projectsTable-dark {
+}
+
+.b-projectsTable-light {
+}

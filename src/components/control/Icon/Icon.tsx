@@ -17,12 +17,21 @@ export type IconTypes =
   | "delete"
   | "projects"
   | "calendar"
+  | "plus"
+  | "drag"
+  | "chevron-low"
+  | "chevron-medium"
+  | "chevron-high"
+  | "task"
+  | "open"
+  | "subtask"
+  | "bug"
   | "folder";
 
 interface IProps {
   type: IconTypes;
   size?: 12 | 16 | 20 | 24 | 32 | 64 | 128;
-  color?: "primary" | "secondary" | "tick";
+  color?: "primary" | "secondary" | "tick" | "error";
 }
 
 const Icon: FC<IProps> = ({ type, size = 12, color = "secondary" }) => {
@@ -198,46 +207,43 @@ const Icon: FC<IProps> = ({ type, size = 12, color = "secondary" }) => {
     case "delete":
       return (
         <SvgIcon
-          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className={`${themeClass} color-${color} size-${size} -stroke`}
         >
           <path
-            d="M10 12V17"
-            stroke="#000000"
-            strokeWidth="2"
+            d="M8.21252 9.99997V14.4688"
+            stroke="#4F46E5"
             strokeLinecap="round"
             strokeLinejoin="round"
-          ></path>
+          />
           <path
-            d="M14 12V17"
-            stroke="#000000"
-            strokeWidth="2"
+            d="M11.7876 9.99997V14.4688"
+            stroke="#4F46E5"
             strokeLinecap="round"
             strokeLinejoin="round"
-          ></path>
+          />
           <path
-            d="M4 7H20"
-            stroke="#000000"
-            strokeWidth="2"
+            d="M2.84985 5.53116H17.1501"
+            stroke="#4F46E5"
             strokeLinecap="round"
             strokeLinejoin="round"
-          ></path>
+          />
           <path
-            d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10"
-            stroke="#000000"
-            strokeWidth="2"
+            d="M4.63745 8.21246V15.3626C4.63745 16.8435 5.83792 18.0439 7.31876 18.0439H12.6814C14.1623 18.0439 15.3627 16.8435 15.3627 15.3626V8.21246"
+            stroke="#4F46E5"
             strokeLinecap="round"
             strokeLinejoin="round"
-          ></path>
+          />
           <path
-            d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
-            stroke="#000000"
-            strokeWidth="2"
+            d="M7.3186 3.74362C7.3186 2.75639 8.11891 1.95609 9.10614 1.95609H10.8937C11.8809 1.95609 12.6812 2.75639 12.6812 3.74362V5.53116H7.3186V3.74362Z"
+            stroke="#4F46E5"
             strokeLinecap="round"
             strokeLinejoin="round"
-          ></path>
+          />
         </SvgIcon>
       );
     case "projects":
@@ -316,6 +322,223 @@ const Icon: FC<IProps> = ({ type, size = 12, color = "secondary" }) => {
               ></path>
             </g>
           </g>
+        </SvgIcon>
+      );
+    case "plus":
+      return (
+        <SvgIcon
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={`${themeClass} color-${color} size-${size} -stroke`}
+        >
+          <path
+            d="M6 12H18M12 6V18"
+            stroke="#000000"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+        </SvgIcon>
+      );
+    case "chevron-low":
+      return (
+        <SvgIcon
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={`${themeClass} color-${color} size-${size} -stroke`}
+        >
+          <path d="M5 12.5L10 7.49998" stroke="#DBA34E" strokeLinecap="round" />
+          <path
+            d="M15 12.5L9.99998 7.49998"
+            stroke="#DBA34E"
+            strokeLinecap="round"
+          />
+        </SvgIcon>
+      );
+    case "chevron-medium":
+      return (
+        <SvgIcon
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={`${themeClass} color-${color} size-${size} -stroke`}
+        >
+          <path d="M5 10L10 4.99998" stroke="#DBA34E" strokeLinecap="round" />
+          <path
+            d="M15 10L9.99998 4.99998"
+            stroke="#DBA34E"
+            strokeLinecap="round"
+          />
+          <path d="M5 15L10 10" stroke="#DBA34E" strokeLinecap="round" />
+          <path d="M15 15L9.99998 10" stroke="#DBA34E" strokeLinecap="round" />
+        </SvgIcon>
+      );
+    case "chevron-high":
+      return (
+        <SvgIcon
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={`${themeClass} color-${color} size-${size} -stroke`}
+        >
+          <path d="M5 7.5L10 2.49998" stroke="#DBA34E" strokeLinecap="round" />
+          <path
+            d="M15 7.5L9.99998 2.49998"
+            stroke="#DBA34E"
+            strokeLinecap="round"
+          />
+          <path d="M5 12.5L10 7.50001" stroke="#DBA34E" strokeLinecap="round" />
+          <path
+            d="M15 12.5L9.99998 7.50001"
+            stroke="#DBA34E"
+            strokeLinecap="round"
+          />
+          <path d="M5 17.5L10 12.5" stroke="#DBA34E" strokeLinecap="round" />
+          <path
+            d="M15 17.5L9.99998 12.5"
+            stroke="#DBA34E"
+            strokeLinecap="round"
+          />
+        </SvgIcon>
+      );
+    case "subtask":
+      return (
+        <SvgIcon
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={`${themeClass} color-${color} size-${size} -stroke`}
+        >
+          <path
+            d="M13.5 9.5V4.5C13.5 3.94772 13.0523 3.5 12.5 3.5H4.5C3.94772 3.5 3.5 3.94772 3.5 4.5V12.5C3.5 13.0523 3.94772 13.5 4.5 13.5H9.5M13.5 9.5H10.5C9.94772 9.5 9.5 9.94772 9.5 10.5V13.5M13.5 9.5H16.5C17.0523 9.5 17.5 9.94772 17.5 10.5V16.5C17.5 17.0523 17.0523 17.5 16.5 17.5H10.5C9.94772 17.5 9.5 17.0523 9.5 16.5V13.5"
+            stroke="#4F46E5"
+            strokeWidth="2"
+          />
+        </SvgIcon>
+      );
+    case "bug":
+      return (
+        <SvgIcon
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={`${themeClass} color-${color} size-${size} -fill`}
+        >
+          <circle cx="10" cy="10" r="5" fill="#4F46E5" />
+        </SvgIcon>
+      );
+    case "task":
+      return (
+        <SvgIcon
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={`${themeClass} color-${color} size-${size} -stroke`}
+        >
+          <line
+            x1="1"
+            y1="-1"
+            x2="8.52"
+            y2="-1"
+            transform="matrix(0.700736 0.713421 -0.700736 0.713421 0.561523 10.7951)"
+            stroke="#4F46E5"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+          <path
+            d="M18 4.41309L7.44941 16.0734"
+            stroke="#4F46E5"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+        </SvgIcon>
+      );
+    case "drag":
+      return (
+        <SvgIcon
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={`${themeClass} color-${color} size-${size} -stroke`}
+        >
+          <path
+            d="M18 14C17.4477 14 17 14.4477 17 15C17 15.5523 17.4477 16 18 16C18.5523 16 19 15.5523 19 15C19 14.4477 18.5523 14 18 14Z"
+            stroke="#000000"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+          <path
+            d="M12 14C11.4477 14 11 14.4477 11 15C11 15.5523 11.4477 16 12 16C12.5523 16 13 15.5523 13 15C13 14.4477 12.5523 14 12 14Z"
+            stroke="#000000"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+          <path
+            d="M6 14C5.44772 14 5 14.4477 5 15C5 15.5523 5.44772 16 6 16C6.55228 16 7 15.5523 7 15C7 14.4477 6.55228 14 6 14Z"
+            stroke="#000000"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+          <path
+            d="M18 8C17.4477 8 17 8.44772 17 9C17 9.55228 17.4477 10 18 10C18.5523 10 19 9.55228 19 9C19 8.44772 18.5523 8 18 8Z"
+            stroke="#000000"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+          <path
+            d="M12 8C11.4477 8 11 8.44772 11 9C11 9.55228 11.4477 10 12 10C12.5523 10 13 9.55228 13 9C13 8.44772 12.5523 8 12 8Z"
+            stroke="#000000"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+          <path
+            d="M6 8C5.44772 8 5 8.44772 5 9C5 9.55228 5.44772 10 6 10C6.55228 10 7 9.55228 7 9C7 8.44772 6.55228 8 6 8Z"
+            stroke="#000000"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+        </SvgIcon>
+      );
+    case "open":
+      return (
+        <SvgIcon
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={`${themeClass} color-${color} size-${size} -stroke`}
+        >
+          <circle
+            cx="12"
+            cy="12"
+            r="3"
+            stroke="#33363F"
+            strokeWidth="2"
+          ></circle>
+          <path
+            d="M21 12C21 12 20 4 12 4C4 4 3 12 3 12"
+            stroke="#33363F"
+            strokeWidth="2"
+          ></path>
         </SvgIcon>
       );
     default:

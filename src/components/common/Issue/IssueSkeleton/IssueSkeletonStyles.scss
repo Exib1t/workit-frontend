@@ -1,0 +1,15 @@
+@import "../../../../assets/styles/designVariables";
+
+.b-issueSkeleton-dark,
+.b-issueSkeleton-light {
+  height: 52px;
+  display: flex;
+  align-items: center;
+
+  &__skeletonControls {
+    display: flex;
+    justify-content: flex-end;
+    padding: $ref-spacing-0 $ref-spacing-24 $ref-spacing-0 $ref-spacing-0;
+    width: 30%;
+  }
+}

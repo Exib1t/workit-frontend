@@ -3,7 +3,8 @@ export const AppRoutes = {
   signUp: "/sign-up",
   projects: "/projects",
   project: "/projects/:projectLink",
-  projectIssues: "/projects/:projectLink/issues",
+  issues: "/projects/:projectLink/issues",
+  issue: "/projects/:projectLink/issues/:issueLink",
   projectPlanning: "/projects/:projectLink/planning",
   components: "/components",
 };

@@ -1,0 +1,30 @@
+@import "../../../assets/styles/designVariables";
+
+.b-projectIssues-dark,
+.b-projectIssues-light {
+  width: 100%;
+  height: 100%;
+  padding: $ref-spacing-12;
+
+  &__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: $border-radius-8;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+  }
+}
+
+.b-projectIssues-dark {
+  &__container {
+    border: 1px solid $dark-on-bgd-srf-5;
+  }
+}
+
+.b-projectIssues-light {
+  &__container {
+    border: 1px solid $light-on-bgd-srf-5;
+  }
+}

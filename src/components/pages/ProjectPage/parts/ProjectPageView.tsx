@@ -4,7 +4,7 @@ import issuesImage from "../../../../assets/images/issues.svg";
 import calendarImage from "../../../../assets/images/calendar.svg";
 import useThemeClass from "../../../../hooks/useThemeClass.ts";
 import { IProject } from "../../../../models/IProject/IProject.ts";
-import ProjectCard from "../../../common/ProjectCard/ProjectCard.tsx";
+import ProjectCard from "../../../common/Project/ProjectCard/ProjectCard.tsx";
 import { AppRoutes } from "../../../../router/Routes.ts";
 
 interface IProps {
@@ -24,7 +24,7 @@ const ProjectPageView: FC<IProps> = ({ project }) => {
         <ProjectCard
           title={"Issues"}
           image={issuesImage}
-          to={AppRoutes.projectIssues.replace(":projectLink", project.link)}
+          to={AppRoutes.issues.replace(":projectLink", project.link)}
         />
         <ProjectCard
           title={"Planning"}

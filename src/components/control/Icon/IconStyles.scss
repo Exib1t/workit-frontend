@@ -106,6 +106,28 @@
       fill: $dark-on-bgd-srf-1;
     }
   }
+
+  &.color-error {
+    &.-fill * {
+      fill: $dark-sys-danger;
+    }
+
+    &.-svgFill {
+      fill: $dark-sys-danger;
+    }
+
+    &.-stroke * {
+      stroke: $dark-sys-danger;
+    }
+
+    &.-strokeCheckbox * {
+      stroke: $dark-sys-danger;
+    }
+
+    &.-fillPrimary * {
+      fill: $dark-sys-danger;
+    }
+  }
 }
 
 .b-icon-light {
@@ -172,6 +194,28 @@
 
     &.-fillPrimary * {
       fill: $light-on-bgd-srf-1;
+    }
+  }
+
+  &.color-error {
+    &.-fill * {
+      fill: $light-sys-danger;
+    }
+
+    &.-svgFill {
+      fill: $light-sys-danger;
+    }
+
+    &.-stroke * {
+      stroke: $light-sys-danger;
+    }
+
+    &.-strokeCheckbox * {
+      stroke: $light-sys-danger;
+    }
+
+    &.-fillPrimary * {
+      fill: $light-sys-danger;
     }
   }
 }

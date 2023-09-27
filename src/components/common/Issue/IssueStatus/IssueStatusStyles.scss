@@ -1,0 +1,10 @@
+@import "../../../../assets/styles/designVariables";
+
+.b-issueStatus-dark,
+.b-issueStatus-light {
+  &__skeleton {
+    width: 100%;
+    padding: $ref-spacing-0 $ref-spacing-24;
+    box-sizing: border-box;
+  }
+}

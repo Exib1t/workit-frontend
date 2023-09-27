@@ -1,5 +1,5 @@
 import useThemeClass from "../../../hooks/useThemeClass.ts";
-import { FC, MouseEvent, useState } from "react";
+import { FC, MouseEvent, ReactNode, useState } from "react";
 import { ISelectItem } from "../../../models/Select/Select.types.ts";
 import Icon from "../Icon/Icon.tsx";
 import "./SelectStyles.scss";
@@ -14,7 +14,7 @@ interface IProps {
   onChange: (item: ISelectItem) => void;
   items: ISelectItem[];
   disabled?: boolean;
-  getTitle?: (item: ISelectItem) => string;
+  getTitle?: (item: ISelectItem) => string | ReactNode;
 }
 
 const Select: FC<IProps> = ({
@@ -67,7 +67,9 @@ const Select: FC<IProps> = ({
           <span className={`${themeClass}__placeholder`}>{placeholder}</span>
         )}
         {!!selected && (
-          <span className={`${themeClass}__selected`}>{selected.title}</span>
+          <span className={`${themeClass}__selected`}>
+            {getTitle ? getTitle(selected) : selected.title}
+          </span>
         )}
         <div className={`${themeClass}__icon`}>
           <Icon type={"chevron-down"} />

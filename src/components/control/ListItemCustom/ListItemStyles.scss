@@ -8,8 +8,9 @@
   justify-content: flex-start !important;
   align-items: center !important;
   margin: 0 !important;
-  padding: $ref-spacing-12 $ref-spacing-16 !important;
-  gap: $ref-spacing-16 !important;
+  padding: $ref-spacing-8 !important;
+  border-radius: 0 !important;
+  gap: $ref-spacing-8 !important;
   font-size: $typography-body-lg-font-size !important;
   line-height: $typography-body-lg-line-height !important;
   font-weight: $typography-body-lg-font-weight !important;
@@ -19,23 +20,47 @@
 .b-listItem-dark {
   color: $dark-on-bgd-srf-3 !important;
 
+  & + & {
+    border-top: 1px solid $dark-on-bgd-srf-5;
+  }
+
   &.on-bgd {
     background: $dark-bgd-variant;
+
+    &:hover {
+      background: $dark-state-bgd-variant-hover;
+    }
   }
 
   &.on-srf {
     background: $dark-srf-variant;
+
+    &:hover {
+      background: $dark-state-srf-variant-hover;
+    }
   }
 }
 
 .b-listItem-light {
   color: $light-on-bgd-srf-3 !important;
 
+  & + & {
+    border-top: 1px solid $light-on-bgd-srf-5;
+  }
+
   &.on-bgd {
     background: $light-bgd-variant;
+
+    &:hover {
+      background: $light-state-bgd-variant-hover;
+    }
   }
 
   &.on-srf {
     background: $light-srf-variant;
+
+    &:hover {
+      background: $light-state-srf-variant-hover;
+    }
   }
 }

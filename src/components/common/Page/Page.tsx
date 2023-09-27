@@ -1,9 +1,9 @@
-import { FC, ReactElement } from "react";
+import { FC, ReactNode } from "react";
 import useThemeClass from "../../../hooks/useThemeClass.ts";
 import "./PageStyles.scss";
 
 interface IProps {
-  children: ReactElement;
+  children: ReactNode;
 }
 
 const Page: FC<IProps> = ({ children }) => {

@@ -63,3 +63,21 @@
     display: none;
   }
 }
+
+.MuiSkeleton-root {
+  transform: none !important;
+}
+
+.MuiPaper-root {
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.b-container-dark .MuiSkeleton-root {
+  background: $dark-gradient-skeleton;
+}
+
+.b-container-light .MuiSkeleton-root {
+  background: $light-gradient-skeleton;
+}

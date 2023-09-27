@@ -3,9 +3,15 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import globalSlice from "./reducers/globalSlice.ts";
 import authSlice from "./reducers/authSlice.ts";
 import projectsSlice from "./reducers/projectsSlice.ts";
+import issuesSlice from "./reducers/issuesSlice.ts";
 
 export const store = configureStore({
-  reducer: { global: globalSlice, auth: authSlice, projects: projectsSlice },
+  reducer: {
+    global: globalSlice,
+    auth: authSlice,
+    projects: projectsSlice,
+    issues: issuesSlice,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

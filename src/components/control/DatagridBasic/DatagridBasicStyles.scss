@@ -1,0 +1,72 @@
+@import "../../../assets/styles/designVariables";
+
+.b-datagridBasic-dark,
+.b-datagridBasic-light {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+
+  &__headerTitle {
+    padding: 0 $ref-spacing-24 !important;
+    font-size: $typography-body-md-font-size;
+    font-weight: $typography-body-md-font-weight;
+    letter-spacing: $typography-body-md-letter-spacing;
+    line-height: $typography-body-md-line-height;
+    outline: none !important;
+  }
+
+  &__cell {
+    padding: 0 $ref-spacing-24 !important;
+    font-size: $typography-label-md-font-size;
+    font-weight: $typography-body-md-font-weight;
+    letter-spacing: $typography-body-md-letter-spacing;
+    line-height: $typography-body-md-line-height;
+    outline: none !important;
+  }
+
+  &__options {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $ref-spacing-4;
+  }
+}
+
+.b-datagridBasic-dark {
+  background-color: $dark-datagrid-header-bg;
+  border-color: $dark-on-bgd-srf-5 !important;
+
+  &__headerTitle {
+    color: $dark-on-bgd-srf-2;
+  }
+
+  &__cell {
+    color: $dark-on-bgd-srf-3;
+    border-color: $dark-on-bgd-srf-5 !important;
+  }
+
+  &__header {
+    border-color: $dark-on-bgd-srf-5 !important;
+  }
+
+  &__overlay {
+    background: none !important;
+  }
+}
+
+.b-datagridBasic-light {
+  background-color: $light-datagrid-header-bg;
+  border-color: $light-on-bgd-srf-5 !important;
+
+  &__headerTitle {
+    color: $light-on-bgd-srf-2;
+  }
+
+  &__cell {
+    color: $light-on-bgd-srf-3;
+    border-color: $light-on-bgd-srf-5 !important;
+  }
+
+  &__header {
+    border-color: $light-on-bgd-srf-5 !important;
+  }
+}

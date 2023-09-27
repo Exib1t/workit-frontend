@@ -1,4 +1,4 @@
-@import '../../../../assets/styles/designVariables';
+@import "../../../../assets/styles/designVariables";
 
 .b-button-dark,
 .b-button-light {
@@ -60,15 +60,6 @@
     &.-md {
       width: 16px;
       height: 16px;
-    }
-
-    &.-xs,
-    &.-sm,
-    &.-md {
-      svg {
-        max-width: 100%;
-        max-height: 100%;
-      }
     }
   }
 

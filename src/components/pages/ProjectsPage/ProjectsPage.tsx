@@ -1,10 +1,10 @@
 import useThemeClass from "../../../hooks/useThemeClass.ts";
-import ProjectsHeader from "../../common/ProjectsHeader/ProjectsHeader.tsx";
+import ProjectsHeader from "../../common/Project/ProjectsHeader/ProjectsHeader.tsx";
 import { useCallback, useEffect, useState } from "react";
 import { useAppDispatch } from "../../../store";
 import { fetchProjects } from "../../../store/thunks/projectsThunks.ts";
-import ProjectsTable from "../../common/ProjectsTable/ProjectsTable.tsx";
-import ProjectCreateModal from "../../common/ProjectCreateModal/ProjectCreateModal.tsx";
+import ProjectsTable from "../../common/Project/ProjectsTable/ProjectsTable.tsx";
+import ProjectCreateModal from "../../common/Project/ProjectCreateModal/ProjectCreateModal.tsx";
 import "./ProjectsPageStyles.scss";
 import Page from "../../common/Page/Page.tsx";
 

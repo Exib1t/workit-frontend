@@ -1,0 +1,48 @@
+@import "../../../../assets/styles/designVariables";
+
+.b-issuesList-dark,
+.b-issuesList-light {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__list {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: $ref-spacing-0;
+    border-radius: $ref-spacing-8;
+  }
+
+  &__controlsCell {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__row {
+    cursor: pointer;
+  }
+}
+
+.b-issuesList-dark {
+  &__list {
+    background: $dark-srf-default;
+  }
+
+  &__row:hover {
+    background: $dark-datagrid-row-hover !important;
+  }
+}
+
+.b-issuesList-light {
+  &__list {
+    background: $light-srf-default;
+  }
+
+  &__row:hover {
+    background: $light-datagrid-row-hover !important;
+  }
+}

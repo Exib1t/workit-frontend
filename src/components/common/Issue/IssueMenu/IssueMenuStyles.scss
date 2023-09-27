@@ -1,0 +1,22 @@
+@import "../../../../assets/styles/designVariables";
+
+.b-issueMenu-dark,
+.b-issueMenu-light {
+  width: 150px;
+
+  &__paper {
+    margin: $ref-spacing-8 $ref-spacing-12;
+  }
+}
+
+.b-issueMenu-dark {
+  &__delete span {
+    color: $dark-sys-danger;
+  }
+}
+
+.b-issueMenu-light {
+  &__delete span {
+    color: $light-sys-danger;
+  }
+}

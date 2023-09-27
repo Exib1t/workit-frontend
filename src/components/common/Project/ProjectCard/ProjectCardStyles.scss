@@ -1,0 +1,59 @@
+@import "../../../../assets/styles/designVariables";
+
+.b-projectPageCard-dark,
+.b-projectPageCard-light {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $ref-spacing-12;
+  border-radius: $border-radius-4;
+  gap: $ref-spacing-8;
+  cursor: pointer;
+
+  &.-disabled {
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  &__title {
+    font-size: $typography-headline-md-font-size;
+    font-weight: $typography-headline-md-font-weight;
+    letter-spacing: $typography-headline-md-letter-spacing;
+    line-height: $typography-headline-md-line-height;
+    user-select: none;
+  }
+
+  &__image {
+    width: $ref-sizing-300;
+    height: $ref-sizing-300;
+    object-fit: contain;
+    margin: 0;
+    user-select: none;
+  }
+}
+
+.b-projectPageCard-dark {
+  background: $dark-srf-default;
+
+  &:hover {
+    background: $dark-state-srf-default-hover;
+  }
+
+  &__title {
+    color: $dark-on-bgd-srf-2;
+  }
+}
+
+.b-projectPageCard-light {
+  background: $light-srf-default;
+
+  &:hover {
+    background: $light-state-srf-default-hover;
+  }
+
+  &__title {
+    color: $light-on-bgd-srf-2;
+  }
+}

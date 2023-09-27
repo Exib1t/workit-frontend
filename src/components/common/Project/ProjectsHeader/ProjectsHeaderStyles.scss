@@ -1,0 +1,46 @@
+@import "../../../../assets/styles/designVariables";
+
+.b-projectsHeader-dark,
+.b-projectsHeader-light {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $ref-spacing-12;
+  padding: $ref-spacing-8 $ref-spacing-24;
+
+  &__title {
+    font-size: $typography-title-lg-font-size;
+    font-weight: $typography-body-lg-font-weight;
+    letter-spacing: $typography-title-lg-letter-spacing;
+    line-height: $typography-title-lg-line-height;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: $ref-spacing-40;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: $ref-spacing-12;
+  }
+}
+
+.b-projectsHeader-dark {
+  background: $dark-srf-default;
+
+  &__title {
+    color: $dark-on-bgd-srf-3;
+  }
+}
+
+.b-projectsHeader-light {
+  background: $light-srf-default;
+
+  &__title {
+    color: $light-on-bgd-srf-3;
+  }
+}

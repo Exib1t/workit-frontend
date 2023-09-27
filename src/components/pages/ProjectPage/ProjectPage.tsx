@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import useThemeClass from "../../../hooks/useThemeClass.ts";
-import useGetOneProject from "../../../hooks/useGetOneProject.tsx";
+import useGetOneProject from "../../../hooks/useGetOneProject.ts";
 
 import "./ProjectPageStyles.scss";
 import ProjectPageView from "./parts/ProjectPageView.tsx";

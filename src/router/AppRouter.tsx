@@ -15,7 +15,8 @@ import { setTheme } from "../store/reducers/globalSlice.ts";
 import ComponentsPage from "../components/pages/ComponentsPage/ComponentsPage.tsx";
 import ProjectPage from "../components/pages/ProjectPage/ProjectPage.tsx";
 import NotFoundPage from "../components/pages/NotFoundPage/NotFoundPage.tsx";
-import ProjectIssues from "../components/pages/ProjectIssues/ProjectIssues.tsx";
+import IssuesPage from "../components/pages/IssuesPage/IssuesPage.tsx";
+import IssuePage from "../components/pages/IssuePage/IssuePage.tsx";
 
 const AppRouter = () => {
   const isAuthenticated = useAuthenticated();
@@ -49,7 +50,8 @@ const AppRouter = () => {
       <Route index element={<Navigate to={AppRoutes.projects} />} />
       <Route path={AppRoutes.projects} element={<ProjectsPage />} />
       <Route path={AppRoutes.project} element={<ProjectPage />} />
-      <Route path={AppRoutes.projectIssues} element={<ProjectIssues />} />
+      <Route path={AppRoutes.issues} element={<IssuesPage />} />
+      <Route path={AppRoutes.issue} element={<IssuePage />} />
       <Route path="*" element={<NotFoundPage />} />
     </>
   );

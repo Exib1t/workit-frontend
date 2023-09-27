@@ -1,0 +1,45 @@
+@import "../../../assets/styles/designVariables";
+
+.b-breadcrumbs-dark,
+.b-breadcrumbs-light {
+  &__text {
+    font-size: $typography-body-md-font-size;
+    font-weight: $typography-body-md-font-weight;
+    letter-spacing: $typography-body-md-letter-spacing;
+    line-height: $typography-body-md-line-height;
+
+    span {
+      font-weight: $typography-label-md-font-weight;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+  }
+}
+
+.b-breadcrumbs-dark {
+  &__text {
+    color: $dark-on-bgd-srf-3;
+
+    &:hover span {
+      color: $dark-primary;
+    }
+  }
+
+  &__separator {
+    color: $dark-on-bgd-srf-3 !important;
+  }
+}
+
+.b-breadcrumbs-light {
+  &__text {
+    color: $light-on-bgd-srf-3;
+
+    &:hover span {
+      color: $light-primary;
+    }
+  }
+
+  &__separator {
+    color: $light-on-bgd-srf-3;
+  }
+}

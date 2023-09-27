@@ -1,0 +1,80 @@
+@import "../../../../assets/styles/designVariables";
+
+.b-createProjectModal-dark,
+.b-createProjectModal-light {
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 1024px;
+  gap: $ref-spacing-24;
+
+  &__title {
+    font-size: $typography-title-lg-font-size;
+    font-weight: $typography-body-lg-font-weight;
+    letter-spacing: $typography-title-lg-letter-spacing;
+    line-height: $typography-title-lg-line-height;
+  }
+
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $ref-spacing-4;
+  }
+
+  &__fieldLabel {
+    font-family: $typography-body-sm-font-family;
+    font-weight: $typography-body-sm-font-weight;
+    line-height: $typography-body-sm-line-height;
+    font-size: $typography-body-sm-font-size;
+    letter-spacing: $typography-body-sm-letter-spacing;
+  }
+
+  &__column {
+    width: 100%;
+    max-width: 430px;
+    display: flex;
+    flex-direction: column;
+    gap: $ref-spacing-12;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__footer {
+    width: 100%;
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: $ref-spacing-8;
+  }
+}
+
+.b-createProjectModal-dark {
+  &__title {
+    color: $dark-on-bgd-srf-2;
+  }
+
+  &__fieldLabel {
+    color: $dark-secondary;
+  }
+}
+
+.b-createProjectModal-light {
+  &__title {
+    color: $light-on-bgd-srf-2;
+  }
+
+  &__fieldLabel {
+    color: $light-secondary;
+  }
+}

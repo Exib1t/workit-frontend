@@ -1,0 +1,67 @@
+@import "../../../../assets/styles/designVariables";
+
+.b-issueBlock-dark,
+.b-issueBlock-light {
+  display: flex;
+  gap: $ref-spacing-8;
+  width: 100%;
+
+  &__skeleton {
+    display: flex;
+    gap: $ref-spacing-8;
+    padding: $ref-spacing-0 $ref-spacing-24;
+  }
+
+  &__type {
+    display: flex;
+    flex-direction: column;
+    padding-top: $ref-spacing-2;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: $ref-spacing-2;
+    width: 100%;
+  }
+
+  &__title {
+    font-size: $typography-body-md-font-size;
+    line-height: $typography-body-md-line-height;
+    font-weight: $typography-body-md-font-weight;
+    letter-spacing: $typography-body-md-letter-spacing;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__desc {
+    font-size: $typography-label-md-font-size;
+    line-height: $typography-label-md-line-height;
+    font-weight: $typography-label-md-font-weight;
+    letter-spacing: $typography-label-md-letter-spacing;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.b-issueBlock-dark {
+  &__title {
+    color: $dark-on-bgd-srf-2;
+  }
+
+  &__desc {
+    color: $dark-on-bgd-srf-3;
+  }
+}
+
+.b-issueBlock-light {
+  &__title {
+    color: $light-on-bgd-srf-2;
+  }
+
+  &__desc {
+    color: $light-on-bgd-srf-3;
+  }
+}

@@ -12,8 +12,12 @@ const Layout = () => {
   const { isLoading: isLoadingGlobal } = useAppSelector(
     (state) => state.global,
   );
+  const { isLoading: isLoadingIssues } = useAppSelector(
+    (state) => state.issues,
+  );
 
-  const isLoading = isLoadingAuth || isLoadingProjects || isLoadingGlobal;
+  const isLoading =
+    isLoadingAuth || isLoadingProjects || isLoadingGlobal || isLoadingIssues;
 
   return (
     <>

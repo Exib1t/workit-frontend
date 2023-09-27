@@ -7,12 +7,16 @@
   gap: $ref-spacing-0;
   margin: $ref-spacing-0;
   padding: $ref-spacing-0;
+  border-radius: $ref-spacing-6;
+  overflow: hidden;
 }
 
 .b-list-dark {
   background: $dark-srf-default !important;
+  border: 1px solid $dark-on-bgd-srf-5;
 }
 
 .b-list-light {
   background: $light-srf-default !important;
+  border: 1px solid $light-on-bgd-srf-5;
 }
