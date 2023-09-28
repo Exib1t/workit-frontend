@@ -1,12 +1,22 @@
-import { FC, useEffect, useState } from "react";
-import { IIssue } from "../../../../models/IIssue/IIssue.ts";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import {
+  IIssue,
+  IIssueUpdate,
+  IssuePriorityType,
+  IssueStatusType,
+  IssueTypes,
+} from "../../../../models/IIssue/IIssue.ts";
 import useThemeClass from "../../../../hooks/useThemeClass.ts";
 import "./IssueViewStyles.scss";
 import IssueType from "../IssueType/IssueType.tsx";
-import IssuePriority from "../IssuePriority/IssuePriority.tsx";
 import IssueAssignee from "../IssueAssignee/IssueAssignee.tsx";
-import IssueStatus from "../IssueStatus/IssueStatus.tsx";
-import { getLocalDate } from "../../../../helpers/issueHelpers.ts";
+import {
+  getIssuePriorityObject,
+  getIssueStatusColor,
+  getIssueStatusObject,
+  getIssueTypeObject,
+  getLocalDate,
+} from "../../../../helpers/issueHelpers.ts";
 import { Skeleton } from "@mui/material";
 import IssueViewItem from "./parts/IssueViewItem/IssueViewItem.tsx";
 import "react-quill/dist/quill.snow.css";
@@ -15,28 +25,77 @@ import Icon from "../../../control/Icon/Icon.tsx";
 import IconButtonCustom from "../../../control/IconButtonCustom/IconButtonCustom.tsx";
 import { useAppDispatch } from "../../../../store";
 import { updateIssue } from "../../../../store/thunks/issuesThunks.ts";
+import CustomButton from "../../../control/ButtonComponents/CustomButton/CustomButton.tsx";
+import Select from "../../../control/Select/Select.tsx";
+import { ISelectItem } from "../../../../models/Select/Select.types.ts";
+import Chip from "../../Chip/Chip.tsx";
+import {
+  issuePriorities,
+  issueStatuses,
+  issueTypes,
+} from "../../../../constants/issues.ts";
+import IssuePriority from "../IssuePriority/IssuePriority.tsx";
 
 interface IExpandedGroups {
   attachments: boolean;
 }
 
 interface IProps {
-  issue: IIssue;
+  initialFields: IIssue;
+  setInitialFields: Dispatch<SetStateAction<IIssue | undefined>>;
   isLoading: boolean;
   onSuccess: () => void;
 }
 
-const IssueView: FC<IProps> = ({ issue, isLoading, onSuccess }) => {
-  const [initialFields, setInitialFields] = useState<IIssue>(issue);
+const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
   const [expandedGroups, setExpandedGroups] = useState<IExpandedGroups>({
     attachments: true,
   });
+  const [statusSelected, setStatusSelected] =
+    useState<ISelectItem<IssueStatusType> | null>(null);
+  const [typeSelected, setTypeSelected] =
+    useState<ISelectItem<IssueTypes> | null>(null);
+  const [prioritySelected, setPrioritySelected] =
+    useState<ISelectItem<IssuePriorityType> | null>(null);
+  const [description, setDescription] = useState("");
   const dispatch = useAppDispatch();
   const themeClass = useThemeClass("b-issueView");
 
   useEffect(() => {
-    setInitialFields(issue);
-  }, [issue]);
+    setDescription(initialFields.description);
+    setStatusSelected(getIssueStatusObject(initialFields.status));
+    setTypeSelected(getIssueTypeObject(initialFields.type));
+    setPrioritySelected(getIssuePriorityObject(initialFields.priority));
+  }, [initialFields]);
+
+  const handleFieldChange = (fieldName: keyof IIssueUpdate, value: string) => {
+    const updatedIssue = { id: initialFields.id, [fieldName]: value };
+    dispatch(
+      updateIssue({
+        updatedIssue,
+        callbacks: { onSuccess },
+      }),
+    );
+  };
+
+  const handleChangeStatus = (status: ISelectItem<IssueStatusType>) => {
+    setStatusSelected(status);
+    handleFieldChange("status", status.title);
+  };
+
+  const handleChangeType = (type: ISelectItem<IssueTypes>) => {
+    setTypeSelected(type);
+    handleFieldChange("type", type.title);
+  };
+
+  const handleChangePriority = (priority: ISelectItem<IssuePriorityType>) => {
+    setPrioritySelected(priority);
+    handleFieldChange("priority", priority.title);
+  };
+
+  const handleDescriptionSave = () => {
+    handleFieldChange("description", description);
+  };
 
   const handleExpandToggle = (name: keyof IExpandedGroups) => {
     setExpandedGroups((prevState) => ({
@@ -45,25 +104,13 @@ const IssueView: FC<IProps> = ({ issue, isLoading, onSuccess }) => {
     }));
   };
 
-  const handleDescriptionSave = () => {
-    dispatch(
-      updateIssue({
-        updatedIssue: { id: issue.id, description: initialFields.description },
-        callbacks: { onSuccess },
-      }),
-    );
-  };
-
   const handleChangeDescription = (value: string) => {
-    setInitialFields((prevState) => ({
-      ...prevState,
-      description: value,
-    }));
+    setDescription(value);
   };
 
   return (
     <div className={themeClass}>
-      <div className={`${themeClass}__title`}>{issue.title}</div>
+      <div className={`${themeClass}__title`}>{initialFields.title}</div>
       <div className={`${themeClass}__row`}>
         <div className={`${themeClass}__left`}>
           <div className={`${themeClass}__row`}>
@@ -74,14 +121,39 @@ const IssueView: FC<IProps> = ({ issue, isLoading, onSuccess }) => {
                   <IssueViewItem
                     label={"Type"}
                     content={
-                      <>
-                        <IssueType issue={issue} /> {issue.type}
-                      </>
+                      <Select<IssueTypes>
+                        type={"on-bgd"}
+                        selected={typeSelected}
+                        onChange={handleChangeType}
+                        customItemClassName={`${themeClass}__statusItem`}
+                        getTitle={(item) => (
+                          <div className={`${themeClass}__selectRow`}>
+                            <IssueType type={item.title} /> {item.title}
+                          </div>
+                        )}
+                        items={issueTypes}
+                      />
                     }
                   />
                   <IssueViewItem
                     label={"Priority"}
-                    content={<IssuePriority issue={issue} isTable={false} />}
+                    content={
+                      <Select<IssuePriorityType>
+                        type={"on-bgd"}
+                        selected={prioritySelected}
+                        onChange={handleChangePriority}
+                        customItemClassName={`${themeClass}__statusItem`}
+                        getTitle={(item) => (
+                          <div className={`${themeClass}__selectRow`}>
+                            <IssuePriority
+                              priority={item.title}
+                              isTable={false}
+                            />
+                          </div>
+                        )}
+                        items={issuePriorities}
+                      />
+                    }
                   />
                   <IssueViewItem
                     label={"Labels"}
@@ -108,7 +180,22 @@ const IssueView: FC<IProps> = ({ issue, isLoading, onSuccess }) => {
                 <div className={`${themeClass}__groupContent`}>
                   <IssueViewItem
                     label={"Status"}
-                    content={<IssueStatus status={issue.status} />}
+                    content={
+                      <Select<IssueStatusType>
+                        type={"on-bgd"}
+                        selected={statusSelected}
+                        onChange={handleChangeStatus}
+                        customItemClassName={`${themeClass}__statusItem`}
+                        getTitle={(item) => (
+                          <Chip
+                            type={"filled"}
+                            value={item.title}
+                            color={getIssueStatusColor(item.title)}
+                          />
+                        )}
+                        items={issueStatuses}
+                      />
+                    }
                   />
                   <IssueViewItem
                     label={"Version"}
@@ -128,11 +215,10 @@ const IssueView: FC<IProps> = ({ issue, isLoading, onSuccess }) => {
                   <TextQuillEditor
                     placeholder={"Description..."}
                     isFooter
-                    value={initialFields.description}
+                    value={description}
                     onChange={handleChangeDescription}
                     disabled={
-                      isLoading ||
-                      initialFields.description === issue.description
+                      isLoading || initialFields.description === description
                     }
                     handleSave={handleDescriptionSave}
                   />
@@ -184,11 +270,11 @@ const IssueView: FC<IProps> = ({ issue, isLoading, onSuccess }) => {
               <div className={`${themeClass}__groupContent`}>
                 <IssueViewItem
                   label={"Assignee"}
-                  content={<IssueAssignee user={issue.assignee} />}
+                  content={<IssueAssignee user={initialFields.assignee} />}
                 />
                 <IssueViewItem
                   label={"Reporter"}
-                  content={<IssueAssignee user={issue.reporter} />}
+                  content={<IssueAssignee user={initialFields.reporter} />}
                 />
               </div>
             </div>
@@ -197,33 +283,41 @@ const IssueView: FC<IProps> = ({ issue, isLoading, onSuccess }) => {
               <div className={`${themeClass}__groupContent`}>
                 <IssueViewItem
                   label={"Created at"}
-                  content={getLocalDate(issue.createdAt)}
+                  content={getLocalDate(initialFields.createdAt)}
                 />
                 <IssueViewItem
                   label={"Updated at"}
-                  content={getLocalDate(issue.updatedAt)}
+                  content={getLocalDate(initialFields.updatedAt)}
                 />
               </div>
             </div>
             <div className={`${themeClass}__group`}>
-              <span className={`${themeClass}__groupTitle`}>Time Tracking</span>
+              <span className={`${themeClass}__groupTitle -time`}>
+                Time Tracking
+                <CustomButton
+                  type={"text-plain"}
+                  size={"sm"}
+                  title={"Manage"}
+                  disabled
+                />
+              </span>
               <div className={`${themeClass}__groupContent`}>
                 <IssueViewItem
                   label={"Estimated"}
                   content={
-                    <Skeleton variant={"text"} width={150} height={14} />
+                    <Skeleton variant={"text"} width={162} height={14} />
                   }
                 />
                 <IssueViewItem
                   label={"Remaining"}
                   content={
-                    <Skeleton variant={"text"} width={150} height={14} />
+                    <Skeleton variant={"text"} width={162} height={14} />
                   }
                 />
                 <IssueViewItem
                   label={"Logged"}
                   content={
-                    <Skeleton variant={"text"} width={150} height={14} />
+                    <Skeleton variant={"text"} width={162} height={14} />
                   }
                 />
               </div>

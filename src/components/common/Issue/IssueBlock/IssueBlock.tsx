@@ -30,7 +30,7 @@ const IssueBlock: FC<IProps> = ({ issue }) => {
   return (
     <div className={themeClass}>
       <div className={`${themeClass}__type`}>
-        <IssueType issue={issue} />
+        <IssueType type={issue.type} />
       </div>
       <div className={`${themeClass}__main`}>
         <h4 className={`${themeClass}__title`}>{issue.link}</h4>

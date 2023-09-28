@@ -6,7 +6,7 @@ import useThemeClass from "../../../../hooks/useThemeClass.ts";
 import {
   IIssueCreate,
   IssuePriorityType,
-  IssueType,
+  IssueTypes,
 } from "../../../../models/IIssue/IIssue.ts";
 import { useParams } from "react-router-dom";
 
@@ -33,7 +33,6 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose, onSuccess }) => {
   const { availableUsers } = useAppSelector((state) => state.projects);
   const [newIssue, setNewIssue] = useState<IIssueCreate>({
     title: "",
-    description: "",
     assignee: 0,
     type: "Task",
     priority: "Medium",
@@ -44,7 +43,6 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose, onSuccess }) => {
     setNewIssue((prevState) => ({
       ...prevState,
       title: "",
-      description: "",
       assignee: 0,
       type: "Task",
       priority: "Medium",
@@ -78,7 +76,7 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose, onSuccess }) => {
   const handleTypeChange = (selected: ISelectItem) => {
     setNewIssue((prevState) => ({
       ...prevState,
-      type: selected.title as IssueType,
+      type: selected.title as IssueTypes,
     }));
   };
 
@@ -151,16 +149,6 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose, onSuccess }) => {
               name="title"
               label="Title"
               value={newIssue.title}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className={`${themeClass}__field`}>
-            <TextInput
-              type="on-bgd"
-              placeholder="Enter issue description"
-              name="description"
-              label="Description"
-              value={newIssue.description}
               onChange={handleInputChange}
             />
           </div>

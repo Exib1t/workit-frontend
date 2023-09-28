@@ -7,7 +7,7 @@ export interface IIssue {
   description: string;
   status: IssueStatusType;
   priority: IssuePriorityType;
-  type: IssueType;
+  type: IssueTypes;
   createdAt: string;
   updatedAt: string;
   projectId: number;
@@ -17,9 +17,8 @@ export interface IIssue {
 
 export interface IIssueCreate {
   title: string;
-  description: string;
   priority: IssuePriorityType;
-  type: IssueType;
+  type: IssueTypes;
   assignee: number;
   projectId: number;
 }
@@ -30,10 +29,10 @@ export interface IIssueUpdate {
   description?: string;
   status?: IssueStatusType;
   priority?: IssuePriorityType;
-  type?: IssueType;
+  type?: IssueTypes;
   assignee?: ICompressedUser;
 }
 
 export type IssueStatusType = "Done" | "To Estimate" | "In Progress";
 export type IssuePriorityType = "High" | "Medium" | "Low";
-export type IssueType = "Task" | "Bug" | "Subtask";
+export type IssueTypes = "Task" | "Bug" | "Subtask";

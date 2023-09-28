@@ -67,7 +67,7 @@ const IssuesList: FC<IProps> = ({ issues, isLoading, onIssueUpdate }) => {
   const renderPriorityCell = (params: GridRenderCellParams<IIssue>) => {
     const issue = params.row;
 
-    return <IssuePriority issue={issue} isTable />;
+    return <IssuePriority priority={issue.priority} isTable />;
   };
 
   const renderAssigneeCell = (params: GridRenderCellParams<IIssue>) => {

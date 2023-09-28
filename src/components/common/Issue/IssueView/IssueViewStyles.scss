@@ -26,6 +26,7 @@
 
     &.-fixed {
       position: fixed;
+      width: 314px;
     }
   }
 
@@ -69,6 +70,16 @@
     font-weight: $typography-label-lg-font-weight;
     letter-spacing: $typography-label-lg-letter-spacing;
     line-height: $typography-label-lg-line-height;
+
+    &.-time {
+      justify-content: space-between;
+    }
+  }
+
+  &__selectRow {
+    display: flex;
+    align-items: center;
+    gap: $ref-spacing-4;
   }
 
   &__groupContent {
@@ -77,6 +88,11 @@
     flex-direction: column;
     gap: $ref-spacing-12;
     margin: 0;
+
+    .b-select-dark,
+    .b-select-light {
+      background: none;
+    }
   }
 
   &__attachments {

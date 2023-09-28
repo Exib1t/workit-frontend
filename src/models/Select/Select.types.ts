@@ -1,4 +1,4 @@
-export interface ISelectItem {
+export interface ISelectItem<T = string> {
   id: number;
-  title: string;
+  title: T;
 }

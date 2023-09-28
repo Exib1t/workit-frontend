@@ -1,5 +1,5 @@
 import useThemeClass from "../../../hooks/useThemeClass.ts";
-import { FC, MouseEvent, ReactNode, useState } from "react";
+import { MouseEvent, useState } from "react";
 import { ISelectItem } from "../../../models/Select/Select.types.ts";
 import Icon from "../Icon/Icon.tsx";
 import "./SelectStyles.scss";
@@ -7,17 +7,18 @@ import { Popover } from "@mui/material";
 import ListCustom from "../ListCustom/ListCustom.tsx";
 import ListItemCustom from "../ListItemCustom/ListItemCustom.tsx";
 
-interface IProps {
+interface IProps<T = string> {
   type: "on-bgd" | "on-srf";
   placeholder?: string;
-  selected: ISelectItem | null;
-  onChange: (item: ISelectItem) => void;
-  items: ISelectItem[];
+  selected: ISelectItem<T> | null;
+  onChange: (item: ISelectItem<T>) => void;
+  items: ISelectItem<T>[];
   disabled?: boolean;
-  getTitle?: (item: ISelectItem) => string | ReactNode;
+  getTitle?: (item: ISelectItem<T>) => any;
+  customItemClassName?: string;
 }
 
-const Select: FC<IProps> = ({
+function Select<T>({
   type,
   placeholder,
   items,
@@ -25,7 +26,8 @@ const Select: FC<IProps> = ({
   disabled,
   onChange,
   getTitle,
-}) => {
+  customItemClassName,
+}: IProps<T>) {
   const themeClass = useThemeClass("b-select");
   const [isMenuOpen, setIsMenuOpen] = useState<Element | null>(null);
 
@@ -37,7 +39,7 @@ const Select: FC<IProps> = ({
     setIsMenuOpen(null);
   };
 
-  const handleSelect = (item: ISelectItem) => {
+  const handleSelect = (item: ISelectItem<T>) => {
     onChange(item);
     handleClose();
   };
@@ -49,7 +51,7 @@ const Select: FC<IProps> = ({
         type={type}
         className={`${themeClass}__item ${
           selected?.id === item.id ? "-selected" : ""
-        }`}
+        } ${customItemClassName || ""}`}
         onClick={() => handleSelect(item)}
       >
         {getTitle ? getTitle(item) : item.title}
@@ -97,5 +99,5 @@ const Select: FC<IProps> = ({
       </Popover>
     </>
   );
-};
+}
 export default Select;

@@ -14,7 +14,7 @@ const IssueSkeleton = () => {
     <div className={themeClass}>
       <IssueBlock issue={null} />
       <IssueStatus status={null} />
-      <IssuePriority issue={null} isTable />
+      <IssuePriority priority={null} isTable />
       <IssueAssignee user={null} />
       <IssueAssignee user={null} />
       <div className={`${themeClass}__skeletonControls`}>

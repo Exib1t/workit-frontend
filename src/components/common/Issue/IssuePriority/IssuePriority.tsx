@@ -2,20 +2,20 @@ import Icon from "../../../control/Icon/Icon.tsx";
 import useThemeClass from "../../../../hooks/useThemeClass.ts";
 import { getIconPriority } from "../../../../helpers/issueHelpers.ts";
 import { FC } from "react";
-import { IIssue } from "../../../../models/IIssue/IIssue.ts";
+import { IssuePriorityType } from "../../../../models/IIssue/IIssue.ts";
 
 import "./issuePriorityStyles.scss";
 import { Skeleton } from "@mui/material";
 
 interface IProps {
-  issue: IIssue | null;
+  priority: IssuePriorityType | null;
   isTable: boolean;
 }
 
-const IssuePriority: FC<IProps> = ({ issue, isTable }) => {
+const IssuePriority: FC<IProps> = ({ priority, isTable }) => {
   const themeClass = useThemeClass("b-issuePriority");
 
-  if (!issue) {
+  if (!priority) {
     return (
       <div className={`${themeClass}__skeleton`}>
         <Skeleton variant={"text"} width={100} height={20} />
@@ -25,8 +25,8 @@ const IssuePriority: FC<IProps> = ({ issue, isTable }) => {
 
   return (
     <div className={`${themeClass} ${isTable ? "-table" : ""}`}>
-      <Icon type={getIconPriority(issue)} size={16} color={"primary"} />
-      {issue.priority}
+      <Icon type={getIconPriority(priority)} size={16} color={"primary"} />
+      {priority}
     </div>
   );
 };
