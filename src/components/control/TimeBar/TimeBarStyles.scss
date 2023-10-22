@@ -1,0 +1,63 @@
+@import "../../../assets/styles/designVariables";
+
+.b-timeBar-dark,
+.b-timeBar-light {
+  width: 162px;
+  height: $ref-sizing-10 !important;
+  border-radius: $border-radius-4 !important;
+
+  &_container {
+    display: flex;
+    align-items: center;
+    gap: $ref-sizing-4;
+  }
+
+  &_label {
+    font-family: $typography-body-sm-font-family;
+    font-weight: $typography-body-sm-font-weight;
+    line-height: $typography-body-sm-line-height;
+    font-size: $typography-body-sm-font-size;
+    letter-spacing: $typography-body-sm-letter-spacing;
+    z-index: 2;
+  }
+}
+
+.b-timeBar-dark {
+  background: $dark-on-bgd-srf-5 !important;
+
+  &_label {
+    color: $dark-on-bgd-srf-3;
+  }
+
+  &_bar.type-estimated {
+    background: $dark-tertiary-sand;
+  }
+
+  &_bar.type-logged {
+    background: $dark-tertiary-lime;
+  }
+
+  &_bar.type-remaining {
+    background: $dark-tertiary-blue;
+  }
+}
+
+.b-timeBar-light {
+  background: $light-on-bgd-srf-5 !important;
+
+  &_label {
+    color: $light-on-bgd-srf-3;
+  }
+
+  &_bar.type-estimated {
+    background: $light-tertiary-sand;
+  }
+
+  &_bar.type-logged {
+    background: $light-tertiary-lime;
+  }
+
+  &_bar.type-remaining {
+    background: $light-tertiary-blue;
+  }
+}

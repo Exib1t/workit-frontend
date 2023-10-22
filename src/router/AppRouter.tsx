@@ -18,11 +18,13 @@ import NotFoundPage from "../components/pages/NotFoundPage/NotFoundPage.tsx";
 import IssuesPage from "../components/pages/IssuesPage/IssuesPage.tsx";
 import IssuePage from "../components/pages/IssuePage/IssuePage.tsx";
 import Page from "../components/common/Page/Page.tsx";
+import { fetchUserById } from "../store/thunks/userThunks.ts";
+import { clearUser } from "../store/reducers/userSlice.ts";
 
 const AppRouter = () => {
   const { isAuthenticated, isLoading } = useAuthenticated();
   const dispatch = useAppDispatch();
-  const { token } = useAppSelector((state) => state.auth);
+  const { token, id } = useAppSelector((state) => state.auth);
   const themeClass = useThemeClass("b-container");
 
   useEffect(() => {
@@ -41,6 +43,14 @@ const AppRouter = () => {
       dispatch(refreshThunk({ token }));
     }
   }, [dispatch, token]);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchUserById(id));
+    } else {
+      dispatch(clearUser());
+    }
+  }, [dispatch, id]);
 
   useEffect(() => {
     document.body.className = themeClass;

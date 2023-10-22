@@ -201,7 +201,10 @@ const ProjectCreateModal: FC<IProps> = ({
         <div className={`${themeClass}__column`}>
           <div className={`${themeClass}__field`}>
             <span className={`${themeClass}__fieldLabel`}>Color</span>
-            <ColorPicker onChange={handleColorChange} />
+            <ColorPicker
+              onChange={handleColorChange}
+              value={newProject.color}
+            />
           </div>
         </div>
       </div>

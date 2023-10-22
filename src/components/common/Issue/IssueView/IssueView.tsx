@@ -35,6 +35,8 @@ import {
   issueTypes,
 } from "../../../../constants/issues.ts";
 import IssuePriority from "../IssuePriority/IssuePriority.tsx";
+import TimeBar from "../../../control/TimeBar/TimeBar.tsx";
+import IssueTimePopup from "../IssueTimePopup/IssueTimePopup.tsx";
 
 interface IExpandedGroups {
   attachments: boolean;
@@ -57,6 +59,7 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
     useState<ISelectItem<IssueTypes> | null>(null);
   const [prioritySelected, setPrioritySelected] =
     useState<ISelectItem<IssuePriorityType> | null>(null);
+  const [isTimePopupOpen, setIsTimePopupOpen] = useState(false);
   const [description, setDescription] = useState("");
   const dispatch = useAppDispatch();
   const themeClass = useThemeClass("b-issueView");
@@ -67,6 +70,14 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
     setTypeSelected(getIssueTypeObject(initialFields.type));
     setPrioritySelected(getIssuePriorityObject(initialFields.priority));
   }, [initialFields]);
+
+  const handleCloseTimePopup = () => {
+    setIsTimePopupOpen(false);
+  };
+
+  const handleOpenTimePopup = () => {
+    setIsTimePopupOpen(true);
+  };
 
   const handleFieldChange = (fieldName: keyof IIssueUpdate, value: string) => {
     const updatedIssue = { id: initialFields.id, [fieldName]: value };
@@ -109,223 +120,268 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
   };
 
   return (
-    <div className={themeClass}>
-      <div className={`${themeClass}__title`}>{initialFields.title}</div>
-      <div className={`${themeClass}__row`}>
-        <div className={`${themeClass}__left`}>
-          <div className={`${themeClass}__row`}>
-            <div className={`${themeClass}__column`}>
-              <div className={`${themeClass}__group`}>
-                <span className={`${themeClass}__groupTitle`}>Details</span>
-                <div className={`${themeClass}__groupContent`}>
-                  <IssueViewItem
-                    label={"Type"}
-                    content={
-                      <Select<IssueTypes>
-                        type={"on-bgd"}
-                        selected={typeSelected}
-                        onChange={handleChangeType}
-                        customItemClassName={`${themeClass}__statusItem`}
-                        getTitle={(item) => (
-                          <div className={`${themeClass}__selectRow`}>
-                            <IssueType type={item.title} /> {item.title}
-                          </div>
-                        )}
-                        items={issueTypes}
-                      />
-                    }
-                  />
-                  <IssueViewItem
-                    label={"Priority"}
-                    content={
-                      <Select<IssuePriorityType>
-                        type={"on-bgd"}
-                        selected={prioritySelected}
-                        onChange={handleChangePriority}
-                        customItemClassName={`${themeClass}__statusItem`}
-                        getTitle={(item) => (
-                          <div className={`${themeClass}__selectRow`}>
-                            <IssuePriority
-                              priority={item.title}
-                              isTable={false}
-                            />
-                          </div>
-                        )}
-                        items={issuePriorities}
-                      />
-                    }
-                  />
-                  <IssueViewItem
-                    label={"Labels"}
-                    content={
-                      <>
-                        <Skeleton variant={"text"} width={50} height={14} />
-                        <Skeleton variant={"text"} width={50} height={14} />
-                        <Skeleton variant={"text"} width={50} height={14} />
-                      </>
-                    }
-                  />
-                  <IssueViewItem
-                    label={"Sprint"}
-                    content={
-                      <Skeleton variant={"text"} width={75} height={14} />
-                    }
-                  />
-                </div>
-              </div>
-            </div>
-            <div className={`${themeClass}__column`}>
-              <div className={`${themeClass}__group`}>
-                <span className={`${themeClass}__groupTitle`}>&nbsp;</span>
-                <div className={`${themeClass}__groupContent`}>
-                  <IssueViewItem
-                    label={"Status"}
-                    content={
-                      <Select<IssueStatusType>
-                        type={"on-bgd"}
-                        selected={statusSelected}
-                        onChange={handleChangeStatus}
-                        customItemClassName={`${themeClass}__statusItem`}
-                        getTitle={(item) => (
-                          <Chip
-                            type={"filled"}
-                            value={item.title}
-                            color={getIssueStatusColor(item.title)}
-                          />
-                        )}
-                        items={issueStatuses}
-                      />
-                    }
-                  />
-                  <IssueViewItem
-                    label={"Version"}
-                    content={
-                      <Skeleton variant={"text"} width={75} height={14} />
-                    }
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className={`${themeClass}__row`}>
-            <div className={`${themeClass}__column`}>
-              <div className={`${themeClass}__group`}>
-                <span className={`${themeClass}__groupTitle`}>Description</span>
-                <div className={`${themeClass}__groupContent`}>
-                  <TextQuillEditor
-                    placeholder={"Description..."}
-                    isFooter
-                    value={description}
-                    onChange={handleChangeDescription}
-                    disabled={
-                      isLoading || initialFields.description === description
-                    }
-                    handleSave={handleDescriptionSave}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className={`${themeClass}__row`}>
-            <div className={`${themeClass}__column`}>
-              <div className={`${themeClass}__group`}>
-                <span className={`${themeClass}__groupTitle`}>
-                  Attachments
-                  <IconButtonCustom
-                    size={"small"}
-                    onClick={() => handleExpandToggle("attachments")}
-                  >
-                    <Icon
-                      type={
-                        expandedGroups.attachments
-                          ? "chevron-down"
-                          : "chevron-right"
+    <>
+      <div className={themeClass}>
+        <div className={`${themeClass}__title`}>{initialFields.title}</div>
+        <div className={`${themeClass}__row`}>
+          <div className={`${themeClass}__left`}>
+            <div className={`${themeClass}__row`}>
+              <div className={`${themeClass}__column`}>
+                <div className={`${themeClass}__group`}>
+                  <span className={`${themeClass}__groupTitle`}>Details</span>
+                  <div className={`${themeClass}__groupContent`}>
+                    <IssueViewItem
+                      label={"Type"}
+                      content={
+                        <Select<IssueTypes>
+                          type={"on-bgd"}
+                          selected={typeSelected}
+                          onChange={handleChangeType}
+                          customItemClassName={`${themeClass}__statusItem`}
+                          getTitle={(item) => (
+                            <div className={`${themeClass}__selectRow`}>
+                              <IssueType type={item.title} /> {item.title}
+                            </div>
+                          )}
+                          items={issueTypes}
+                        />
                       }
                     />
-                  </IconButtonCustom>
-                </span>
-                {expandedGroups.attachments && (
-                  <div className={`${themeClass}__groupContent`}>
-                    <div className={`${themeClass}__attachments`}></div>
+                    <IssueViewItem
+                      label={"Priority"}
+                      content={
+                        <Select<IssuePriorityType>
+                          type={"on-bgd"}
+                          selected={prioritySelected}
+                          onChange={handleChangePriority}
+                          customItemClassName={`${themeClass}__statusItem`}
+                          getTitle={(item) => (
+                            <div className={`${themeClass}__selectRow`}>
+                              <IssuePriority
+                                priority={item.title}
+                                isTable={false}
+                              />
+                            </div>
+                          )}
+                          items={issuePriorities}
+                        />
+                      }
+                    />
+                    <IssueViewItem
+                      label={"Labels"}
+                      content={
+                        <>
+                          <Skeleton variant={"text"} width={50} height={14} />
+                          <Skeleton variant={"text"} width={50} height={14} />
+                          <Skeleton variant={"text"} width={50} height={14} />
+                        </>
+                      }
+                    />
+                    <IssueViewItem
+                      label={"Sprint"}
+                      content={
+                        <Skeleton variant={"text"} width={75} height={14} />
+                      }
+                    />
                   </div>
-                )}
+                </div>
+              </div>
+              <div className={`${themeClass}__column`}>
+                <div className={`${themeClass}__group`}>
+                  <span className={`${themeClass}__groupTitle`}>&nbsp;</span>
+                  <div className={`${themeClass}__groupContent`}>
+                    <IssueViewItem
+                      label={"Status"}
+                      content={
+                        <Select<IssueStatusType>
+                          type={"on-bgd"}
+                          selected={statusSelected}
+                          onChange={handleChangeStatus}
+                          customItemClassName={`${themeClass}__statusItem`}
+                          getTitle={(item) => (
+                            <Chip
+                              type={"filled"}
+                              value={item.title}
+                              color={getIssueStatusColor(item.title)}
+                            />
+                          )}
+                          items={issueStatuses}
+                        />
+                      }
+                    />
+                    <IssueViewItem
+                      label={"Version"}
+                      content={
+                        <Skeleton variant={"text"} width={75} height={14} />
+                      }
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div className={`${themeClass}__row`}>
-            <div className={`${themeClass}__column`}>
-              <div className={`${themeClass}__group`}>
-                <span className={`${themeClass}__groupTitle`}>Activity</span>
-                <div className={`${themeClass}__groupContent`}>
-                  <div className={`${themeClass}__attachments`}></div>
+            <div className={`${themeClass}__row`}>
+              <div className={`${themeClass}__column`}>
+                <div className={`${themeClass}__group`}>
+                  <span className={`${themeClass}__groupTitle`}>
+                    Description
+                  </span>
+                  <div className={`${themeClass}__groupContent`}>
+                    <TextQuillEditor
+                      placeholder={"Description..."}
+                      isFooter
+                      value={description}
+                      onChange={handleChangeDescription}
+                      disabled={
+                        isLoading || initialFields.description === description
+                      }
+                      handleSave={handleDescriptionSave}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={`${themeClass}__row`}>
+              <div className={`${themeClass}__column`}>
+                <div className={`${themeClass}__group`}>
+                  <span className={`${themeClass}__groupTitle`}>
+                    Attachments
+                    <IconButtonCustom
+                      size={"small"}
+                      onClick={() => handleExpandToggle("attachments")}
+                    >
+                      <Icon
+                        type={
+                          expandedGroups.attachments
+                            ? "chevron-down"
+                            : "chevron-right"
+                        }
+                      />
+                    </IconButtonCustom>
+                  </span>
+                  {expandedGroups.attachments && (
+                    <div className={`${themeClass}__groupContent`}>
+                      <div className={`${themeClass}__attachments`}></div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className={`${themeClass}__row`}>
+              <div className={`${themeClass}__column`}>
+                <div className={`${themeClass}__group`}>
+                  <span className={`${themeClass}__groupTitle`}>Activity</span>
+                  <div className={`${themeClass}__groupContent`}>
+                    <div className={`${themeClass}__activity`}>
+                      <TextQuillEditor
+                        placeholder={"Description..."}
+                        isFooter
+                        value={description}
+                        onChange={handleChangeDescription}
+                        disabled={
+                          isLoading || initialFields.description === description
+                        }
+                        handleSave={handleDescriptionSave}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className={`${themeClass}__right`}>
-          <div className={`${themeClass}__column -fixed`}>
-            <div className={`${themeClass}__group`}>
-              <span className={`${themeClass}__groupTitle`}>People</span>
-              <div className={`${themeClass}__groupContent`}>
-                <IssueViewItem
-                  label={"Assignee"}
-                  content={<IssueAssignee user={initialFields.assignee} />}
-                />
-                <IssueViewItem
-                  label={"Reporter"}
-                  content={<IssueAssignee user={initialFields.reporter} />}
-                />
+          <div className={`${themeClass}__right`}>
+            <div className={`${themeClass}__column -fixed`}>
+              <div className={`${themeClass}__group`}>
+                <span className={`${themeClass}__groupTitle`}>People</span>
+                <div className={`${themeClass}__groupContent`}>
+                  <IssueViewItem
+                    label={"Assignee"}
+                    content={<IssueAssignee user={initialFields.assignee} />}
+                  />
+                  <IssueViewItem
+                    label={"Reporter"}
+                    content={<IssueAssignee user={initialFields.reporter} />}
+                  />
+                </div>
               </div>
-            </div>
-            <div className={`${themeClass}__group`}>
-              <span className={`${themeClass}__groupTitle`}>Dates</span>
-              <div className={`${themeClass}__groupContent`}>
-                <IssueViewItem
-                  label={"Created at"}
-                  content={getLocalDate(initialFields.createdAt)}
-                />
-                <IssueViewItem
-                  label={"Updated at"}
-                  content={getLocalDate(initialFields.updatedAt)}
-                />
+              <div className={`${themeClass}__group`}>
+                <span className={`${themeClass}__groupTitle`}>Dates</span>
+                <div className={`${themeClass}__groupContent`}>
+                  <IssueViewItem
+                    label={"Created at"}
+                    content={getLocalDate(initialFields.createdAt)}
+                  />
+                  <IssueViewItem
+                    label={"Updated at"}
+                    content={getLocalDate(initialFields.updatedAt)}
+                  />
+                </div>
               </div>
-            </div>
-            <div className={`${themeClass}__group`}>
-              <span className={`${themeClass}__groupTitle -time`}>
-                Time Tracking
-                <CustomButton
-                  type={"text-plain"}
-                  size={"sm"}
-                  title={"Manage"}
-                  disabled
-                />
-              </span>
-              <div className={`${themeClass}__groupContent`}>
-                <IssueViewItem
-                  label={"Estimated"}
-                  content={
-                    <Skeleton variant={"text"} width={162} height={14} />
-                  }
-                />
-                <IssueViewItem
-                  label={"Remaining"}
-                  content={
-                    <Skeleton variant={"text"} width={162} height={14} />
-                  }
-                />
-                <IssueViewItem
-                  label={"Logged"}
-                  content={
-                    <Skeleton variant={"text"} width={162} height={14} />
-                  }
-                />
+              <div className={`${themeClass}__group`}>
+                <span className={`${themeClass}__groupTitle -time`}>
+                  Time Tracking
+                  <CustomButton
+                    type={"text-plain"}
+                    size={"sm"}
+                    title={"Manage"}
+                    clickHandler={handleOpenTimePopup}
+                  />
+                </span>
+                <div className={`${themeClass}__groupContent`}>
+                  <IssueViewItem
+                    label={"Estimated"}
+                    content={
+                      <TimeBar
+                        value={
+                          (initialFields.time.estimated * 100) /
+                          initialFields.time.estimated
+                        }
+                        type={"estimated"}
+                        label={initialFields.time.estimated}
+                      />
+                    }
+                  />
+                  <IssueViewItem
+                    label={"Logged"}
+                    content={
+                      <TimeBar
+                        value={
+                          initialFields.time.logged >
+                          initialFields.time.estimated
+                            ? 100
+                            : (initialFields.time.logged * 100) /
+                              initialFields.time.estimated
+                        }
+                        type={"logged"}
+                        label={initialFields.time.logged}
+                      />
+                    }
+                  />
+                  <IssueViewItem
+                    label={"Remaining"}
+                    content={
+                      <TimeBar
+                        value={
+                          (initialFields.time.remaining * 100) /
+                          initialFields.time.estimated
+                        }
+                        type={"remaining"}
+                        label={initialFields.time.remaining}
+                      />
+                    }
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <IssueTimePopup
+        isOpen={isTimePopupOpen}
+        onClose={handleCloseTimePopup}
+        onSuccess={onSuccess}
+        estimated={initialFields.time.estimated}
+      />
+    </>
   );
 };
 export default IssueView;

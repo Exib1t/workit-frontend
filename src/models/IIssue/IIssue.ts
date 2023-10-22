@@ -13,6 +13,7 @@ export interface IIssue {
   projectId: number;
   assignee: ICompressedUser;
   reporter: ICompressedUser;
+  time: IssueTime;
 }
 
 export interface IIssueCreate {
@@ -21,6 +22,7 @@ export interface IIssueCreate {
   type: IssueTypes;
   assignee: number;
   projectId: number;
+  time: IssueCreateTime;
 }
 
 export interface IIssueUpdate {
@@ -31,8 +33,23 @@ export interface IIssueUpdate {
   priority?: IssuePriorityType;
   type?: IssueTypes;
   assignee?: ICompressedUser;
+  time?: IssueCreateTime;
 }
 
 export type IssueStatusType = "Done" | "To Estimate" | "In Progress";
 export type IssuePriorityType = "High" | "Medium" | "Low";
 export type IssueTypes = "Task" | "Bug" | "Subtask";
+export interface IssueTime {
+  estimated: number;
+  logged: number;
+  remaining: number;
+}
+
+export interface IssueCreateTime {
+  estimated: string;
+}
+
+export interface IssueUpdateTime {
+  estimated?: string;
+  logged?: string;
+}

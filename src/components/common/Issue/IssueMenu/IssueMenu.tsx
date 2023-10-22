@@ -18,6 +18,7 @@ interface IProps {
   anchorEl: EventTarget;
   selectedIssue: IIssue;
   onIssueUpdate: () => void;
+  type: "issue-page" | "issues-list";
 }
 
 const IssueMenu: FC<IProps> = ({
@@ -26,6 +27,7 @@ const IssueMenu: FC<IProps> = ({
   isOpen,
   selectedIssue,
   onIssueUpdate,
+  type,
 }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -44,6 +46,7 @@ const IssueMenu: FC<IProps> = ({
         callbacks: { onSuccess: onSuccess },
       }),
     );
+    navigate(AppRoutes.issues.replace(":projectLink", String(projectLink)));
   };
 
   const handleOpen = () => {
@@ -68,12 +71,14 @@ const IssueMenu: FC<IProps> = ({
       }}
     >
       <ListCustom className={themeClass}>
-        <ListItemCustom
-          icon={<Icon type={"open"} size={16} />}
-          onClick={handleOpen}
-        >
-          Open
-        </ListItemCustom>
+        {type === "issues-list" && (
+          <ListItemCustom
+            icon={<Icon type={"open"} size={16} />}
+            onClick={handleOpen}
+          >
+            Open
+          </ListItemCustom>
+        )}
         <ListItemCustom
           icon={<Icon type={"delete"} size={16} color={"error"} />}
           className={`${themeClass}__delete`}

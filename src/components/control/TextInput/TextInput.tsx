@@ -10,7 +10,7 @@ import useThemeClass from "../../../hooks/useThemeClass.ts";
 import "./TextInputStyles.scss";
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  value: string;
+  value: string | number;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   type: "on-bgd" | "on-srf";
   label?: string;
@@ -21,6 +21,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   customIconClass?: string;
   onClickIcon?: (func: any) => void;
   width?: number | string;
+  inputType?: "text" | "password" | "number";
 }
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
@@ -37,6 +38,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       onClickIcon,
       width,
       disabled,
+      inputType,
       ...inputProps
     },
     ref,
@@ -63,6 +65,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
                 onChange={onChange}
                 ref={ref}
                 className={`${themeClass}_field_${type}_input`}
+                type={inputType}
                 {...(inputProps || {})}
               />
               {onClickIcon ? (

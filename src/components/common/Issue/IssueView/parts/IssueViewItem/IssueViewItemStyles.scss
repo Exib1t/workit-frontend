@@ -25,6 +25,21 @@
     font-weight: $typography-body-md-font-weight;
     letter-spacing: $typography-body-md-letter-spacing;
     line-height: $typography-body-md-line-height;
+
+    .b-select-dark__icon,
+    .b-select-light__icon {
+      opacity: 0;
+      transition: 0.3s;
+    }
+
+    .b-select-dark:hover,
+    .b-select-light:hover {
+      .b-select-dark__icon,
+      .b-select-light__icon {
+        opacity: 1;
+        transition: 0.3s;
+      }
+    }
   }
 }
 

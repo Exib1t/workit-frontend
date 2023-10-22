@@ -12,9 +12,9 @@ export const issueTypes: ISelectItem<IssueTypes>[] = [
 ];
 
 export const issuePriorities: ISelectItem<IssuePriorityType>[] = [
-  { id: 1, title: "High" },
+  { id: 1, title: "Low" },
   { id: 2, title: "Medium" },
-  { id: 3, title: "Low" },
+  { id: 3, title: "High" },
 ];
 
 export const issueStatuses: ISelectItem<IssueStatusType>[] = [

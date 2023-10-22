@@ -13,6 +13,7 @@ import HeaderMenu from "./parts/HeaderMenu/HeaderMenu.tsx";
 import { MouseEventHandler, useState } from "react";
 import CustomButton from "../../control/ButtonComponents/CustomButton/CustomButton.tsx";
 import HeaderNavigation from "./parts/HeaderNavigation/HeaderNavigation.tsx";
+import { useAppSelector } from "../../../store";
 
 const Header = () => {
   const [isHeaderMenuOpen, setIsHeaderMenuOpen] = useState<Element | null>(
@@ -21,6 +22,8 @@ const Header = () => {
   const headerClass = useThemeClass("b-header");
   const navigate = useNavigate();
   const isAuthenticated = useAuthenticated();
+
+  const { user } = useAppSelector((state) => state.user);
 
   const handleHeaderMenuClose = () => {
     setIsHeaderMenuOpen(null);
@@ -41,15 +44,15 @@ const Header = () => {
           clickHandler={() => navigate(AppRoutes.components)}
         />
       </div>
-      {isAuthenticated ? (
+      {isAuthenticated && user ? (
         <>
           <HeaderNavigation />
           <div className={`${headerClass}__controls`}>
             <ThemeSwitcher />
             <ProfileButton
-              first_name="Dmitriy"
-              last_name="Maznyak"
-              email="dmaznyak2604@gmail.com"
+              first_name={user.first_name}
+              last_name={user.last_name}
+              email={user.email}
             />
             <LogoutButton />
             <MoreButton onClick={handleHeaderMenuOpen} />

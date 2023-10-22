@@ -4,6 +4,7 @@ import globalSlice from "./reducers/globalSlice.ts";
 import authSlice from "./reducers/authSlice.ts";
 import projectsSlice from "./reducers/projectsSlice.ts";
 import issuesSlice from "./reducers/issuesSlice.ts";
+import userSlice from "./reducers/userSlice.ts";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     auth: authSlice,
     projects: projectsSlice,
     issues: issuesSlice,
+    user: userSlice,
   },
 });
 

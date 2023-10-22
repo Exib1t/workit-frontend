@@ -1,0 +1,43 @@
+@import "../../../../assets/styles/designVariables";
+
+.b-issueTimePopup-dark,
+.b-issueTimePopup-light {
+  &_header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &_title {
+      font-family: $typography-title-md-font-family;
+      font-weight: $typography-title-md-font-weight;
+      line-height: $typography-title-md-line-height;
+      font-size: $typography-title-md-font-size;
+      letter-spacing: $typography-title-md-letter-spacing;
+    }
+  }
+
+  &_content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: $ref-sizing-8;
+    padding: $ref-sizing-24 $ref-spacing-0;
+  }
+
+  &_footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $ref-sizing-8;
+  }
+}
+
+.b-issueTimePopup-dark {
+  &_header {
+    &_title {
+      color: $dark-on-bgd-srf-1;
+    }
+  }
+}

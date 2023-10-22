@@ -4,7 +4,7 @@ import { IIssue } from "../models/IIssue/IIssue.ts";
 import { fetchIssuesByProjectId } from "../store/thunks/issuesThunks.ts";
 import useGetOneProject from "./useGetOneProject.ts";
 
-export default function (
+export default function useGetOneIssue (
   projectLink: string | undefined,
   issueLink: string | undefined,
 ) {

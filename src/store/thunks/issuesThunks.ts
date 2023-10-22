@@ -4,6 +4,7 @@ import {
   IIssue,
   IIssueCreate,
   IIssueUpdate,
+  IssueUpdateTime,
 } from "../../models/IIssue/IIssue.ts";
 import { AxiosResponse } from "axios";
 import { AdditionalCallbacks } from "../../models/reducers/index.types.ts";
@@ -71,6 +72,28 @@ export const deleteIssue = createAsyncThunk<
   async ({ issueId, callbacks: { onSuccess, onError } }, thunkAPI) => {
     try {
       const response = await api.delete(`issues/${issueId}`);
+      onSuccess && onSuccess();
+      return response.data;
+    } catch (err: any) {
+      onError && onError();
+      thunkAPI.rejectWithValue(err.response.data);
+    }
+  },
+);
+
+export const logIssueTime = createAsyncThunk<
+  IIssue,
+  {
+    data: { link: string; time: IssueUpdateTime };
+    callbacks: AdditionalCallbacks;
+  }
+>(
+  "issues/deleteIssue",
+  async ({ data, callbacks: { onSuccess, onError } }, thunkAPI) => {
+    try {
+      const response = await api.post(`issues/${data.link}/time`, {
+        time: data.time,
+      });
       onSuccess && onSuccess();
       return response.data;
     } catch (err: any) {

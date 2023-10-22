@@ -167,6 +167,7 @@ const IssuesList: FC<IProps> = ({ issues, isLoading, onIssueUpdate }) => {
           anchorEl={isMenuOpen}
           selectedIssue={selectedIssue}
           onIssueUpdate={onIssueUpdate}
+          type={"issues-list"}
         />
       )}
     </div>

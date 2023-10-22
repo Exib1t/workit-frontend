@@ -37,6 +37,9 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose, onSuccess }) => {
     type: "Task",
     priority: "Medium",
     projectId: 0,
+    time: {
+      estimated: 0,
+    },
   });
 
   useEffect(() => {
@@ -46,6 +49,9 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose, onSuccess }) => {
       assignee: 0,
       type: "Task",
       priority: "Medium",
+      time: {
+        estimated: 0,
+      },
     }));
   }, []);
 
@@ -63,6 +69,15 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose, onSuccess }) => {
     setNewIssue((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleTimeChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setNewIssue((prevState) => ({
+      ...prevState,
+      time: {
+        estimated: e.target.value,
+      },
     }));
   };
 
@@ -164,6 +179,14 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose, onSuccess }) => {
               }
             />
           </div>
+          <div className={`${themeClass}__field`}>
+            <TextInput
+              type={"on-bgd"}
+              value={newIssue.time.estimated}
+              onChange={handleTimeChange}
+              label={"Time to log (hrs)"}
+            />
+          </div>
         </div>
         <div className={`${themeClass}__column`}>
           <div className={`${themeClass}__field`}>
@@ -204,7 +227,7 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose, onSuccess }) => {
           clickHandler={onClose}
         />
         <CustomButton
-          type="secondary"
+          type="primary"
           title={"Create"}
           size={"md"}
           clickHandler={handleSubmit}
