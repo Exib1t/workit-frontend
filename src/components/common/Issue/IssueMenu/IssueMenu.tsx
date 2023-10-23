@@ -8,7 +8,7 @@ import Icon from "../../../control/Icon/Icon.tsx";
 import "./IssueMenuStyles.scss";
 import { IIssue } from "../../../../models/IIssue/IIssue.ts";
 import { useAppDispatch } from "../../../../store";
-import { deleteIssue } from "../../../../store/thunks/issuesThunks.ts";
+import { deleteIssue } from "../../../../store/issues/issuesThunks.ts";
 import { AppRoutes } from "../../../../router/Routes.ts";
 import { useNavigate, useParams } from "react-router-dom";
 

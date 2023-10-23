@@ -1,0 +1,201 @@
+@import "../../../assets/styles/designVariables";
+
+.dialogPopUp-dark,
+.dialogPopUp-light {
+  &.-overlay {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  &_paper {
+    max-height: max-content !important;
+    margin: 0 !important;
+    border-radius: $border-radius-4 !important;
+    box-shadow: $z1-x $z1-y $z1-blur $z1-color !important;
+
+    &:not(.-maxWidth) {
+      max-width: max-content !important;
+    }
+
+    &.-maxWidth {
+      width: 100%;
+    }
+  }
+
+  &_closeIcon {
+    cursor: pointer;
+  }
+
+  &_dialogTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $ref-spacing-16 $ref-spacing-24;
+    width: 560px;
+
+    &.-divided {
+      width: 560px;
+      height: $ref-sizing-40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 $ref-spacing-16;
+      box-sizing: border-box;
+      margin-bottom: $ref-spacing-16;
+
+      div {
+        font-family: $typography-label-md-font-family !important;
+        line-height: $typography-label-md-line-height !important;
+        font-size: $typography-label-md-font-size !important;
+        font-weight: $typography-label-md-font-weight !important;
+        letter-spacing: $typography-label-md-letter-spacing !important;
+      }
+    }
+
+    &.-mobile {
+      height: auto;
+      padding: $ref-spacing-16;
+
+      div {
+        font-family: $typography-label-xxl-font-family !important;
+        line-height: $typography-label-xxl-line-height !important;
+        font-size: $typography-label-xxl-font-size !important;
+        font-weight: $typography-label-xxl-font-weight !important;
+        letter-spacing: $typography-label-xxl-letter-spacing !important;
+      }
+    }
+
+    &_titleText {
+      display: flex;
+    }
+
+    .configPromptPCD {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 160px;
+    }
+
+    div {
+      line-height: $typography-title-lg-line-height !important;
+      font-weight: $typography-title-lg-font-weight !important;
+      font-family: $typography-title-lg-font-family !important;
+      font-size: $typography-title-lg-font-size !important;
+      letter-spacing: $typography-title-lg-letter-spacing !important;
+    }
+  }
+  &_content {
+    padding: 0 $ref-spacing-24;
+    max-width: 550px;
+
+    &.-divided {
+      padding: 0 $ref-spacing-16;
+    }
+
+    &_modalText,
+    div,
+    span {
+      white-space: pre-line;
+      font-family: $typography-body-md-font-family !important;
+      font-weight: $typography-body-md-font-weight !important;
+      line-height: $typography-body-md-line-height !important;
+      font-size: $typography-body-md-font-size !important;
+      letter-spacing: $typography-body-md-letter-spacing !important;
+    }
+  }
+  &_buttonsSection {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $ref-spacing-8;
+    padding: $ref-spacing-16 $ref-spacing-24;
+    margin-top: $ref-sizing-12;
+
+    &.-mobile {
+      flex-direction: column;
+      gap: $ref-sizing-12;
+
+      span {
+        width: 100%;
+      }
+
+      .b-button-dark,
+      .b-button-light {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    &.-divided {
+      padding: $ref-spacing-16;
+    }
+  }
+}
+
+.dialogPopUp-dark {
+  &_paper {
+    background-color: $dark-srf-default !important;
+  }
+
+  &_dialogTitle {
+    div {
+      color: $dark-on-bgd-srf-1;
+    }
+    &.-divided {
+      background: $dark-srf-variant;
+
+      div {
+        color: $dark-on-bgd-srf-2;
+      }
+    }
+
+    .primaryText {
+      color: $dark-primary;
+    }
+  }
+
+  &_content {
+    &_modalText,
+    div,
+    span {
+      color: $dark-on-bgd-srf-2;
+    }
+  }
+
+  .marked {
+    color: $dark-primary;
+  }
+}
+
+.dialogPopUp-light {
+  &_paper {
+    background-color: $light-srf-default !important;
+  }
+
+  &_dialogTitle {
+    div {
+      color: $light-on-bgd-srf-1;
+    }
+
+    .primaryText {
+      color: $light-primary;
+    }
+    &.-divided {
+      background: $light-srf-variant;
+
+      div {
+        color: $light-on-bgd-srf-2;
+      }
+    }
+  }
+
+  &_content,
+  div,
+  span {
+    &_modalText {
+      color: $light-on-bgd-srf-2;
+    }
+  }
+
+  .marked {
+    color: $dark-primary;
+  }
+}

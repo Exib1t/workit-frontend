@@ -1,6 +1,6 @@
 import { Switch } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../store";
-import { setTheme } from "../../../store/reducers/globalSlice.ts";
+import { setTheme } from "../../../store/global/globalSlice.ts";
 import { ChangeEvent } from "react";
 import useThemeClass from "../../../hooks/useThemeClass.ts";
 

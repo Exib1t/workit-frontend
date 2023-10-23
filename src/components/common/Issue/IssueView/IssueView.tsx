@@ -11,6 +11,7 @@ import "./IssueViewStyles.scss";
 import IssueType from "../IssueType/IssueType.tsx";
 import IssueAssignee from "../IssueAssignee/IssueAssignee.tsx";
 import {
+  getIssueAssigneeObject,
   getIssuePriorityObject,
   getIssueStatusColor,
   getIssueStatusObject,
@@ -23,8 +24,11 @@ import "react-quill/dist/quill.snow.css";
 import TextQuillEditor from "../../../control/TextQuillEditor/TextQuillEditor.tsx";
 import Icon from "../../../control/Icon/Icon.tsx";
 import IconButtonCustom from "../../../control/IconButtonCustom/IconButtonCustom.tsx";
-import { useAppDispatch } from "../../../../store";
-import { updateIssue } from "../../../../store/thunks/issuesThunks.ts";
+import { useAppDispatch, useAppSelector } from "../../../../store";
+import {
+  fetchIssueAvailableAssignments,
+  updateIssue,
+} from "../../../../store/issues/issuesThunks.ts";
 import CustomButton from "../../../control/ButtonComponents/CustomButton/CustomButton.tsx";
 import Select from "../../../control/Select/Select.tsx";
 import { ISelectItem } from "../../../../models/Select/Select.types.ts";
@@ -59,8 +63,17 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
     useState<ISelectItem<IssueTypes> | null>(null);
   const [prioritySelected, setPrioritySelected] =
     useState<ISelectItem<IssuePriorityType> | null>(null);
+  const [assigneeSelected, setAssigneeSelected] = useState<ISelectItem<{
+    first_name: string;
+    last_name: string;
+  }> | null>(null);
   const [isTimePopupOpen, setIsTimePopupOpen] = useState(false);
   const [description, setDescription] = useState("");
+
+  const { data: availableAssignments } = useAppSelector(
+    (state) => state.issues.editorsData.assignments,
+  );
+
   const dispatch = useAppDispatch();
   const themeClass = useThemeClass("b-issueView");
 
@@ -69,7 +82,17 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
     setStatusSelected(getIssueStatusObject(initialFields.status));
     setTypeSelected(getIssueTypeObject(initialFields.type));
     setPrioritySelected(getIssuePriorityObject(initialFields.priority));
+    setAssigneeSelected(getIssueAssigneeObject(initialFields.assignee));
   }, [initialFields]);
+
+  useEffect(() => {
+    dispatch(
+      fetchIssueAvailableAssignments({
+        id: initialFields.id,
+        callbacks: {},
+      }),
+    );
+  }, [dispatch]);
 
   const handleCloseTimePopup = () => {
     setIsTimePopupOpen(false);
@@ -79,7 +102,10 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
     setIsTimePopupOpen(true);
   };
 
-  const handleFieldChange = (fieldName: keyof IIssueUpdate, value: string) => {
+  const handleFieldChange = (
+    fieldName: keyof IIssueUpdate,
+    value: string | number,
+  ) => {
     const updatedIssue = { id: initialFields.id, [fieldName]: value };
     dispatch(
       updateIssue({
@@ -102,6 +128,13 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
   const handleChangePriority = (priority: ISelectItem<IssuePriorityType>) => {
     setPrioritySelected(priority);
     handleFieldChange("priority", priority.title);
+  };
+
+  const handleChangeAssignee = (
+    assignee: ISelectItem<{ first_name: string; last_name: string }>,
+  ) => {
+    setAssigneeSelected(assignee);
+    handleFieldChange("assignee", assignee.id);
   };
 
   const handleDescriptionSave = () => {
@@ -295,7 +328,22 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
                 <div className={`${themeClass}__groupContent`}>
                   <IssueViewItem
                     label={"Assignee"}
-                    content={<IssueAssignee user={initialFields.assignee} />}
+                    content={
+                      <Select<{ first_name: string; last_name: string }>
+                        type={"on-bgd"}
+                        selected={assigneeSelected}
+                        onChange={handleChangeAssignee}
+                        customItemClassName={`${themeClass}__assigneeItem`}
+                        getTitle={(item) => <IssueAssignee user={item.title} />}
+                        items={
+                          availableAssignments
+                            ? availableAssignments.map((item) =>
+                                getIssueAssigneeObject(item),
+                              )
+                            : []
+                        }
+                      />
+                    }
                   />
                   <IssueViewItem
                     label={"Reporter"}
@@ -380,6 +428,7 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
         onClose={handleCloseTimePopup}
         onSuccess={onSuccess}
         estimated={initialFields.time.estimated}
+        issueId={initialFields.id}
       />
     </>
   );

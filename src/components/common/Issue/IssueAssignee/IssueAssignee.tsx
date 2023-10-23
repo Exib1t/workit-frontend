@@ -6,7 +6,7 @@ import { ICompressedUser } from "../../../../models/IUser/IUser.ts";
 import { Skeleton } from "@mui/material";
 
 interface IProps {
-  user: ICompressedUser | null;
+  user: ICompressedUser | { first_name: string; last_name: string } | null;
 }
 
 const IssueAssignee: FC<IProps> = ({ user }) => {

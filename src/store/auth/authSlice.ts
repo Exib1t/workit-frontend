@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  loginThunk,
-  refreshThunk,
-  registerThunk,
-} from "../thunks/authThunks.ts";
+import { loginThunk, refreshThunk, registerThunk } from "./authThunks.ts";
 import { AuthError } from "../../models/reducers/auth.types.ts";
 
 interface IState {

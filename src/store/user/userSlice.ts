@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IUser } from "../../models/IUser/IUser.ts";
-import { fetchUserById } from "../thunks/userThunks.ts";
+import { fetchUserById } from "./userThunks.ts";
 
 interface IState {
   user: IUser | null;

@@ -11,12 +11,12 @@ import {
   fetchProjects,
   fetchProjectUsers,
   updateProject,
-} from "../../../../store/thunks/projectsThunks.ts";
+} from "../../../../store/projects/projectsThunks.ts";
 import CustomButton from "../../../control/ButtonComponents/CustomButton/CustomButton.tsx";
 import TextInput from "../../../control/TextInput/TextInput.tsx";
 import MultiSelect from "../../../control/MultiSelect/MultiSelect.tsx";
 import { ISelectItem } from "../../../../models/Select/Select.types.ts";
-import { setProjectsError } from "../../../../store/reducers/projectsSlice.ts";
+import { setProjectsError } from "../../../../store/projects/projectsSlice.ts";
 
 interface IProps {
   isOpen: boolean;

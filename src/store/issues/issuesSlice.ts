@@ -1,10 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AuthError } from "../../models/reducers/auth.types.ts";
-import { fetchIssuesByProjectId } from "../thunks/issuesThunks.ts";
+import {
+  fetchIssueAvailableAssignments,
+  fetchIssuesByProjectId,
+} from "./issuesThunks.ts";
 import { IIssue } from "../../models/IIssue/IIssue.ts";
+import { ICompressedUser } from "../../models/IUser/IUser.ts";
 
 interface IState {
   issues: IIssue[];
+  editorsData: {
+    assignments: {
+      loading: boolean;
+      data: ICompressedUser[];
+      error: any | null;
+    };
+  };
   projectId: number | null;
   errors: AuthError | null;
   isLoading: boolean;
@@ -13,6 +24,13 @@ interface IState {
 const initialState: IState = {
   issues: [],
   projectId: null,
+  editorsData: {
+    assignments: {
+      loading: false,
+      data: [],
+      error: null,
+    },
+  },
   errors: null,
   isLoading: false,
 };
@@ -41,6 +59,25 @@ const issuesSlice = createSlice({
       state.errors = action.payload as AuthError;
       state.isLoading = false;
     });
+    builder.addCase(fetchIssueAvailableAssignments.pending, (state) => {
+      state.editorsData.assignments.loading = true;
+      state.editorsData.assignments.error = null;
+    });
+    builder.addCase(
+      fetchIssueAvailableAssignments.fulfilled,
+      (state, action) => {
+        state.editorsData.assignments.data = action.payload;
+        state.editorsData.assignments.loading = false;
+        state.editorsData.assignments.error = null;
+      },
+    );
+    builder.addCase(
+      fetchIssueAvailableAssignments.rejected,
+      (state, action) => {
+        state.editorsData.assignments.loading = false;
+        state.editorsData.assignments.error = action.payload;
+      },
+    );
   },
 });
 

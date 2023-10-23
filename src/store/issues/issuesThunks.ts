@@ -8,6 +8,7 @@ import {
 } from "../../models/IIssue/IIssue.ts";
 import { AxiosResponse } from "axios";
 import { AdditionalCallbacks } from "../../models/reducers/index.types.ts";
+import { ICompressedUser } from "../../models/IUser/IUser.ts";
 
 export const fetchIssuesByProjectId = createAsyncThunk<
   { issues: IIssue[]; projectId: number },
@@ -84,16 +85,35 @@ export const deleteIssue = createAsyncThunk<
 export const logIssueTime = createAsyncThunk<
   IIssue,
   {
-    data: { link: string; time: IssueUpdateTime };
+    data: { id: number; time: IssueUpdateTime };
     callbacks: AdditionalCallbacks;
   }
 >(
-  "issues/deleteIssue",
+  "issues/logIssueTime",
   async ({ data, callbacks: { onSuccess, onError } }, thunkAPI) => {
     try {
-      const response = await api.post(`issues/${data.link}/time`, {
+      const response = await api.post(`issues/${data.id}/time`, {
         time: data.time,
       });
+      onSuccess && onSuccess();
+      return response.data;
+    } catch (err: any) {
+      onError && onError();
+      thunkAPI.rejectWithValue(err.response.data);
+    }
+  },
+);
+export const fetchIssueAvailableAssignments = createAsyncThunk<
+  ICompressedUser[],
+  {
+    id: number;
+    callbacks: AdditionalCallbacks;
+  }
+>(
+  "issues/fetchIssueAvailableAssignments",
+  async ({ id, callbacks: { onSuccess, onError } }, thunkAPI) => {
+    try {
+      const response = await api.get(`issues/${id}/assignments`);
       onSuccess && onSuccess();
       return response.data;
     } catch (err: any) {

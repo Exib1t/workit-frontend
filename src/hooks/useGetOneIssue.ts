@@ -1,10 +1,10 @@
 import { useAppDispatch, useAppSelector } from "../store";
 import { useEffect, useState } from "react";
 import { IIssue } from "../models/IIssue/IIssue.ts";
-import { fetchIssuesByProjectId } from "../store/thunks/issuesThunks.ts";
+import { fetchIssuesByProjectId } from "../store/issues/issuesThunks.ts";
 import useGetOneProject from "./useGetOneProject.ts";
 
-export default function useGetOneIssue (
+export default function useGetOneIssue(
   projectLink: string | undefined,
   issueLink: string | undefined,
 ) {

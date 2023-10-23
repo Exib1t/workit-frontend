@@ -11,11 +11,11 @@ import {
 import { useParams } from "react-router-dom";
 
 import "./IssueCreateModalStyles.scss";
-import { fetchProjectUsers } from "../../../../store/thunks/projectsThunks.ts";
+import { fetchProjectUsers } from "../../../../store/projects/projectsThunks.ts";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import { ISelectItem } from "../../../../models/Select/Select.types.ts";
 import Select from "../../../control/Select/Select.tsx";
-import { createIssue } from "../../../../store/thunks/issuesThunks.ts";
+import { createIssue } from "../../../../store/issues/issuesThunks.ts";
 import useGetOneProject from "../../../../hooks/useGetOneProject.ts";
 import { issuePriorities, issueTypes } from "../../../../constants/issues.ts";
 import Icon, { IconTypes } from "../../../control/Icon/Icon.tsx";
@@ -38,7 +38,7 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose, onSuccess }) => {
     priority: "Medium",
     projectId: 0,
     time: {
-      estimated: 0,
+      estimated: "0",
     },
   });
 
@@ -50,7 +50,7 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose, onSuccess }) => {
       type: "Task",
       priority: "Medium",
       time: {
-        estimated: 0,
+        estimated: "0",
       },
     }));
   }, []);

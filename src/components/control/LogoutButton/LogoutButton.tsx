@@ -2,7 +2,7 @@ import useThemeClass from "../../../hooks/useThemeClass.ts";
 import Icon from "../Icon/Icon.tsx";
 import "./LogoutButtonStyles.scss";
 import { useAppDispatch } from "../../../store";
-import { logout } from "../../../store/reducers/authSlice.ts";
+import { logout } from "../../../store/auth/authSlice.ts";
 import IconButtonCustom from "../IconButtonCustom/IconButtonCustom.tsx";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "../../../router/Routes.ts";

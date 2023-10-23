@@ -4,7 +4,7 @@ import IssuesHeader from "../../common/Issue/IssuesHeader/IssuesHeader.tsx";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { useParams } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
-import { fetchIssuesByProjectId } from "../../../store/thunks/issuesThunks.ts";
+import { fetchIssuesByProjectId } from "../../../store/issues/issuesThunks.ts";
 import useGetOneProject from "../../../hooks/useGetOneProject.ts";
 import IssuesList from "../../common/Issue/IssuesList/IssuesList.tsx";
 import IssueCreateModal from "../../common/Issue/IssueCreateModal/IssueCreateModal.tsx";

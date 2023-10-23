@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../store";
 import { useEffect, useState } from "react";
 import { IProject } from "../models/IProject/IProject.ts";
-import { fetchProjects } from "../store/thunks/projectsThunks.ts";
+import { fetchProjects } from "../store/projects/projectsThunks.ts";
 
 export default function useGetOneProject(projectLink: string | undefined) {
   const dispatch = useAppDispatch();

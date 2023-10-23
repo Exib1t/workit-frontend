@@ -5,7 +5,7 @@ import LinkCustom from "../../control/LinkCustom/LinkCustom.tsx";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { SignInFormDataInterface } from "../../../models/forms/SignInForm.types.ts";
 import { useAppDispatch } from "../../../store";
-import { loginThunk } from "../../../store/thunks/authThunks.ts";
+import { loginThunk } from "../../../store/auth/authThunks.ts";
 import CustomButton from "../../control/ButtonComponents/CustomButton/CustomButton.tsx";
 import Page from "../../common/Page/Page.tsx";
 import { useNavigate } from "react-router-dom";

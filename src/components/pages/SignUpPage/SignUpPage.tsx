@@ -4,7 +4,7 @@ import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { SignUpFormDataInterface } from "../../../models/forms/SignUpForm.types.ts";
 import { useAppDispatch } from "../../../store";
-import { registerThunk } from "../../../store/thunks/authThunks.ts";
+import { registerThunk } from "../../../store/auth/authThunks.ts";
 import CustomButton from "../../control/ButtonComponents/CustomButton/CustomButton.tsx";
 import Page from "../../common/Page/Page.tsx";
 import { AppRoutes } from "../../../router/Routes.ts";

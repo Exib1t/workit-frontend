@@ -8,18 +8,18 @@ import useThemeClass from "../hooks/useThemeClass.ts";
 import "../components/control/InputCustom/InputStyles.scss";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store";
-import { refreshThunk } from "../store/thunks/authThunks.ts";
-import { setToken } from "../store/reducers/authSlice.ts";
+import { refreshThunk } from "../store/auth/authThunks.ts";
+import { setToken } from "../store/auth/authSlice.ts";
 import ProjectsPage from "../components/pages/ProjectsPage/ProjectsPage.tsx";
-import { setTheme } from "../store/reducers/globalSlice.ts";
+import { setTheme } from "../store/global/globalSlice.ts";
 import ComponentsPage from "../components/pages/ComponentsPage/ComponentsPage.tsx";
 import ProjectPage from "../components/pages/ProjectPage/ProjectPage.tsx";
 import NotFoundPage from "../components/pages/NotFoundPage/NotFoundPage.tsx";
 import IssuesPage from "../components/pages/IssuesPage/IssuesPage.tsx";
 import IssuePage from "../components/pages/IssuePage/IssuePage.tsx";
 import Page from "../components/common/Page/Page.tsx";
-import { fetchUserById } from "../store/thunks/userThunks.ts";
-import { clearUser } from "../store/reducers/userSlice.ts";
+import { fetchUserById } from "../store/user/userThunks.ts";
+import { clearUser } from "../store/user/userSlice.ts";
 
 const AppRouter = () => {
   const { isAuthenticated, isLoading } = useAuthenticated();

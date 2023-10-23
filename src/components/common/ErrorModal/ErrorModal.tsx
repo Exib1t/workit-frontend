@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ModalCustom from "../../control/ModalCustom/ModalCustom.tsx";
 import { useAppDispatch, useAppSelector } from "../../../store";
-import { setErrors, setToken } from "../../../store/reducers/authSlice.ts";
+import { setErrors, setToken } from "../../../store/auth/authSlice.ts";
 
 const ErrorModal = () => {
   const [isOpen, setIsOpen] = useState(false);

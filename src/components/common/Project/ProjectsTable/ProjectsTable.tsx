@@ -7,7 +7,7 @@ import Chip from "../../Chip/Chip.tsx";
 import { Link } from "react-router-dom";
 import IconButtonCustom from "../../../control/IconButtonCustom/IconButtonCustom.tsx";
 import Icon from "../../../control/Icon/Icon.tsx";
-import { deleteProject } from "../../../../store/thunks/projectsThunks.ts";
+import { deleteProject } from "../../../../store/projects/projectsThunks.ts";
 import { FC } from "react";
 import { AppRoutes } from "../../../../router/Routes.ts";
 import DatagridBasic from "../../../control/DatagridBasic/DatagridBasic.tsx";

@@ -6,6 +6,7 @@ import {
 } from "../models/IIssue/IIssue.ts";
 import { IColors } from "../models/IColors/IColors.ts";
 import { ISelectItem } from "../models/Select/Select.types.ts";
+import { ICompressedUser } from "../models/IUser/IUser.ts";
 
 export const getIconType = (type: IssueTypes): IconTypes => {
   return type === "Task" ? "task" : type === "Subtask" ? "subtask" : "bug";
@@ -61,6 +62,18 @@ export const getIssuePriorityObject = (
   } else {
     return { id: 3, title: priority };
   }
+};
+
+export const getIssueAssigneeObject = (
+  assignee: ICompressedUser,
+): ISelectItem<{ first_name: string; last_name: string }> => {
+  return {
+    id: assignee.id,
+    title: {
+      first_name: assignee.first_name,
+      last_name: assignee.last_name,
+    },
+  };
 };
 
 export const getLocalDate = (date: string) => {

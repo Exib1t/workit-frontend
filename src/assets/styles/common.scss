@@ -43,7 +43,6 @@
 #root {
   width: 100%;
   min-height: 100vh;
-  background: red;
 }
 
 .outlet {
@@ -72,6 +71,14 @@
   border-radius: 0 !important;
   background: none !important;
   box-shadow: none !important;
+}
+
+.b-container-dark {
+  background: $dark-bgd-default;
+}
+
+.b-container-light {
+  background: $light-bgd-default;
 }
 
 .b-container-dark .MuiSkeleton-root {

@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import globalSlice from "./reducers/globalSlice.ts";
-import authSlice from "./reducers/authSlice.ts";
-import projectsSlice from "./reducers/projectsSlice.ts";
-import issuesSlice from "./reducers/issuesSlice.ts";
-import userSlice from "./reducers/userSlice.ts";
+import globalSlice from "./global/globalSlice.ts";
+import authSlice from "./auth/authSlice.ts";
+import projectsSlice from "./projects/projectsSlice.ts";
+import issuesSlice from "./issues/issuesSlice.ts";
+import userSlice from "./user/userSlice.ts";
 
 export const store = configureStore({
   reducer: {

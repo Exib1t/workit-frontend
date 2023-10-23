@@ -7,7 +7,7 @@ import {
   fetchProjects,
   fetchProjectUsers,
   updateProject,
-} from "../thunks/projectsThunks.ts";
+} from "./projectsThunks.ts";
 import { ICompressedUser } from "../../models/IUser/IUser.ts";
 import { AuthError } from "../../models/reducers/auth.types.ts";
 
