@@ -2,18 +2,18 @@
 
 .b-tooltip-dark,
 .b-tooltip-light {
-  font-size: $typography-body-sm-font-size;
-  font-weight: $typography-body-sm-font-weight;
-  letter-spacing: $typography-body-sm-letter-spacing;
-  line-height: $typography-body-sm-line-height;
+  font-size: $typography-body-sm-font-size !important;
+  font-weight: $typography-body-sm-font-weight !important;
+  letter-spacing: $typography-body-sm-letter-spacing !important;
+  line-height: $typography-body-sm-line-height !important;
 }
 
 .b-tooltip-dark {
-  background: $dark-tooltip;
-  color: $dark-on-tooltip-default;
+  background: $dark-tooltip !important;
+  color: $dark-on-tooltip-default !important;
 }
 
 .b-tooltip-light {
-  background: $light-tooltip;
-  color: $light-on-tooltip-default;
+  background: $light-tooltip !important;
+  color: $light-on-tooltip-default !important;
 }

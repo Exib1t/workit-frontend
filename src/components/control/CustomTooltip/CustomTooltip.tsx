@@ -7,7 +7,12 @@ const CustomTooltip: FC<TooltipProps> = (props) => {
   const themeClass = useThemeClass("b-tooltip");
 
   return (
-    <Tooltip {...props} classes={{ tooltip: themeClass }}>
+    <Tooltip
+      {...props}
+      classes={{ tooltip: themeClass }}
+      enterDelay={500}
+      enterNextDelay={500}
+    >
       {props.children}
     </Tooltip>
   );
