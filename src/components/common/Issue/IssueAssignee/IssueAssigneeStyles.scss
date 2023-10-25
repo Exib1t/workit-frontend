@@ -2,9 +2,8 @@
 
 .b-issueAssignee-dark,
 .b-issueAssignee-light {
-  display: flex;
-  align-items: center;
-  gap: $ref-spacing-6;
+  display: block;
+  padding-left: $ref-sizing-6;
 
   &__skeleton {
     display: flex;
@@ -12,28 +11,5 @@
     gap: $ref-spacing-2;
     width: 100%;
     padding: $ref-spacing-0 $ref-spacing-24;
-  }
-
-  &__assigneeText {
-    display: flex;
-    align-items: center;
-    gap: $ref-spacing-4;
-    font-family: $typography-label-md-font-family;
-    font-weight: $typography-label-md-font-weight;
-    line-height: $typography-label-md-line-height;
-    font-size: $typography-label-md-font-size;
-    letter-spacing: $typography-label-md-letter-spacing;
-  }
-}
-
-.b-issueAssignee-dark {
-  &__assigneeText {
-    color: $dark-on-bgd-srf-3;
-  }
-}
-
-.b-issueAssignee-light {
-  &__assigneeText {
-    color: $light-on-bgd-srf-3;
   }
 }

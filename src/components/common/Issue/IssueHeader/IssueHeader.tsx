@@ -35,6 +35,7 @@ const IssueHeader: FC<IProps> = ({ project, initialFields, onSuccess }) => {
       <div className={themeClass}>
         <h2 className={`${themeClass}__breadcrumbs`}>
           <BreadcrumbsCustom>
+            <span onClick={() => navigate(AppRoutes.projects)}>Projects</span>
             <span
               onClick={() =>
                 navigate(

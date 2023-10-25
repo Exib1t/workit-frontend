@@ -22,6 +22,7 @@ const IssuesHeader: FC<IProps> = ({ project, handleCreateNewOpen }) => {
   return (
     <div className={themeClass}>
       <BreadcrumbsCustom>
+        <span onClick={() => navigate(AppRoutes.projects)}>Projects</span>
         <span
           onClick={() =>
             navigate(AppRoutes.project.replace(":projectLink", project.link))

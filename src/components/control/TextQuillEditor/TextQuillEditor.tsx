@@ -21,6 +21,7 @@ interface IProps extends ReactQuillProps {
   isFooter?: boolean;
   disabled?: boolean;
   handleSave?: () => void;
+  customHeight: number;
 }
 
 const TextQuillEditor: FC<IProps> = (props) => {
@@ -31,6 +32,7 @@ const TextQuillEditor: FC<IProps> = (props) => {
       <ReactQuill
         {...props}
         className={`${themeClass} ${props.isFooter ? "-isFooter" : ""}`}
+        style={{ height: props.customHeight || 150 }}
         modules={modules}
       />
       <div className={`${themeClass}__footer`}>

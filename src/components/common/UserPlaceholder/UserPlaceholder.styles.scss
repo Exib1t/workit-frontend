@@ -1,0 +1,31 @@
+@import "../../../assets/styles/designVariables";
+
+.b-userPlaceholder-dark,
+.b-userPlaceholder-light {
+  display: flex;
+  align-items: center;
+  gap: $ref-spacing-6;
+
+  &__assigneeText {
+    display: flex;
+    align-items: center;
+    gap: $ref-spacing-4;
+    font-family: $typography-label-md-font-family;
+    font-weight: $typography-label-md-font-weight;
+    line-height: $typography-label-md-line-height;
+    font-size: $typography-label-md-font-size;
+    letter-spacing: $typography-label-md-letter-spacing;
+  }
+}
+
+.b-userPlaceholder-dark {
+  &__assigneeText {
+    color: $dark-on-bgd-srf-3;
+  }
+}
+
+.b-userPlaceholder-light {
+  &__assigneeText {
+    color: $light-on-bgd-srf-3;
+  }
+}

@@ -1,9 +1,10 @@
 import { FC } from "react";
 import useThemeClass from "../../../../hooks/useThemeClass.ts";
-import AvatarCustom from "../../AvatarCustom/AvatarCustom.tsx";
-import "./IssueAssigneeStyles.scss";
 import { ICompressedUser } from "../../../../models/IUser/IUser.ts";
 import { Skeleton } from "@mui/material";
+
+import "./IssueAssigneeStyles.scss";
+import UserPlaceholder from "../../UserPlaceholder/UserPlaceholder.tsx";
 
 interface IProps {
   user: ICompressedUser | { first_name: string; last_name: string } | null;
@@ -26,12 +27,10 @@ const IssueAssignee: FC<IProps> = ({ user }) => {
 
   return (
     <div className={themeClass}>
-      <AvatarCustom size="small">{`${user.first_name.charAt(
-        0,
-      )}${user.last_name.charAt(0)}`}</AvatarCustom>
-      <span className={`${themeClass}__assigneeText`}>
-        {user.first_name} {user.last_name}
-      </span>
+      <UserPlaceholder
+        first_name={user.first_name}
+        last_name={user.last_name}
+      />
     </div>
   );
 };

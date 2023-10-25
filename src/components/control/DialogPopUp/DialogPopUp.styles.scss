@@ -29,10 +29,10 @@
     align-items: center;
     justify-content: space-between;
     padding: $ref-spacing-16 $ref-spacing-24;
-    width: 560px;
+    width: 100%;
 
     &.-divided {
-      width: 560px;
+      width: 100%;
       height: $ref-sizing-40;
       display: flex;
       align-items: center;
@@ -84,7 +84,6 @@
   }
   &_content {
     padding: 0 $ref-spacing-24;
-    max-width: 550px;
 
     &.-divided {
       padding: 0 $ref-spacing-16;
@@ -132,7 +131,7 @@
 
 .dialogPopUp-dark {
   &_paper {
-    background-color: $dark-srf-default !important;
+    background: $dark-srf-default !important;
   }
 
   &_dialogTitle {
@@ -167,7 +166,7 @@
 
 .dialogPopUp-light {
   &_paper {
-    background-color: $light-srf-default !important;
+    background: $light-srf-default !important;
   }
 
   &_dialogTitle {

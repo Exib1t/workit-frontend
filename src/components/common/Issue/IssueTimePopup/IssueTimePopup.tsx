@@ -1,5 +1,4 @@
 import { ChangeEvent, FC, useEffect, useState } from "react";
-import useThemeClass from "../../../../hooks/useThemeClass.ts";
 import TextInput from "../../../control/TextInput/TextInput.tsx";
 
 import "./IssueTimePopupStyles.scss";
@@ -25,8 +24,6 @@ const IssueTimePopup: FC<IProps> = ({
   const [logTime, setLogTime] = useState("0");
   const [estimatedTime, setEstimatedTime] = useState("0");
   const dispatch = useAppDispatch();
-
-  const themeClass = useThemeClass("b-issueTimePopup");
 
   useEffect(() => {
     setEstimatedTime(String(estimated));

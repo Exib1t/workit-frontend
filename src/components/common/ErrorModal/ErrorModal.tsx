@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import ModalCustom from "../../control/ModalCustom/ModalCustom.tsx";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { setErrors, setToken } from "../../../store/auth/authSlice.ts";
+import DialogPopUp from "../../control/DialogPopUp/DialogPopUp.tsx";
 
 const ErrorModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,11 +22,16 @@ const ErrorModal = () => {
   };
 
   return (
-    <ModalCustom
-      isOpen={isOpen}
-      handleClose={handleClose}
-      title="Token Expired"
-      text="Your authorization token is expired, please re-login into your account."
+    <DialogPopUp
+      open={isOpen}
+      onClose={handleClose}
+      dividedHeader
+      title={"Token Expired"}
+      modalText={
+        "Your authorization token is expired, please re-login into your account."
+      }
+      primaryText={"Okey"}
+      handleOnPrimary={handleClose}
     />
   );
 };

@@ -41,6 +41,7 @@ import {
 import IssuePriority from "../IssuePriority/IssuePriority.tsx";
 import TimeBar from "../../../control/TimeBar/TimeBar.tsx";
 import IssueTimePopup from "../IssueTimePopup/IssueTimePopup.tsx";
+import UserPlaceholder from "../../UserPlaceholder/UserPlaceholder.tsx";
 
 interface IExpandedGroups {
   attachments: boolean;
@@ -302,19 +303,23 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
             <div className={`${themeClass}__row`}>
               <div className={`${themeClass}__column`}>
                 <div className={`${themeClass}__group`}>
-                  <span className={`${themeClass}__groupTitle`}>Activity</span>
+                  <span className={`${themeClass}__groupTitle`}>Comments</span>
                   <div className={`${themeClass}__groupContent`}>
-                    <div className={`${themeClass}__activity`}>
-                      <TextQuillEditor
-                        placeholder={"Description..."}
-                        isFooter
-                        value={description}
-                        onChange={handleChangeDescription}
-                        disabled={
-                          isLoading || initialFields.description === description
-                        }
-                        handleSave={handleDescriptionSave}
-                      />
+                    <div className={`${themeClass}__attachments`}>
+                      <div className={`${themeClass}__activity`}>
+                        <TextQuillEditor
+                          placeholder={"Description..."}
+                          customHeight={45}
+                          isFooter
+                          value={description}
+                          onChange={handleChangeDescription}
+                          disabled={
+                            isLoading ||
+                            initialFields.description === description
+                          }
+                          handleSave={handleDescriptionSave}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -334,7 +339,12 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
                         selected={assigneeSelected}
                         onChange={handleChangeAssignee}
                         customItemClassName={`${themeClass}__assigneeItem`}
-                        getTitle={(item) => <IssueAssignee user={item.title} />}
+                        getTitle={(item) => (
+                          <UserPlaceholder
+                            first_name={item.title.first_name}
+                            last_name={item.title.last_name}
+                          />
+                        )}
                         items={
                           availableAssignments
                             ? availableAssignments.map((item) =>

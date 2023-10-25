@@ -1,7 +1,5 @@
 import { ChangeEvent, FC, useEffect, useState } from "react";
 import TextInput from "../../../control/TextInput/TextInput.tsx";
-import CustomButton from "../../../control/ButtonComponents/CustomButton/CustomButton.tsx";
-import ModalCustom from "../../../control/ModalCustom/ModalCustom.tsx";
 import useThemeClass from "../../../../hooks/useThemeClass.ts";
 import {
   IIssueCreate,
@@ -19,6 +17,7 @@ import { createIssue } from "../../../../store/issues/issuesThunks.ts";
 import useGetOneProject from "../../../../hooks/useGetOneProject.ts";
 import { issuePriorities, issueTypes } from "../../../../constants/issues.ts";
 import Icon, { IconTypes } from "../../../control/Icon/Icon.tsx";
+import DialogPopUp from "../../../control/DialogPopUp/DialogPopUp.tsx";
 
 interface IProps {
   isOpen: boolean;
@@ -151,89 +150,84 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose, onSuccess }) => {
   const themeClass = useThemeClass("b-issueCreateModal");
 
   return (
-    <ModalCustom isOpen={isOpen} handleClose={onClose} className={themeClass}>
-      <div className={`${themeClass}__header`}>
-        <h2 className={`${themeClass}__title`}>Issue Create</h2>
-      </div>
-      <div className={`${themeClass}__row`}>
-        <div className={`${themeClass}__column`}>
-          <div className={`${themeClass}__field`}>
-            <TextInput
-              type="on-bgd"
-              placeholder="Enter issue title"
-              name="title"
-              label="Title"
-              value={newIssue.title}
-              onChange={handleInputChange}
-            />
+    <DialogPopUp
+      open={isOpen}
+      onClose={onClose}
+      title={"Issue Create"}
+      secondaryText={"Cancel"}
+      primaryText={"Create"}
+      handleOnSecondary={onClose}
+      handleOnPrimary={handleSubmit}
+      dividedHeader
+      paperMaxWidth={"1000px"}
+      renderModalContent={() => (
+        <div className={`${themeClass}__row`}>
+          <div className={`${themeClass}__column`}>
+            <div className={`${themeClass}__field`}>
+              <TextInput
+                type="on-bgd"
+                placeholder="Enter issue title"
+                name="title"
+                label="Title"
+                value={newIssue.title}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={`${themeClass}__field`}>
+              <span className={`${themeClass}__fieldLabel`}>Assignee</span>
+              <Select
+                items={allUsers}
+                onChange={handleUsersChange}
+                type={"on-bgd"}
+                placeholder="Select assignee"
+                selected={
+                  allUsers.find((user) => user.id === newIssue.assignee) || null
+                }
+              />
+            </div>
+            <div className={`${themeClass}__field`}>
+              <TextInput
+                type={"on-bgd"}
+                value={newIssue.time.estimated}
+                onChange={handleTimeChange}
+                label={"Time to log (hrs)"}
+              />
+            </div>
           </div>
-          <div className={`${themeClass}__field`}>
-            <span className={`${themeClass}__fieldLabel`}>Assignee</span>
-            <Select
-              items={allUsers}
-              onChange={handleUsersChange}
-              type={"on-bgd"}
-              placeholder="Select assignee"
-              selected={
-                allUsers.find((user) => user.id === newIssue.assignee) || null
-              }
-            />
-          </div>
-          <div className={`${themeClass}__field`}>
-            <TextInput
-              type={"on-bgd"}
-              value={newIssue.time.estimated}
-              onChange={handleTimeChange}
-              label={"Time to log (hrs)"}
-            />
+          <div className={`${themeClass}__column`}>
+            <div className={`${themeClass}__field`}>
+              <span className={`${themeClass}__fieldLabel`}>Priorities</span>
+              <Select
+                items={issuePriorities}
+                onChange={handlePriorityChange}
+                type={"on-bgd"}
+                getTitle={renderPriorityItem}
+                placeholder="Select priority"
+                selected={
+                  issuePriorities.find(
+                    (type) => type.title === newIssue.priority,
+                  ) || null
+                }
+              />
+            </div>
+            <div className={`${themeClass}__field`}>
+              <span className={`${themeClass}__fieldLabel`}>Type</span>
+              <Select
+                items={issueTypes}
+                onChange={handleTypeChange}
+                type={"on-bgd"}
+                getTitle={renderTypeItem}
+                placeholder="Select type"
+                selected={
+                  issueTypes.find((type) => type.title === newIssue.type) ||
+                  null
+                }
+              />
+            </div>
           </div>
         </div>
-        <div className={`${themeClass}__column`}>
-          <div className={`${themeClass}__field`}>
-            <span className={`${themeClass}__fieldLabel`}>Priorities</span>
-            <Select
-              items={issuePriorities}
-              onChange={handlePriorityChange}
-              type={"on-bgd"}
-              getTitle={renderPriorityItem}
-              placeholder="Select priority"
-              selected={
-                issuePriorities.find(
-                  (type) => type.title === newIssue.priority,
-                ) || null
-              }
-            />
-          </div>
-          <div className={`${themeClass}__field`}>
-            <span className={`${themeClass}__fieldLabel`}>Type</span>
-            <Select
-              items={issueTypes}
-              onChange={handleTypeChange}
-              type={"on-bgd"}
-              getTitle={renderTypeItem}
-              placeholder="Select type"
-              selected={
-                issueTypes.find((type) => type.title === newIssue.type) || null
-              }
-            />
-          </div>
-        </div>
-      </div>
-      <div className={`${themeClass}__footer`}>
-        <CustomButton
-          type="tertiary"
-          title={"Cancel"}
-          size={"md"}
-          clickHandler={onClose}
-        />
-        <CustomButton
-          type="primary"
-          title={"Create"}
-          size={"md"}
-          clickHandler={handleSubmit}
-        />
-      </div>
-    </ModalCustom>
+      )}
+    />
   );
 };
 export default IssueCreateModal;

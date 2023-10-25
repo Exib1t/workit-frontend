@@ -1,7 +1,6 @@
 import "./HeaderStyles.scss";
 import Logo from "../Logo/Logo.tsx";
 import useThemeClass from "../../../hooks/useThemeClass.ts";
-import ButtonCustom from "../../control/ButtonCustom/ButtonCustom.tsx";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "../../../router/Routes.ts";
 import useAuthenticated from "../../../hooks/useAuthenticated.tsx";
@@ -60,19 +59,18 @@ const Header = () => {
         </>
       ) : (
         <div className={`${headerClass}__controls`}>
-          <ButtonCustom
-            variant="text"
-            className={`${headerClass}__button`}
-            onClick={() => navigate(AppRoutes.signIn)}
-          >
-            Sign In
-          </ButtonCustom>
-          <ButtonCustom
-            className={`${headerClass}__button`}
-            onClick={() => navigate(AppRoutes.signUp)}
-          >
-            Sign Up
-          </ButtonCustom>
+          <CustomButton
+            type="text-plain"
+            size={"md"}
+            title={"Sign In"}
+            clickHandler={() => navigate(AppRoutes.signIn)}
+          />
+          <CustomButton
+            type="primary"
+            size={"md"}
+            title={"Sign up"}
+            clickHandler={() => navigate(AppRoutes.signUp)}
+          />
         </div>
       )}
       <HeaderMenu
