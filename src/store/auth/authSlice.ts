@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginThunk, refreshThunk, registerThunk } from "./authThunks.ts";
-import { AuthError } from "../../models/reducers/auth.types.ts";
+
+type IError = { [key: string]: string }[];
 
 interface IState {
   id: number | null;
   email: string | null;
   token: string | null;
   isLoading: boolean;
-  errors: AuthError | null;
+  errors: IError | null;
 }
 
 const initialState: IState = {
@@ -48,7 +49,7 @@ const authSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(registerThunk.rejected, (state, action) => {
-      state.errors = action.payload as AuthError;
+      state.errors = action.payload?.errors as IError;
       state.isLoading = false;
     });
 
@@ -61,7 +62,7 @@ const authSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(loginThunk.rejected, (state, action) => {
-      state.errors = action.payload as AuthError;
+      state.errors = action.payload?.errors as IError;
       state.isLoading = false;
     });
 
@@ -76,7 +77,7 @@ const authSlice = createSlice({
     builder.addCase(refreshThunk.rejected, (state, action) => {
       state.id = null;
       state.email = null;
-      state.errors = action.payload as AuthError;
+      state.errors = action.payload?.errors as IError;
       state.isLoading = false;
     });
   },

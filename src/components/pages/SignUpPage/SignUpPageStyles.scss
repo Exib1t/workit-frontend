@@ -16,7 +16,7 @@
     max-width: 500px;
     padding: $ref-spacing-24;
     box-sizing: border-box;
-    border-radius: $border-radius-12;
+    border-radius: $border-radius-4;
     gap: $ref-spacing-12;
     box-shadow: $shadow-1;
   }
@@ -32,78 +32,70 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: $ref-spacing-6;
+    gap: $ref-spacing-12;
+  }
+
+  &__checkboxRow {
+    display: flex;
+    align-items: center;
+    gap: $ref-sizing-8;
+    cursor: pointer;
+    margin-bottom: $ref-sizing-12;
+  }
+
+  &__checkboxLabel {
+    font-size: $typography-body-md-font-size;
+    font-weight: $typography-body-md-font-weight;
+    letter-spacing: $typography-body-md-letter-spacing;
+    line-height: $typography-body-md-line-height;
+    user-select: none;
   }
 
   &__row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     gap: $ref-spacing-6;
   }
 
-  &__input,
   &__button {
     width: 100% !important;
-  }
-
-  .b-input {
-    width: 100%;
-  }
-
-  &__errorLabel {
-    font-size: $typography-body-md-font-size;
-    font-weight: $typography-body-md-font-weight;
-    letter-spacing: $typography-body-md-letter-spacing;
-    line-height: $typography-body-md-line-height;
-    color: $error !important;
-  }
-}
-
-.b-signUp-light {
-  &__card {
-    background-color: $light-srf-variant;
-  }
-
-  &__title {
-    color: $light-on-bgd-srf-3;
-  }
-
-  &__controlLabel {
-    .MuiCheckbox-root svg path {
-      fill: $light-on-bgd-srf-3;
-    }
-
-    .Mui-checked svg path {
-      fill: $light-primary;
-    }
-
-    .MuiTypography-root {
-      color: $light-on-bgd-srf-3;
-    }
   }
 }
 
 .b-signUp-dark {
   &__card {
-    background-color: $dark-srf-variant;
+    background-color: $dark-srf-default;
+    border: 1px solid $dark-on-bgd-srf-5;
   }
 
   &__title {
     color: $dark-on-bgd-srf-3;
   }
 
-  &__controlLabel {
-    .MuiCheckbox-root svg path {
-      fill: $dark-on-bgd-srf-3;
-    }
+  &__checkboxLabel {
+    color: $dark-on-bgd-srf-3;
+  }
 
-    .Mui-checked svg path {
-      fill: $dark-primary;
-    }
+  &__checkbox.-error {
+    border-color: $dark-sys-danger;
+  }
+}
 
-    .MuiTypography-root {
-      color: $dark-on-bgd-srf-3;
-    }
+.b-signUp-light {
+  &__card {
+    background-color: $light-srf-default;
+    border: 1px solid $light-on-bgd-srf-5;
+  }
+
+  &__title {
+    color: $light-on-bgd-srf-3;
+  }
+
+  &__checkboxLabel {
+    color: $light-on-bgd-srf-3;
+  }
+
+  &__checkbox.-error {
+    border-color: $light-sys-danger;
   }
 }

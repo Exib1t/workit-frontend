@@ -1,11 +1,10 @@
 import useThemeClass from "../../../hooks/useThemeClass.ts";
-import LinkCustom from "../../control/LinkCustom/LinkCustom.tsx";
 import { SignInFormDataInterface } from "../../../models/forms/SignInForm.types.ts";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import CustomButton from "../../control/ButtonComponents/CustomButton/CustomButton.tsx";
 import Page from "../../common/Page/Page.tsx";
 import { useNavigate } from "react-router-dom";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import TextInput from "../../control/TextInput/TextInput.tsx";
 import Checkbox from "../../control/Checkbox/Checkbox.tsx";
 import { loginThunk } from "../../../store/auth/authThunks.ts";
@@ -14,12 +13,14 @@ import { AppRoutes } from "../../../router/Routes.ts";
 import "./SignInPageStyles.scss";
 
 const SignInPage = () => {
+  const authErrors = useAppSelector((state) => state.auth.errors);
+
   const themeClass = useThemeClass("b-signIn");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [errors, setErrors] = useState<{
-    email?: string | undefined;
-    password?: string | undefined;
+    email: string | undefined;
+    password: string | undefined;
   }>({
     email: undefined,
     password: undefined,
@@ -30,7 +31,17 @@ const SignInPage = () => {
     isRemember: false,
   });
 
-  const authErrors = useAppSelector((state) => state.auth.errors);
+  useEffect(() => {
+    if (authErrors) {
+      setErrors({
+        email:
+          authErrors.find((err) => err.field === "email")?.message || undefined,
+        password:
+          authErrors.find((err) => err.field === "password")?.message ||
+          undefined,
+      });
+    }
+  }, [authErrors]);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
@@ -54,16 +65,12 @@ const SignInPage = () => {
       setErrors((prevState) => ({ ...prevState, password: undefined }));
     }
 
-    if (
+    return !(
       !data.email.trim() ||
       data.email.length < 5 ||
       !data.password.trim() ||
       data.password.length < 5
-    ) {
-      return false;
-    } else {
-      return true;
-    }
+    );
   };
 
   const onSubmit = async () => {
@@ -73,25 +80,12 @@ const SignInPage = () => {
       dispatch(loginThunk(data))
         .unwrap()
         .then(() => {
-          console.log("then");
           setData({
             email: "",
             password: "",
             isRemember: false,
           });
           navigate(AppRoutes.projects);
-        })
-        .catch((err) => {
-          setErrors({
-            email:
-              err.message[0] !== "Password is incorrect"
-                ? err.message[0]
-                : null,
-            password:
-              err.message[0] === "Password is incorrect"
-                ? err.message[0]
-                : null,
-          });
         });
     }
   };
@@ -134,7 +128,6 @@ const SignInPage = () => {
                   Remember me
                 </span>
               </div>
-              <LinkCustom to={"/password-reset"}>Forgot password?</LinkCustom>
             </div>
           </div>
           <CustomButton

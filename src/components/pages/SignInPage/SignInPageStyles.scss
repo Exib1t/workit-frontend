@@ -58,32 +58,8 @@
     margin-bottom: $ref-sizing-12;
   }
 
-  &__input,
   &__button {
     width: 100% !important;
-  }
-
-  &__errorLabel {
-    font-size: $typography-body-md-font-size;
-    font-weight: $typography-body-md-font-weight;
-    letter-spacing: $typography-body-md-letter-spacing;
-    line-height: $typography-body-md-line-height;
-    color: $error !important;
-  }
-}
-
-.b-signIn-light {
-  &__card {
-    background-color: $light-srf-default;
-    border: 1px solid $light-on-bgd-srf-5;
-  }
-
-  &__title {
-    color: $light-on-bgd-srf-3;
-  }
-
-  &__checkboxLabel {
-    color: $light-on-bgd-srf-3;
   }
 }
 
@@ -99,5 +75,20 @@
 
   &__checkboxLabel {
     color: $dark-on-bgd-srf-3;
+  }
+}
+
+.b-signIn-light {
+  &__card {
+    background-color: $light-srf-default;
+    border: 1px solid $light-on-bgd-srf-5;
+  }
+
+  &__title {
+    color: $light-on-bgd-srf-3;
+  }
+
+  &__checkboxLabel {
+    color: $light-on-bgd-srf-3;
   }
 }

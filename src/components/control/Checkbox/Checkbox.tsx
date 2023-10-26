@@ -24,7 +24,9 @@ const Checkbox: FC<{
             <Icon type={"tick"} size={20} color={"tick"} />
           </div>
         ) : (
-          <div className={`${themeClass}_btn-empty`}></div>
+          <div
+            className={`${themeClass}_btn-empty ${btnClassName || ""}`}
+          ></div>
         )}
       </div>
     </>

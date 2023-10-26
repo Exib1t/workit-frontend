@@ -1,8 +1,8 @@
 export interface SignUpFormDataInterface {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
-  confirmationPassword: string;
-  privacyPolicy: boolean;
+  confirmation_password: string;
+  privacy_policy: boolean;
 }
