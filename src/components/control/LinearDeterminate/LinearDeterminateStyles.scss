@@ -1,0 +1,36 @@
+@import "../../../assets/styles/designVariables";
+
+.b-linearDeterminate-dark,
+.b-linearDeterminate-light {
+  &_root {
+    height: 1px !important;
+    max-height: 1px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  &_bar {
+    margin: 0 !important;
+    display: block !important;
+  }
+}
+
+.b-linearDeterminate-dark {
+  &_colorPrimary {
+    background-color: $dark-bgd-default !important;
+  }
+
+  &_barColorPrimary {
+    background-color: $dark-primary !important;
+  }
+}
+
+.b-linearDeterminate-light {
+  &_colorPrimary {
+    background-color: $light-bgd-default !important;
+  }
+
+  &_barColorPrimary {
+    background-color: $light-primary !important;
+  }
+}

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { IProject } from "../../models/IProject/IProject.ts";
 import {
   createProject,
@@ -8,12 +8,12 @@ import {
   updateProject,
 } from "./projectsThunks.ts";
 import { ICompressedUser } from "../../models/IUser/IUser.ts";
-import { IError } from "../../models/reducers/global.types.ts";
+import { IErrors } from "../../models/reducers/global.types.ts";
 
 interface IState {
   data: IProject[];
   availableUsers: ICompressedUser[];
-  errors: IError | null;
+  errors: IErrors | null;
   isLoading: boolean;
   isFirstLoading: boolean;
 }
@@ -29,11 +29,7 @@ const initialState: IState = {
 const projectsSlice = createSlice({
   name: "projects",
   initialState,
-  reducers: {
-    setProjectsError: (state, action: PayloadAction<IError | null>) => {
-      state.errors = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchProjects.pending, (state) => {
       state.isLoading = true;
@@ -47,7 +43,7 @@ const projectsSlice = createSlice({
     builder.addCase(fetchProjects.rejected, (state, action) => {
       state.isLoading = false;
       state.isFirstLoading = false;
-      state.errors = action.payload as IError;
+      state.errors = action.payload as IErrors;
     });
     builder.addCase(createProject.pending, (state) => {
       state.isLoading = true;
@@ -59,7 +55,7 @@ const projectsSlice = createSlice({
     });
     builder.addCase(createProject.rejected, (state, action) => {
       state.isLoading = false;
-      state.errors = action.payload as IError;
+      state.errors = action.payload as IErrors;
     });
     builder.addCase(deleteProject.pending, (state) => {
       state.isLoading = true;
@@ -71,7 +67,7 @@ const projectsSlice = createSlice({
     });
     builder.addCase(deleteProject.rejected, (state, action) => {
       state.isLoading = false;
-      state.errors = action.payload as IError;
+      state.errors = action.payload as IErrors;
     });
     builder.addCase(updateProject.pending, (state) => {
       state.isLoading = true;
@@ -83,7 +79,7 @@ const projectsSlice = createSlice({
     });
     builder.addCase(updateProject.rejected, (state, action) => {
       state.isLoading = false;
-      state.errors = action.payload as IError;
+      state.errors = action.payload as IErrors;
     });
     builder.addCase(fetchProjectUsers.pending, (state) => {
       state.isLoading = true;
@@ -94,11 +90,9 @@ const projectsSlice = createSlice({
     });
     builder.addCase(fetchProjectUsers.rejected, (state, action) => {
       state.isLoading = false;
-      state.errors = action.payload as IError;
+      state.errors = action.payload as IErrors;
     });
   },
 });
 
 export default projectsSlice.reducer;
-
-export const { setProjectsError } = projectsSlice.actions;

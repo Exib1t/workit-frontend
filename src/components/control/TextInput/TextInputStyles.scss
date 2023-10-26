@@ -249,10 +249,10 @@
   }
 
   &_label {
-    color: $dark-secondary;
+    color: $dark-secondary !important;
   }
   &_error {
-    color: $dark-sys-danger;
+    color: $dark-sys-danger !important;
   }
 }
 
@@ -329,10 +329,10 @@
   }
 
   &_label {
-    color: $light-secondary;
+    color: $light-secondary !important;
   }
 
   &_error {
-    color: $light-sys-danger;
+    color: $light-sys-danger !important;
   }
 }

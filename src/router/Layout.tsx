@@ -1,8 +1,9 @@
 import Header from "../components/common/Header/Header.tsx";
 import { Outlet } from "react-router-dom";
 import { useAppSelector } from "../store";
-import { Box, LinearProgress } from "@mui/material";
+import { Box } from "@mui/material";
 import ErrorModal from "../components/common/ErrorModal/ErrorModal.tsx";
+import LinearDeterminate from "../components/control/LinearDeterminate/LinearDeterminate.tsx";
 
 const Layout = () => {
   const { isLoading: isLoadingAuth } = useAppSelector((state) => state.auth);
@@ -23,7 +24,7 @@ const Layout = () => {
     <>
       <Header />
       <Box className={`b-loader ${isLoading ? "" : "-hidden"}`}>
-        <LinearProgress sx={{ background: "none" }} />
+        <LinearDeterminate isActive={isLoading} />
       </Box>
       <div className="outlet">
         <Outlet />

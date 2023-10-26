@@ -9,7 +9,7 @@ import {
 } from "./issuesThunks.ts";
 import { IIssue } from "../../models/IIssue/IIssue.ts";
 import { ICompressedUser } from "../../models/IUser/IUser.ts";
-import { IError } from "../../models/reducers/global.types.ts";
+import { IErrors } from "../../models/reducers/global.types.ts";
 
 interface IState {
   issues: IIssue[];
@@ -21,7 +21,7 @@ interface IState {
     };
   };
   projectId: number | null;
-  errors: IError | null;
+  errors: IErrors | null;
   isLoading: boolean;
   isFirstLoading: boolean;
 }
@@ -45,7 +45,7 @@ const issuesSlice = createSlice({
   name: "issues",
   initialState,
   reducers: {
-    setIssuesError: (state, action: PayloadAction<IError | null>) => {
+    setIssuesError: (state, action: PayloadAction<IErrors | null>) => {
       state.errors = action.payload;
     },
   },
@@ -63,7 +63,7 @@ const issuesSlice = createSlice({
       state.isFirstLoading = false;
     });
     builder.addCase(fetchIssuesByProjectId.rejected, (state, action) => {
-      state.errors = action.payload as IError;
+      state.errors = action.payload as IErrors;
       state.isLoading = false;
       state.isFirstLoading = false;
     });
@@ -81,7 +81,7 @@ const issuesSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(updateIssue.rejected, (state, action) => {
-      state.errors = action.payload as IError;
+      state.errors = action.payload as IErrors;
       state.isLoading = false;
     });
     builder.addCase(logIssueTime.pending, (state) => {
@@ -94,7 +94,7 @@ const issuesSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(logIssueTime.rejected, (state, action) => {
-      state.errors = action.payload as IError;
+      state.errors = action.payload as IErrors;
       state.isLoading = false;
     });
     builder.addCase(deleteIssue.pending, (state) => {
@@ -107,7 +107,7 @@ const issuesSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(deleteIssue.rejected, (state, action) => {
-      state.errors = action.payload as IError;
+      state.errors = action.payload as IErrors;
       state.isLoading = false;
     });
     builder.addCase(createIssue.pending, (state) => {
@@ -120,7 +120,7 @@ const issuesSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(createIssue.rejected, (state, action) => {
-      state.errors = action.payload as IError;
+      state.errors = action.payload as IErrors;
       state.isLoading = false;
     });
     builder.addCase(

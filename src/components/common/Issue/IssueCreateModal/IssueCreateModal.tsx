@@ -24,11 +24,17 @@ interface IProps {
   onClose: () => void;
 }
 
+interface IssueErrors {
+  title: string | undefined;
+}
+
 const IssueCreateModal: FC<IProps> = ({ isOpen, onClose }) => {
   const { projectLink } = useParams();
   const { project } = useGetOneProject(projectLink);
   const dispatch = useAppDispatch();
   const { availableUsers } = useAppSelector((state) => state.projects);
+  const { errors: issueErrors } = useAppSelector((state) => state.issues);
+  const [errors, setErrors] = useState<IssueErrors>({ title: undefined });
   const [newIssue, setNewIssue] = useState<IIssueCreate>({
     title: "",
     assignee: 0,
@@ -63,7 +69,20 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose }) => {
     }
   }, [project]);
 
+  useEffect(() => {
+    if (issueErrors) {
+      setErrors({
+        title:
+          issueErrors.find((err) => err.field === "title")?.message ||
+          undefined,
+      });
+    }
+  }, [issueErrors]);
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setErrors({
+      title: undefined,
+    });
     setNewIssue((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -101,8 +120,14 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose }) => {
   };
 
   const handleSubmit = () => {
-    dispatch(createIssue({ data: newIssue, callbacks: {} }));
-    onClose();
+    if (!newIssue.title.trim()) {
+      setErrors({
+        title: "Field title is required",
+      });
+    } else {
+      dispatch(createIssue({ data: newIssue, callbacks: {} }));
+      onClose();
+    }
   };
 
   const allUsers = availableUsers.map(
@@ -170,6 +195,7 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose }) => {
                 label="Title"
                 value={newIssue.title}
                 onChange={handleInputChange}
+                error={errors.title}
               />
             </div>
             <div className={`${themeClass}__field`}>

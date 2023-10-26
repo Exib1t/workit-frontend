@@ -10,7 +10,6 @@ import {
   updateProject,
 } from "../../../../store/projects/projectsThunks.ts";
 import { ISelectItem } from "../../../../models/Select/Select.types.ts";
-import { setProjectsError } from "../../../../store/projects/projectsSlice.ts";
 import DialogPopUp from "../../../control/DialogPopUp/DialogPopUp.tsx";
 import TextInput from "../../../control/TextInput/TextInput.tsx";
 import MultiSelect from "../../../control/MultiSelect/MultiSelect.tsx";
@@ -22,15 +21,26 @@ interface IProps {
   editableProjectId: number | null;
 }
 
+interface ProjectErrors {
+  title: string | undefined;
+  link: string | undefined;
+}
+
 const ProjectCreateModal: FC<IProps> = ({
   isOpen,
   handleClose,
   editableProjectId,
 }) => {
   const dispatch = useAppDispatch();
-  const { availableUsers, errors, data } = useAppSelector(
-    (state) => state.projects,
-  );
+  const {
+    availableUsers,
+    errors: projectErrors,
+    data,
+  } = useAppSelector((state) => state.projects);
+  const [errors, setErrors] = useState<ProjectErrors>({
+    title: undefined,
+    link: undefined,
+  });
   const [isEditable, setIsEditable] = useState(false);
   const [newProject, setNewProject] = useState<IProjectCreate>({
     title: "",
@@ -56,11 +66,28 @@ const ProjectCreateModal: FC<IProps> = ({
           userIds: editableProject.userIds,
         });
         setIsEditable(true);
+        setErrors({
+          title: undefined,
+          link: undefined,
+        });
       }
     } else {
       setIsEditable(false);
     }
   }, [editableProjectId, data]);
+
+  useEffect(() => {
+    if (projectErrors) {
+      setErrors({
+        title:
+          projectErrors.find((err) => err.field === "title")?.message ||
+          undefined,
+        link:
+          projectErrors.find((err) => err.field === "link")?.message ||
+          undefined,
+      });
+    }
+  }, [projectErrors]);
 
   const onClose = () => {
     resetForm();
@@ -69,19 +96,16 @@ const ProjectCreateModal: FC<IProps> = ({
 
   const validateProject = () => {
     if (!newProject.title.trim()) {
-      dispatch(
-        setProjectsError({
-          statusCode: 500,
-          message: "Field title is required",
-        }),
-      );
-    } else if (!newProject.link.trim()) {
-      dispatch(
-        setProjectsError({
-          statusCode: 500,
-          message: "Field link is required",
-        }),
-      );
+      setErrors((prevState) => ({
+        ...prevState,
+        title: "Field title is required",
+      }));
+    }
+    if (!newProject.link.trim()) {
+      setErrors((prevState) => ({
+        ...prevState,
+        link: "Field link is required",
+      }));
     }
     return !!newProject.title.trim() && !!newProject.link.trim();
   };
@@ -121,8 +145,11 @@ const ProjectCreateModal: FC<IProps> = ({
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setErrors((prevState) => ({
+      ...prevState,
+      [e.target.name]: undefined,
+    }));
     if (e.target.name === "link") {
-      dispatch(setProjectsError(null));
       setNewProject((prevState) => ({
         ...prevState,
         link: e.target.value.toUpperCase(),
@@ -175,6 +202,7 @@ const ProjectCreateModal: FC<IProps> = ({
                 name="title"
                 label="Title"
                 value={newProject.title}
+                error={errors.title}
                 onChange={handleInputChange}
               />
             </div>
@@ -186,7 +214,7 @@ const ProjectCreateModal: FC<IProps> = ({
                 label="Link"
                 value={newProject.link}
                 onChange={handleInputChange}
-                error={errors?.message}
+                error={errors.link}
               />
             </div>
             <div className={`${themeClass}__field`}>

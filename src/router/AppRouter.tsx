@@ -5,7 +5,7 @@ import SignUpPage from "../components/pages/SignUpPage/SignUpPage.tsx";
 import { AppRoutes } from "./Routes.ts";
 import useAuthenticated from "../hooks/useAuthenticated.tsx";
 import useThemeClass from "../hooks/useThemeClass.ts";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../store";
 import { refreshThunk } from "../store/auth/authThunks.ts";
 import { setToken } from "../store/auth/authSlice.ts";
@@ -23,6 +23,7 @@ const AppRouter = () => {
   const { isAuthenticated } = useAuthenticated();
   const dispatch = useAppDispatch();
   const { token, id } = useAppSelector((state) => state.auth);
+  const [isLoaded, setIsLoaded] = useState(false);
   const themeClass = useThemeClass("b-container");
 
   useEffect(() => {
@@ -30,6 +31,8 @@ const AppRouter = () => {
     const theme = localStorage.getItem("theme");
     if (token) {
       dispatch(setToken(token));
+    } else {
+      setIsLoaded(true);
     }
     if (theme === "light" || theme === "dark") {
       dispatch(setTheme(theme));
@@ -38,7 +41,11 @@ const AppRouter = () => {
 
   useEffect(() => {
     if (token) {
-      dispatch(refreshThunk({ token }));
+      dispatch(refreshThunk({ token }))
+        .unwrap()
+        .finally(() => {
+          setIsLoaded(true);
+        });
     }
   }, [dispatch, token]);
 
@@ -83,7 +90,7 @@ const AppRouter = () => {
     <div className={themeClass}>
       <Routes>
         <Route path="/" element={<Layout />}>
-          {isAuthenticated ? privateRoutes() : authRoutes()}
+          {isLoaded && <>{isAuthenticated ? privateRoutes() : authRoutes()}</>}
           {publicRoutes()}
         </Route>
       </Routes>

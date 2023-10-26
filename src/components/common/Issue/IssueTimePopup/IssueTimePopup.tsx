@@ -47,6 +47,7 @@ const IssueTimePopup: FC<IProps> = ({
         callbacks: { onSuccess },
       }),
     );
+    setLogTime("0");
     onClose();
   };
 
@@ -56,6 +57,7 @@ const IssueTimePopup: FC<IProps> = ({
       onClose={onClose}
       title={"Log Time"}
       dividedHeader
+      paperMaxWidth={"500px"}
       renderModalContent={() => (
         <>
           <TextInput
