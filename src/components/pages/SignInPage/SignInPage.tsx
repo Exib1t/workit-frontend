@@ -1,24 +1,25 @@
 import useThemeClass from "../../../hooks/useThemeClass.ts";
-import "./SignInPageStyles.scss";
 import LinkCustom from "../../control/LinkCustom/LinkCustom.tsx";
 import { SignInFormDataInterface } from "../../../models/forms/SignInForm.types.ts";
-import { useAppDispatch } from "../../../store";
-import { loginThunk } from "../../../store/auth/authThunks.ts";
+import { useAppDispatch, useAppSelector } from "../../../store";
 import CustomButton from "../../control/ButtonComponents/CustomButton/CustomButton.tsx";
 import Page from "../../common/Page/Page.tsx";
 import { useNavigate } from "react-router-dom";
-import { AppRoutes } from "../../../router/Routes.ts";
 import { ChangeEvent, useState } from "react";
 import TextInput from "../../control/TextInput/TextInput.tsx";
 import Checkbox from "../../control/Checkbox/Checkbox.tsx";
+import { loginThunk } from "../../../store/auth/authThunks.ts";
+import { AppRoutes } from "../../../router/Routes.ts";
+
+import "./SignInPageStyles.scss";
 
 const SignInPage = () => {
   const themeClass = useThemeClass("b-signIn");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [errors, setErrors] = useState<{
-    email: undefined | string;
-    password: undefined | string;
+    email?: string | undefined;
+    password?: string | undefined;
   }>({
     email: undefined,
     password: undefined,
@@ -28,6 +29,8 @@ const SignInPage = () => {
     password: "",
     isRemember: false,
   });
+
+  const authErrors = useAppSelector((state) => state.auth.errors);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
@@ -39,25 +42,58 @@ const SignInPage = () => {
         ...prevState,
         email: "Field email is required",
       }));
+    } else {
+      setErrors((prevState) => ({ ...prevState, email: undefined }));
     }
     if (!data.password.trim() || data.password.length < 6) {
       setErrors((prevState) => ({
         ...prevState,
         password: "Field password is required",
       }));
+    } else {
+      setErrors((prevState) => ({ ...prevState, password: undefined }));
+    }
+
+    if (
+      !data.email.trim() ||
+      data.email.length < 5 ||
+      !data.password.trim() ||
+      data.password.length < 5
+    ) {
+      return false;
+    } else {
+      return true;
     }
   };
 
   const onSubmit = async () => {
-    validate();
-    if (errors.email || errors.password) return null;
-    await dispatch(loginThunk(data));
-    setData({
-      email: "",
-      password: "",
-      isRemember: false,
-    });
-    navigate(AppRoutes.projects);
+    const isValid = validate();
+
+    if (isValid) {
+      dispatch(loginThunk(data))
+        .unwrap()
+        .then(() => {
+          console.log("then");
+          setData({
+            email: "",
+            password: "",
+            isRemember: false,
+          });
+          navigate(AppRoutes.projects);
+        })
+        .catch((err) => {
+          setErrors({
+            email:
+              err.message[0] !== "Password is incorrect"
+                ? err.message[0]
+                : null,
+            password:
+              err.message[0] === "Password is incorrect"
+                ? err.message[0]
+                : null,
+          });
+        });
+    }
   };
 
   return (
