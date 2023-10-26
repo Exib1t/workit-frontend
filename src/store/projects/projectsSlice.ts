@@ -3,19 +3,19 @@ import { IProject } from "../../models/IProject/IProject.ts";
 import {
   createProject,
   deleteProject,
-  fetchOneProject,
   fetchProjects,
   fetchProjectUsers,
   updateProject,
 } from "./projectsThunks.ts";
 import { ICompressedUser } from "../../models/IUser/IUser.ts";
-import { AuthError } from "../../models/reducers/auth.types.ts";
+import { IError } from "../../models/reducers/global.types.ts";
 
 interface IState {
   data: IProject[];
   availableUsers: ICompressedUser[];
-  errors: AuthError | null;
+  errors: IError | null;
   isLoading: boolean;
+  isFirstLoading: boolean;
 }
 
 const initialState: IState = {
@@ -23,67 +23,67 @@ const initialState: IState = {
   availableUsers: [],
   errors: null,
   isLoading: false,
+  isFirstLoading: true,
 };
 
 const projectsSlice = createSlice({
   name: "projects",
   initialState,
   reducers: {
-    setProjectsError: (state, action: PayloadAction<AuthError | null>) => {
+    setProjectsError: (state, action: PayloadAction<IError | null>) => {
       state.errors = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProjects.pending, (state) => {
       state.isLoading = true;
+      state.errors = null;
     });
     builder.addCase(fetchProjects.fulfilled, (state, action) => {
       state.data = action.payload;
       state.isLoading = false;
+      state.isFirstLoading = false;
     });
     builder.addCase(fetchProjects.rejected, (state, action) => {
       state.isLoading = false;
-      state.errors = action.payload as AuthError;
+      state.isFirstLoading = false;
+      state.errors = action.payload as IError;
     });
     builder.addCase(createProject.pending, (state) => {
       state.isLoading = true;
+      state.errors = null;
     });
-    builder.addCase(createProject.fulfilled, (state) => {
+    builder.addCase(createProject.fulfilled, (state, action) => {
+      state.data = action.payload;
       state.isLoading = false;
     });
     builder.addCase(createProject.rejected, (state, action) => {
       state.isLoading = false;
-      state.errors = action.payload as AuthError;
+      state.errors = action.payload as IError;
     });
     builder.addCase(deleteProject.pending, (state) => {
       state.isLoading = true;
+      state.errors = null;
     });
-    builder.addCase(deleteProject.fulfilled, (state) => {
+    builder.addCase(deleteProject.fulfilled, (state, action) => {
+      state.data = action.payload;
       state.isLoading = false;
     });
     builder.addCase(deleteProject.rejected, (state, action) => {
       state.isLoading = false;
-      state.errors = action.payload as AuthError;
+      state.errors = action.payload as IError;
     });
     builder.addCase(updateProject.pending, (state) => {
       state.isLoading = true;
+      state.errors = null;
     });
-    builder.addCase(updateProject.fulfilled, (state) => {
+    builder.addCase(updateProject.fulfilled, (state, action) => {
+      state.data = action.payload;
       state.isLoading = false;
     });
     builder.addCase(updateProject.rejected, (state, action) => {
       state.isLoading = false;
-      state.errors = action.payload as AuthError;
-    });
-    builder.addCase(fetchOneProject.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(fetchOneProject.fulfilled, (state) => {
-      state.isLoading = false;
-    });
-    builder.addCase(fetchOneProject.rejected, (state, action) => {
-      state.isLoading = false;
-      state.errors = action.payload as AuthError;
+      state.errors = action.payload as IError;
     });
     builder.addCase(fetchProjectUsers.pending, (state) => {
       state.isLoading = true;
@@ -94,7 +94,7 @@ const projectsSlice = createSlice({
     });
     builder.addCase(fetchProjectUsers.rejected, (state, action) => {
       state.isLoading = false;
-      state.errors = action.payload as AuthError;
+      state.errors = action.payload as IError;
     });
   },
 });

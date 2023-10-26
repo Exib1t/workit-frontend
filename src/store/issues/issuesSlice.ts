@@ -1,11 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AuthError } from "../../models/reducers/auth.types.ts";
 import {
+  createIssue,
+  deleteIssue,
   fetchIssueAvailableAssignments,
   fetchIssuesByProjectId,
+  logIssueTime,
+  updateIssue,
 } from "./issuesThunks.ts";
 import { IIssue } from "../../models/IIssue/IIssue.ts";
 import { ICompressedUser } from "../../models/IUser/IUser.ts";
+import { IError } from "../../models/reducers/global.types.ts";
 
 interface IState {
   issues: IIssue[];
@@ -17,8 +21,9 @@ interface IState {
     };
   };
   projectId: number | null;
-  errors: AuthError | null;
+  errors: IError | null;
   isLoading: boolean;
+  isFirstLoading: boolean;
 }
 
 const initialState: IState = {
@@ -33,13 +38,14 @@ const initialState: IState = {
   },
   errors: null,
   isLoading: false,
+  isFirstLoading: true,
 };
 
 const issuesSlice = createSlice({
   name: "issues",
   initialState,
   reducers: {
-    setIssuesError: (state, action: PayloadAction<AuthError | null>) => {
+    setIssuesError: (state, action: PayloadAction<IError | null>) => {
       state.errors = action.payload;
     },
   },
@@ -54,14 +60,68 @@ const issuesSlice = createSlice({
       state.projectId = action.payload.projectId;
       state.errors = null;
       state.isLoading = false;
+      state.isFirstLoading = false;
     });
     builder.addCase(fetchIssuesByProjectId.rejected, (state, action) => {
-      state.errors = action.payload as AuthError;
+      state.errors = action.payload as IError;
       state.isLoading = false;
+      state.isFirstLoading = false;
     });
     builder.addCase(fetchIssueAvailableAssignments.pending, (state) => {
       state.editorsData.assignments.loading = true;
       state.editorsData.assignments.error = null;
+    });
+    builder.addCase(updateIssue.pending, (state) => {
+      state.isLoading = true;
+      state.errors = null;
+    });
+    builder.addCase(updateIssue.fulfilled, (state, action) => {
+      state.issues = action.payload;
+      state.errors = null;
+      state.isLoading = false;
+    });
+    builder.addCase(updateIssue.rejected, (state, action) => {
+      state.errors = action.payload as IError;
+      state.isLoading = false;
+    });
+    builder.addCase(logIssueTime.pending, (state) => {
+      state.isLoading = true;
+      state.errors = null;
+    });
+    builder.addCase(logIssueTime.fulfilled, (state, action) => {
+      state.issues = action.payload;
+      state.errors = null;
+      state.isLoading = false;
+    });
+    builder.addCase(logIssueTime.rejected, (state, action) => {
+      state.errors = action.payload as IError;
+      state.isLoading = false;
+    });
+    builder.addCase(deleteIssue.pending, (state) => {
+      state.isLoading = true;
+      state.errors = null;
+    });
+    builder.addCase(deleteIssue.fulfilled, (state, action) => {
+      state.issues = action.payload;
+      state.errors = null;
+      state.isLoading = false;
+    });
+    builder.addCase(deleteIssue.rejected, (state, action) => {
+      state.errors = action.payload as IError;
+      state.isLoading = false;
+    });
+    builder.addCase(createIssue.pending, (state) => {
+      state.isLoading = true;
+      state.errors = null;
+    });
+    builder.addCase(createIssue.fulfilled, (state, action) => {
+      state.issues = action.payload;
+      state.errors = null;
+      state.isLoading = false;
+    });
+    builder.addCase(createIssue.rejected, (state, action) => {
+      state.errors = action.payload as IError;
+      state.isLoading = false;
     });
     builder.addCase(
       fetchIssueAvailableAssignments.fulfilled,

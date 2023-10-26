@@ -6,7 +6,6 @@ import { IColors } from "../../../../models/IColors/IColors.ts";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import {
   createProject,
-  fetchProjects,
   fetchProjectUsers,
   updateProject,
 } from "../../../../store/projects/projectsThunks.ts";
@@ -97,7 +96,6 @@ const ProjectCreateModal: FC<IProps> = ({
   };
 
   const onCreateSuccess = () => {
-    dispatch(fetchProjects());
     resetForm();
     handleClose();
   };

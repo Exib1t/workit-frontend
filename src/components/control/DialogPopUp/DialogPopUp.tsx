@@ -99,7 +99,6 @@ const DialogPopUp = ({
       }}
       BackdropProps={{
         invisible: true,
-        hideBackdrop: true,
       }}
       {...(props || {})}
     >

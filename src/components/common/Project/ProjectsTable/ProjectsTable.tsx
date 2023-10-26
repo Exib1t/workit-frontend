@@ -13,19 +13,16 @@ import { AppRoutes } from "../../../../router/Routes.ts";
 import DatagridBasic from "../../../control/DatagridBasic/DatagridBasic.tsx";
 
 interface IProps {
-  loadProjects: () => void;
   handleProjectEdit: (projectId: number) => void;
 }
 
-const ProjectsTable: FC<IProps> = ({ loadProjects, handleProjectEdit }) => {
+const ProjectsTable: FC<IProps> = ({ handleProjectEdit }) => {
   const { data } = useAppSelector((state) => state.projects);
   const dispatch = useAppDispatch();
   const themeClass = useThemeClass("b-projectsTable");
 
   const handleDelete = (projectId: number) => {
-    dispatch(
-      deleteProject({ projectId, callbacks: { onSuccess: loadProjects } }),
-    );
+    dispatch(deleteProject({ projectId, callbacks: {} }));
   };
 
   const basicFormatter = (params: GridRenderCellParams<IProject>) => {

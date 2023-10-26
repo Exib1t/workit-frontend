@@ -21,10 +21,9 @@ import { AppRoutes } from "../../../../router/Routes.ts";
 interface IProps {
   issues: IIssue[];
   isLoading: boolean;
-  onIssueUpdate: () => void;
 }
 
-const IssuesList: FC<IProps> = ({ issues, isLoading, onIssueUpdate }) => {
+const IssuesList: FC<IProps> = ({ issues, isLoading }) => {
   const navigate = useNavigate();
   const { projectLink } = useParams();
   const [isMenuOpen, setIsMenuOpen] = useState<EventTarget | null>(null);
@@ -166,7 +165,6 @@ const IssuesList: FC<IProps> = ({ issues, isLoading, onIssueUpdate }) => {
           onClose={handleMenuClose}
           anchorEl={isMenuOpen}
           selectedIssue={selectedIssue}
-          onIssueUpdate={onIssueUpdate}
           type={"issues-list"}
         />
       )}

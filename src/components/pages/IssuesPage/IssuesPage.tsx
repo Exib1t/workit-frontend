@@ -15,7 +15,7 @@ const IssuesPage = () => {
   const dispatch = useAppDispatch();
   const { projectLink } = useParams();
   const { project } = useGetOneProject(projectLink);
-  const { issues, isLoading } = useAppSelector((state) => state.issues);
+  const { issues, isFirstLoading } = useAppSelector((state) => state.issues);
   const [isCreateNew, setIsCreateNew] = useState(false);
   const themeClass = useThemeClass("b-projectIssues");
 
@@ -47,18 +47,10 @@ const IssuesPage = () => {
             project={project}
             handleCreateNewOpen={handleCreateNewOpen}
           />
-          <IssuesList
-            issues={issues}
-            isLoading={isLoading}
-            onIssueUpdate={fetchIssues}
-          />
+          <IssuesList issues={issues} isLoading={isFirstLoading} />
         </div>
       </div>
-      <IssueCreateModal
-        isOpen={isCreateNew}
-        onClose={handleCreateNewClose}
-        onSuccess={fetchIssues}
-      />
+      <IssueCreateModal isOpen={isCreateNew} onClose={handleCreateNewClose} />
     </Page>
   );
 };

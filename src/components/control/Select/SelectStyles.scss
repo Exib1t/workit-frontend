@@ -32,8 +32,12 @@
 
   &__paper {
     border-radius: $border-radius-2 !important;
-    margin-top: 10px !important;
     background: transparent !important;
+  }
+
+  &__list {
+    border-top-left-radius: $ref-spacing-0;
+    border-top-right-radius: $ref-spacing-0;
   }
 
   &__item {

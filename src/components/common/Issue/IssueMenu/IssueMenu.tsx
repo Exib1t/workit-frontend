@@ -17,7 +17,6 @@ interface IProps {
   onClose: () => void;
   anchorEl: EventTarget;
   selectedIssue: IIssue;
-  onIssueUpdate: () => void;
   type: "issue-page" | "issues-list";
 }
 
@@ -26,7 +25,6 @@ const IssueMenu: FC<IProps> = ({
   onClose,
   isOpen,
   selectedIssue,
-  onIssueUpdate,
   type,
 }) => {
   const dispatch = useAppDispatch();
@@ -35,7 +33,6 @@ const IssueMenu: FC<IProps> = ({
   const themeClass = useThemeClass("b-issueMenu");
 
   const onSuccess = () => {
-    onIssueUpdate();
     onClose();
   };
 

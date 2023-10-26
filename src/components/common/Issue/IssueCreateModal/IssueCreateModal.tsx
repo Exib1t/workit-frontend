@@ -22,10 +22,9 @@ import DialogPopUp from "../../../control/DialogPopUp/DialogPopUp.tsx";
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
-  onSuccess: () => void;
 }
 
-const IssueCreateModal: FC<IProps> = ({ isOpen, onClose, onSuccess }) => {
+const IssueCreateModal: FC<IProps> = ({ isOpen, onClose }) => {
   const { projectLink } = useParams();
   const { project } = useGetOneProject(projectLink);
   const dispatch = useAppDispatch();
@@ -102,7 +101,7 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose, onSuccess }) => {
   };
 
   const handleSubmit = () => {
-    dispatch(createIssue({ data: newIssue, callbacks: { onSuccess } }));
+    dispatch(createIssue({ data: newIssue, callbacks: {} }));
     onClose();
   };
 

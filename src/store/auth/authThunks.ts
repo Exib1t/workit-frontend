@@ -19,7 +19,7 @@ export const registerThunk = createAsyncThunk<IToken, IUserCreate>(
       localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (err: any) {
-      return thunkAPI.rejectWithValue(err.response.data);
+      return thunkAPI.rejectWithValue(err.response.data.errors);
     }
   },
 );
@@ -35,7 +35,7 @@ export const loginThunk = createAsyncThunk<IToken, IUserLogin>(
       localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (err: any) {
-      return thunkAPI.rejectWithValue(err.response.data);
+      return thunkAPI.rejectWithValue(err.response.data.errors);
     }
   },
 );
@@ -50,7 +50,7 @@ export const refreshThunk = createAsyncThunk<IRefreshUser, IToken>(
       );
       return response.data;
     } catch (err: any) {
-      return thunkAPI.rejectWithValue(err.response.data);
+      return thunkAPI.rejectWithValue(err.response.data.errors);
     }
   },
 );

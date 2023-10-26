@@ -123,6 +123,7 @@ const MultiSelect: FC<IProps> = ({
         }}
       >
         <ListCustom
+          className={`${themeClass}__list`}
           style={{ minWidth: isMenuOpen?.getBoundingClientRect().width }}
         >
           {renderItems()}

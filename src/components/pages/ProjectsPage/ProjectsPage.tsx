@@ -5,8 +5,9 @@ import { useAppDispatch } from "../../../store";
 import { fetchProjects } from "../../../store/projects/projectsThunks.ts";
 import ProjectsTable from "../../common/Project/ProjectsTable/ProjectsTable.tsx";
 import ProjectCreateModal from "../../common/Project/ProjectCreateModal/ProjectCreateModal.tsx";
-import "./ProjectsPageStyles.scss";
 import Page from "../../common/Page/Page.tsx";
+
+import "./ProjectsPageStyles.scss";
 
 const ProjectsPage = () => {
   const dispatch = useAppDispatch();
@@ -43,10 +44,7 @@ const ProjectsPage = () => {
       <div className={themeClass}>
         <div className={`${themeClass}__container`}>
           <ProjectsHeader handleNewProjectOpen={handleCreateModalOpen} />
-          <ProjectsTable
-            loadProjects={handleFetchProjects}
-            handleProjectEdit={handleProjectEdit}
-          />
+          <ProjectsTable handleProjectEdit={handleProjectEdit} />
         </div>
         <ProjectCreateModal
           isOpen={isCreateModalOpen}

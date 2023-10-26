@@ -15,19 +15,7 @@ export const fetchProjects = createAsyncThunk<IProject[], void>(
       const res = await api.get("projects");
       return res.data;
     } catch (err: any) {
-      return thunkAPI.rejectWithValue(err.response.data);
-    }
-  },
-);
-
-export const fetchOneProject = createAsyncThunk<IProject, number>(
-  "projects/fetchOne",
-  async (projectId, thunkAPI) => {
-    try {
-      const res = await api.get(`projects/${projectId}`);
-      return res.data;
-    } catch (err: any) {
-      return thunkAPI.rejectWithValue(err.response.data);
+      return thunkAPI.rejectWithValue(err.response.data.errors);
     }
   },
 );
@@ -44,13 +32,13 @@ export const createProject = createAsyncThunk<
       return res.data;
     } catch (err: any) {
       onError && onError();
-      return thunkAPI.rejectWithValue(err.response.data);
+      return thunkAPI.rejectWithValue(err.response.data.errors);
     }
   },
 );
 
 export const updateProject = createAsyncThunk<
-  IProject,
+  IProject[],
   { data: IProjectUpdate; callbacks: AdditionalCallbacks }
 >(
   "projects/update",
@@ -61,13 +49,13 @@ export const updateProject = createAsyncThunk<
       return res.data;
     } catch (err: any) {
       onError && onError();
-      return thunkAPI.rejectWithValue(err.response.data);
+      return thunkAPI.rejectWithValue(err.response.data.errors);
     }
   },
 );
 
 export const deleteProject = createAsyncThunk<
-  IProject,
+  IProject[],
   { projectId: number; callbacks: AdditionalCallbacks }
 >(
   "projects/delete",
@@ -78,7 +66,7 @@ export const deleteProject = createAsyncThunk<
       return res.data;
     } catch (err: any) {
       onError && onError();
-      return thunkAPI.rejectWithValue(err.response.data);
+      return thunkAPI.rejectWithValue(err.response.data.errors);
     }
   },
 );

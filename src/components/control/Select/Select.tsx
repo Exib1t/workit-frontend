@@ -92,6 +92,7 @@ function Select<T>({
         }}
       >
         <ListCustom
+          className={`${themeClass}__list`}
           style={{ minWidth: isMenuOpen?.getBoundingClientRect().width }}
         >
           {renderItems()}

@@ -24,12 +24,12 @@ export const fetchIssuesByProjectId = createAsyncThunk<
       issues: data.data,
     };
   } catch (err: any) {
-    thunkAPI.rejectWithValue(err.response.data);
+    thunkAPI.rejectWithValue(err.response.data.errors);
   }
 });
 
 export const createIssue = createAsyncThunk<
-  IIssue,
+  IIssue[],
   { data: IIssueCreate; callbacks: AdditionalCallbacks }
 >(
   "issues/createIssue",
@@ -40,13 +40,13 @@ export const createIssue = createAsyncThunk<
       return response.data;
     } catch (err: any) {
       onError && onError();
-      thunkAPI.rejectWithValue(err.response.data);
+      thunkAPI.rejectWithValue(err.response.data.errors);
     }
   },
 );
 
 export const updateIssue = createAsyncThunk<
-  IIssue,
+  IIssue[],
   { updatedIssue: IIssueUpdate; callbacks: AdditionalCallbacks }
 >(
   "issues/updateIssue",
@@ -60,13 +60,13 @@ export const updateIssue = createAsyncThunk<
       return response.data;
     } catch (err: any) {
       onError && onError();
-      thunkAPI.rejectWithValue(err.response.data);
+      thunkAPI.rejectWithValue(err.response.data.errors);
     }
   },
 );
 
 export const deleteIssue = createAsyncThunk<
-  IIssue,
+  IIssue[],
   { issueId: number; callbacks: AdditionalCallbacks }
 >(
   "issues/deleteIssue",
@@ -77,13 +77,13 @@ export const deleteIssue = createAsyncThunk<
       return response.data;
     } catch (err: any) {
       onError && onError();
-      thunkAPI.rejectWithValue(err.response.data);
+      thunkAPI.rejectWithValue(err.response.data.errors);
     }
   },
 );
 
 export const logIssueTime = createAsyncThunk<
-  IIssue,
+  IIssue[],
   {
     data: { id: number; time: IssueUpdateTime };
     callbacks: AdditionalCallbacks;
@@ -99,7 +99,7 @@ export const logIssueTime = createAsyncThunk<
       return response.data;
     } catch (err: any) {
       onError && onError();
-      thunkAPI.rejectWithValue(err.response.data);
+      thunkAPI.rejectWithValue(err.response.data.errors);
     }
   },
 );
@@ -118,7 +118,7 @@ export const fetchIssueAvailableAssignments = createAsyncThunk<
       return response.data;
     } catch (err: any) {
       onError && onError();
-      thunkAPI.rejectWithValue(err.response.data);
+      thunkAPI.rejectWithValue(err.response.data.errors);
     }
   },
 );
