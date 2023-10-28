@@ -6,10 +6,35 @@
   flex-direction: column;
   gap: $ref-spacing-16;
 
+  &_button {
+    width: 100%;
+  }
+
   &_list {
     display: flex;
     flex-direction: column;
     gap: $ref-spacing-8;
+    max-height: 368px;
+    overflow-y: auto;
+
+    &.-scroll {
+      padding-right: $ref-spacing-4;
+    }
+
+    &_item-enter {
+      opacity: 0;
+    }
+    &_item-enter-active {
+      opacity: 1;
+      transition: opacity 500ms ease-in;
+    }
+    &_item-exit {
+      opacity: 1;
+    }
+    &_item-exit-active {
+      opacity: 0;
+      transition: opacity 500ms ease-in;
+    }
   }
 
   &_empty {

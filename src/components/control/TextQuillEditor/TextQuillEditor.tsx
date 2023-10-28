@@ -22,7 +22,7 @@ interface IProps extends ReactQuillProps {
   disabled?: boolean;
   handleSave?: () => void;
   handleCancel?: () => void;
-  customHeight?: number;
+  customHeight?: number | string;
   customButtonTitle?: string;
   isPrimary?: boolean;
   isCancel?: boolean;

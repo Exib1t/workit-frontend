@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 import {
   IIssue,
   IIssueUpdate,
@@ -44,6 +44,9 @@ import { useParams } from "react-router-dom";
 import IconButtonCustom from "../../../control/IconButtonCustom/IconButtonCustom.tsx";
 import Icon from "../../../control/Icon/Icon.tsx";
 import CommentsView from "../../CommentsView/CommentsView.tsx";
+import TextInput from "../../../control/TextInput/TextInput.tsx";
+import { setIssuesError } from "../../../../store/issues/issuesSlice.ts";
+import cn from "classnames";
 
 interface IExpandedGroups {
   attachments: boolean;
@@ -56,10 +59,12 @@ interface IProps {
 
 const IssueView: FC<IProps> = ({ initialFields, isLoading }) => {
   const { projectLink } = useParams();
+  const dispatch = useAppDispatch();
 
   const [expandedGroups, setExpandedGroups] = useState<IExpandedGroups>({
     attachments: true,
   });
+  const [titleUpdated, setTitleUpdated] = useState<string>("");
   const [statusSelected, setStatusSelected] =
     useState<ISelectItem<IssueStatusType> | null>(null);
   const [typeSelected, setTypeSelected] =
@@ -72,14 +77,17 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading }) => {
   }> | null>(null);
   const [isTimePopupOpen, setIsTimePopupOpen] = useState(false);
   const [description, setDescription] = useState("");
+  const [isTitleFocused, setIsTitleFocused] = useState(false);
 
   const { project } = useGetOneProject(projectLink);
 
   const { data: availableAssignments } = useAppSelector(
     (state) => state.issues.editorsData.assignments,
   );
+  const { errors } = useAppSelector((state) => state.issues);
 
-  const dispatch = useAppDispatch();
+  const issueViewRef = useRef<HTMLDivElement>(null);
+
   const themeClass = useThemeClass("b-issueView");
 
   useEffect(() => {
@@ -88,6 +96,7 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading }) => {
     setTypeSelected(getIssueTypeObject(initialFields.type));
     setPrioritySelected(getIssuePriorityObject(initialFields.priority));
     setAssigneeSelected(getIssueAssigneeObject(initialFields.assignee));
+    setTitleUpdated(initialFields.title);
   }, [initialFields]);
 
   useEffect(() => {
@@ -122,6 +131,25 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading }) => {
           updatedIssue,
           callbacks: {},
         }),
+      );
+    }
+  };
+
+  const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitleUpdated(e.target.value);
+  };
+
+  const handleUpdateTitle = () => {
+    setIsTitleFocused(false);
+    if (titleUpdated.trim()) {
+      if (titleUpdated !== initialFields.title) {
+        handleFieldChange("title", titleUpdated);
+      }
+    } else {
+      dispatch(
+        setIssuesError([
+          { field: "title", message: "Field title is required" },
+        ]),
       );
     }
   };
@@ -163,10 +191,40 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading }) => {
     setDescription(value);
   };
 
+  const handleScrollToBottom = () => {
+    setTimeout(() => {
+      if (issueViewRef && issueViewRef.current) {
+        issueViewRef.current.scrollTo({
+          top: issueViewRef.current.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+    }, 200);
+  };
+
   return (
     <>
-      <div className={themeClass}>
-        <div className={`${themeClass}__title`}>{initialFields.title}</div>
+      <div className={themeClass} ref={issueViewRef}>
+        <div className={`${themeClass}__title`}>
+          <TextInput
+            value={titleUpdated}
+            onChange={handleChangeTitle}
+            isFocus={isTitleFocused}
+            onFocus={() => setIsTitleFocused(true)}
+            onBlur={handleUpdateTitle}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleUpdateTitle();
+              }
+            }}
+            error={
+              errors
+                ? errors.find((err) => err.field === "title")?.message
+                : undefined
+            }
+            type={"on-bgd"}
+          />
+        </div>
         <div className={`${themeClass}__row`}>
           <div className={`${themeClass}__left`}>
             <div className={`${themeClass}__row`}>
@@ -275,6 +333,7 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading }) => {
                       isFooter
                       value={description}
                       onChange={handleChangeDescription}
+                      customHeight={"100%"}
                       disabled={
                         isLoading || initialFields.description === description
                       }
@@ -302,11 +361,13 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading }) => {
                       />
                     </IconButtonCustom>
                   </span>
-                  {expandedGroups.attachments && (
-                    <div className={`${themeClass}__groupContent`}>
-                      <div className={`${themeClass}__attachments`}></div>
-                    </div>
-                  )}
+                  <div
+                    className={cn(`${themeClass}__groupContent -attachment`, {
+                      ["-hidden"]: !expandedGroups.attachments,
+                    })}
+                  >
+                    <div className={`${themeClass}__attachments`}></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -318,6 +379,7 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading }) => {
                     <CommentsView
                       issueId={initialFields.id}
                       projectId={initialFields.projectId}
+                      handleScrollToBottom={handleScrollToBottom}
                     />
                   </div>
                 </div>
@@ -382,7 +444,7 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading }) => {
                     clickHandler={handleOpenTimePopup}
                   />
                 </span>
-                <div className={`${themeClass}__groupContent`}>
+                <div className={`${themeClass}__groupContent -time`}>
                   <IssueViewItem
                     label={"Estimated"}
                     content={

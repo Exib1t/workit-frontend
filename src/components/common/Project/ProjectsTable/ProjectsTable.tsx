@@ -1,10 +1,14 @@
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import useThemeClass from "../../../../hooks/useThemeClass.ts";
-import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import {
+  GridColDef,
+  GridRenderCellParams,
+  GridRowParams,
+} from "@mui/x-data-grid";
 import { IProject } from "../../../../models/IProject/IProject.ts";
 import "./ProjectsTablesStyle.scss";
 import Chip from "../../Chip/Chip.tsx";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import IconButtonCustom from "../../../control/IconButtonCustom/IconButtonCustom.tsx";
 import Icon from "../../../control/Icon/Icon.tsx";
 import { deleteProject } from "../../../../store/projects/projectsThunks.ts";
@@ -20,9 +24,14 @@ const ProjectsTable: FC<IProps> = ({ handleProjectEdit }) => {
   const { projects } = useAppSelector((state) => state.projects);
   const dispatch = useAppDispatch();
   const themeClass = useThemeClass("b-projectsTable");
+  const navigate = useNavigate();
 
   const handleDelete = (projectId: number) => {
     dispatch(deleteProject({ projectId, callbacks: {} }));
+  };
+
+  const handleRowClick = (p: GridRowParams<IProject>) => {
+    navigate(AppRoutes.project.replace(":projectLink", p.row.link));
   };
 
   const basicFormatter = (params: GridRenderCellParams<IProject>) => {
@@ -36,13 +45,7 @@ const ProjectsTable: FC<IProps> = ({ handleProjectEdit }) => {
 
     if (params.field === "link") {
       return (
-        <Link to={AppRoutes.project.replace(":projectLink", params.row.link)}>
-          <Chip
-            type="filled"
-            value={params.row.link}
-            color={params.row.color}
-          />
-        </Link>
+        <Chip type="filled" value={params.row.link} color={params.row.color} />
       );
     }
 
@@ -126,6 +129,7 @@ const ProjectsTable: FC<IProps> = ({ handleProjectEdit }) => {
         disableColumnSelector
         hideFooter
         disableRowSelectionOnClick
+        onRowClick={handleRowClick}
       />
     </div>
   );

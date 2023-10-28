@@ -53,6 +53,13 @@
     font-weight: $typography-title-md-font-weight;
     letter-spacing: $typography-title-md-letter-spacing;
     line-height: $typography-title-md-line-height;
+
+    &:not(:hover) {
+      .b-textInput-dark_field_on-bgd,
+      .b-textInput-light_field_on-bgd {
+        background: none;
+      }
+    }
   }
 
   &__group {
@@ -88,16 +95,33 @@
     flex-direction: column;
     gap: $ref-spacing-12;
     margin: 0;
+    overflow: hidden;
+    max-height: 100%;
+    transition: 0.3s ease-in-out;
+
+    &.-time {
+      overflow: visible;
+    }
+
+    &.-attachment {
+      height: 200px;
+      max-height: 200px;
+    }
 
     .b-select-dark,
     .b-select-light {
       background: none;
     }
+
+    &.-hidden {
+      transition: 0.3s ease-in-out;
+      max-height: 0;
+    }
   }
 
   &__attachments {
     width: 100%;
-    height: 200px;
+    height: 100%;
     border-radius: $border-radius-4;
   }
 }
