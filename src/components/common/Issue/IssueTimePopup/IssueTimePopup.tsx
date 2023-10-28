@@ -5,11 +5,12 @@ import "./IssueTimePopupStyles.scss";
 import { useAppDispatch } from "../../../../store";
 import { logIssueTime } from "../../../../store/issues/issuesThunks.ts";
 import DialogPopUp from "../../../control/DialogPopUp/DialogPopUp.tsx";
+import { useParams } from "react-router-dom";
+import useGetOneProject from "../../../../hooks/useGetOneProject.ts";
 
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
-  onSuccess: () => void;
   estimated: number;
   issueId: number;
 }
@@ -17,13 +18,15 @@ interface IProps {
 const IssueTimePopup: FC<IProps> = ({
   onClose,
   isOpen,
-  onSuccess,
   estimated,
   issueId,
 }) => {
+  const { projectLink } = useParams();
   const [logTime, setLogTime] = useState("0");
   const [estimatedTime, setEstimatedTime] = useState("0");
   const dispatch = useAppDispatch();
+
+  const { project } = useGetOneProject(projectLink);
 
   useEffect(() => {
     setEstimatedTime(String(estimated));
@@ -38,17 +41,20 @@ const IssueTimePopup: FC<IProps> = ({
   };
 
   const handleLog = () => {
-    dispatch(
-      logIssueTime({
-        data: {
-          id: issueId,
-          time: { logged: logTime, estimated: estimatedTime },
-        },
-        callbacks: { onSuccess },
-      }),
-    );
-    setLogTime("0");
-    onClose();
+    if (project) {
+      dispatch(
+        logIssueTime({
+          projectId: project.id,
+          data: {
+            id: issueId,
+            time: { logged: logTime, estimated: estimatedTime },
+          },
+          callbacks: {},
+        }),
+      );
+      setLogTime("0");
+      onClose();
+    }
   };
 
   return (

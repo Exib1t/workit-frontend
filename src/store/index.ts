@@ -5,6 +5,7 @@ import authSlice from "./auth/authSlice.ts";
 import projectsSlice from "./projects/projectsSlice.ts";
 import issuesSlice from "./issues/issuesSlice.ts";
 import userSlice from "./user/userSlice.ts";
+import commentsSlice from "./comments/commentsSlice.ts";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     projects: projectsSlice,
     issues: issuesSlice,
     user: userSlice,
+    comments: commentsSlice,
   },
 });
 

@@ -35,7 +35,7 @@ const ProjectCreateModal: FC<IProps> = ({
   const {
     availableUsers,
     errors: projectErrors,
-    data,
+    projects,
   } = useAppSelector((state) => state.projects);
   const [errors, setErrors] = useState<ProjectErrors>({
     title: undefined,
@@ -55,7 +55,7 @@ const ProjectCreateModal: FC<IProps> = ({
 
   useEffect(() => {
     if (editableProjectId) {
-      const editableProject = data.find(
+      const editableProject = projects.find(
         (project) => project.id === editableProjectId,
       );
       if (editableProject) {
@@ -74,7 +74,7 @@ const ProjectCreateModal: FC<IProps> = ({
     } else {
       setIsEditable(false);
     }
-  }, [editableProjectId, data]);
+  }, [editableProjectId, projects]);
 
   useEffect(() => {
     if (projectErrors) {

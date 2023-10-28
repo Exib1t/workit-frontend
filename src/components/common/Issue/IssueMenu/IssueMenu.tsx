@@ -11,6 +11,7 @@ import { useAppDispatch } from "../../../../store";
 import { deleteIssue } from "../../../../store/issues/issuesThunks.ts";
 import { AppRoutes } from "../../../../router/Routes.ts";
 import { useNavigate, useParams } from "react-router-dom";
+import useGetOneProject from "../../../../hooks/useGetOneProject.ts";
 
 interface IProps {
   isOpen: boolean;
@@ -32,18 +33,23 @@ const IssueMenu: FC<IProps> = ({
   const { projectLink } = useParams();
   const themeClass = useThemeClass("b-issueMenu");
 
+  const { project } = useGetOneProject(projectLink);
+
   const onSuccess = () => {
     onClose();
   };
 
   const handleDelete = () => {
-    dispatch(
-      deleteIssue({
-        issueId: selectedIssue.id,
-        callbacks: { onSuccess: onSuccess },
-      }),
-    );
-    navigate(AppRoutes.issues.replace(":projectLink", String(projectLink)));
+    if (project) {
+      dispatch(
+        deleteIssue({
+          projectId: project.id,
+          issueId: selectedIssue.id,
+          callbacks: { onSuccess: onSuccess },
+        }),
+      );
+      navigate(AppRoutes.issues.replace(":projectLink", String(projectLink)));
+    }
   };
 
   const handleOpen = () => {

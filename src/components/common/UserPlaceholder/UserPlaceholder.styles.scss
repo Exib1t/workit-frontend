@@ -21,11 +21,19 @@
 .b-userPlaceholder-dark {
   &__assigneeText {
     color: $dark-on-bgd-srf-3;
+
+    &.-primary {
+      color: $dark-primary;
+    }
   }
 }
 
 .b-userPlaceholder-light {
   &__assigneeText {
     color: $light-on-bgd-srf-3;
+
+    &.-primary {
+      color: $light-primary;
+    }
   }
 }

@@ -17,7 +17,7 @@ interface IProps {
 }
 
 const ProjectsTable: FC<IProps> = ({ handleProjectEdit }) => {
-  const { data } = useAppSelector((state) => state.projects);
+  const { projects } = useAppSelector((state) => state.projects);
   const dispatch = useAppDispatch();
   const themeClass = useThemeClass("b-projectsTable");
 
@@ -116,7 +116,7 @@ const ProjectsTable: FC<IProps> = ({ handleProjectEdit }) => {
     <div className={themeClass}>
       <DatagridBasic
         columns={columns}
-        rows={data}
+        rows={projects}
         rowSelection={false}
         rowHeight={35}
         columnHeaderHeight={40}

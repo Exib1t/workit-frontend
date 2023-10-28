@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from "../store";
-import { useEffect, useState } from "react";
-import { IIssue } from "../models/IIssue/IIssue.ts";
-import { fetchIssuesByProjectId } from "../store/issues/issuesThunks.ts";
+import { useEffect } from "react";
 import useGetOneProject from "./useGetOneProject.ts";
+import { setSelectedIssue } from "../store/issues/issuesSlice.ts";
+import { fetchIssuesByProjectId } from "../store/issues/issuesThunks.ts";
 
 export default function useGetOneIssue(
   projectLink: string | undefined,
@@ -10,29 +10,29 @@ export default function useGetOneIssue(
 ) {
   const dispatch = useAppDispatch();
   const { project } = useGetOneProject(projectLink);
-  const { issues, isLoading } = useAppSelector((state) => state.issues);
-  const [issue, setIssue] = useState<IIssue | undefined>(undefined);
+  const { issues, isLoading, selectedIssue } = useAppSelector(
+    (state) => state.issues,
+  );
 
   useEffect(() => {
-    fetchIssues();
-  }, [dispatch, project]);
+    if (project && !issues.length) {
+      dispatch(fetchIssuesByProjectId(project.id));
+    }
+  }, [issues, project]);
 
   useEffect(() => {
     if (issues) {
-      setIssue(issues.find((item) => item.link === issueLink));
+      dispatch(
+        setSelectedIssue(
+          issues.find((issue) => issue.link === issueLink) || null,
+        ),
+      );
     }
   }, [issues, issueLink]);
 
-  const fetchIssues = () => {
-    if (project) {
-      dispatch(fetchIssuesByProjectId(project?.id));
-    }
-  };
-
   return {
-    issue,
+    issue: selectedIssue,
     project,
     isLoading,
-    refresh: fetchIssues,
   };
 }

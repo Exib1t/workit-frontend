@@ -1,0 +1,75 @@
+@import "../../../../assets/styles/designVariables";
+
+.b-issueComment-dark,
+.b-issueComment-light {
+  display: flex;
+  flex-direction: column;
+  gap: $ref-spacing-16;
+  border-radius: $border-radius-4;
+  padding: $ref-spacing-12;
+
+  &_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $ref-sizing-8;
+
+    &_left {
+      display: flex;
+      align-items: center;
+      gap: $ref-spacing-8;
+    }
+
+    &_right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: $ref-spacing-8;
+    }
+
+    &_date {
+      font-size: $typography-body-md-font-size;
+      font-weight: $typography-body-md-font-weight;
+      letter-spacing: $typography-body-md-letter-spacing;
+      line-height: $typography-body-md-line-height;
+    }
+  }
+
+  &_content {
+    display: block;
+    font-size: $typography-body-md-font-size;
+    font-weight: $typography-body-md-font-weight;
+    letter-spacing: $typography-body-md-letter-spacing;
+    line-height: $typography-body-md-line-height;
+  }
+}
+
+.b-issueComment-dark {
+  background: $dark-srf-default;
+  border: 1px solid $dark-on-bgd-srf-5;
+
+  &_header {
+    &_date {
+      color: $dark-on-bgd-srf-3;
+    }
+  }
+
+  &_content {
+    color: $dark-on-bgd-srf-2;
+  }
+}
+
+.b-issueComment-light {
+  background: $light-srf-default;
+  border: 1px solid $light-on-bgd-srf-5;
+
+  &_header {
+    &_date {
+      color: $light-on-bgd-srf-3;
+    }
+  }
+
+  &_content {
+    color: $light-on-bgd-srf-2;
+  }
+}

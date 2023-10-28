@@ -6,27 +6,21 @@ import {
   IIssueUpdate,
   IssueUpdateTime,
 } from "../../models/IIssue/IIssue.ts";
-import { AxiosResponse } from "axios";
 import { AdditionalCallbacks } from "../../models/reducers/index.types.ts";
 import { ICompressedUser } from "../../models/IUser/IUser.ts";
 
-export const fetchIssuesByProjectId = createAsyncThunk<
-  { issues: IIssue[]; projectId: number },
-  number
->("issues/fetchByProjectId", async (projectId, thunkAPI) => {
-  try {
-    const data: AxiosResponse<IIssue[]> = await api.get(
-      `issues/project/${projectId}`,
-    );
+export const fetchIssuesByProjectId = createAsyncThunk<IIssue[], number>(
+  "issues/fetchByProjectId",
+  async (projectId, thunkAPI) => {
+    try {
+      const response = await api.get(`projects/${projectId}/issues`);
 
-    return {
-      projectId,
-      issues: data.data,
-    };
-  } catch (err: any) {
-    thunkAPI.rejectWithValue(err.response.data.errors);
-  }
-});
+      return response.data;
+    } catch (err: any) {
+      thunkAPI.rejectWithValue(err.response.data.errors);
+    }
+  },
+);
 
 export const createIssue = createAsyncThunk<
   IIssue[],
@@ -35,7 +29,10 @@ export const createIssue = createAsyncThunk<
   "issues/createIssue",
   async ({ data, callbacks: { onSuccess, onError } }, thunkAPI) => {
     try {
-      const response = await api.post(`issues`, data);
+      const response = await api.post(
+        `projects/${data.projectId}/issues`,
+        data,
+      );
       onSuccess && onSuccess();
       return response.data;
     } catch (err: any) {
@@ -47,13 +44,20 @@ export const createIssue = createAsyncThunk<
 
 export const updateIssue = createAsyncThunk<
   IIssue[],
-  { updatedIssue: IIssueUpdate; callbacks: AdditionalCallbacks }
+  {
+    projectId: number;
+    updatedIssue: IIssueUpdate;
+    callbacks: AdditionalCallbacks;
+  }
 >(
   "issues/updateIssue",
-  async ({ updatedIssue, callbacks: { onSuccess, onError } }, thunkAPI) => {
+  async (
+    { projectId, updatedIssue, callbacks: { onSuccess, onError } },
+    thunkAPI,
+  ) => {
     try {
       const response = await api.patch(
-        `issues/${updatedIssue.id}`,
+        `projects/${projectId}/issues/${updatedIssue.id}`,
         updatedIssue,
       );
       onSuccess && onSuccess();
@@ -67,12 +71,17 @@ export const updateIssue = createAsyncThunk<
 
 export const deleteIssue = createAsyncThunk<
   IIssue[],
-  { issueId: number; callbacks: AdditionalCallbacks }
+  { projectId: number; issueId: number; callbacks: AdditionalCallbacks }
 >(
   "issues/deleteIssue",
-  async ({ issueId, callbacks: { onSuccess, onError } }, thunkAPI) => {
+  async (
+    { projectId, issueId, callbacks: { onSuccess, onError } },
+    thunkAPI,
+  ) => {
     try {
-      const response = await api.delete(`issues/${issueId}`);
+      const response = await api.delete(
+        `projects/${projectId}/issues/${issueId}`,
+      );
       onSuccess && onSuccess();
       return response.data;
     } catch (err: any) {
@@ -85,16 +94,20 @@ export const deleteIssue = createAsyncThunk<
 export const logIssueTime = createAsyncThunk<
   IIssue[],
   {
+    projectId: number;
     data: { id: number; time: IssueUpdateTime };
     callbacks: AdditionalCallbacks;
   }
 >(
   "issues/logIssueTime",
-  async ({ data, callbacks: { onSuccess, onError } }, thunkAPI) => {
+  async ({ projectId, data, callbacks: { onSuccess, onError } }, thunkAPI) => {
     try {
-      const response = await api.post(`issues/${data.id}/time`, {
-        time: data.time,
-      });
+      const response = await api.post(
+        `projects/${projectId}/issues/${data.id}/time`,
+        {
+          time: data.time,
+        },
+      );
       onSuccess && onSuccess();
       return response.data;
     } catch (err: any) {
@@ -107,13 +120,16 @@ export const fetchIssueAvailableAssignments = createAsyncThunk<
   ICompressedUser[],
   {
     id: number;
+    projectId: number;
     callbacks: AdditionalCallbacks;
   }
 >(
   "issues/fetchIssueAvailableAssignments",
-  async ({ id, callbacks: { onSuccess, onError } }, thunkAPI) => {
+  async ({ id, projectId, callbacks: { onSuccess, onError } }, thunkAPI) => {
     try {
-      const response = await api.get(`issues/${id}/assignments`);
+      const response = await api.get(
+        `projects/${projectId}/issues/${id}/assignments`,
+      );
       onSuccess && onSuccess();
       return response.data;
     } catch (err: any) {

@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   IIssue,
   IIssueUpdate,
@@ -20,10 +20,7 @@ import {
 } from "../../../../helpers/issueHelpers.ts";
 import { Skeleton } from "@mui/material";
 import IssueViewItem from "./parts/IssueViewItem/IssueViewItem.tsx";
-import "react-quill/dist/quill.snow.css";
 import TextQuillEditor from "../../../control/TextQuillEditor/TextQuillEditor.tsx";
-import Icon from "../../../control/Icon/Icon.tsx";
-import IconButtonCustom from "../../../control/IconButtonCustom/IconButtonCustom.tsx";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import {
   fetchIssueAvailableAssignments,
@@ -42,6 +39,11 @@ import IssuePriority from "../IssuePriority/IssuePriority.tsx";
 import TimeBar from "../../../control/TimeBar/TimeBar.tsx";
 import IssueTimePopup from "../IssueTimePopup/IssueTimePopup.tsx";
 import UserPlaceholder from "../../UserPlaceholder/UserPlaceholder.tsx";
+import useGetOneProject from "../../../../hooks/useGetOneProject.ts";
+import { useParams } from "react-router-dom";
+import IconButtonCustom from "../../../control/IconButtonCustom/IconButtonCustom.tsx";
+import Icon from "../../../control/Icon/Icon.tsx";
+import CommentsView from "../../CommentsView/CommentsView.tsx";
 
 interface IExpandedGroups {
   attachments: boolean;
@@ -49,12 +51,12 @@ interface IExpandedGroups {
 
 interface IProps {
   initialFields: IIssue;
-  setInitialFields: Dispatch<SetStateAction<IIssue | undefined>>;
   isLoading: boolean;
-  onSuccess: () => void;
 }
 
-const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
+const IssueView: FC<IProps> = ({ initialFields, isLoading }) => {
+  const { projectLink } = useParams();
+
   const [expandedGroups, setExpandedGroups] = useState<IExpandedGroups>({
     attachments: true,
   });
@@ -70,6 +72,8 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
   }> | null>(null);
   const [isTimePopupOpen, setIsTimePopupOpen] = useState(false);
   const [description, setDescription] = useState("");
+
+  const { project } = useGetOneProject(projectLink);
 
   const { data: availableAssignments } = useAppSelector(
     (state) => state.issues.editorsData.assignments,
@@ -87,12 +91,15 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
   }, [initialFields]);
 
   useEffect(() => {
-    dispatch(
-      fetchIssueAvailableAssignments({
-        id: initialFields.id,
-        callbacks: {},
-      }),
-    );
+    if (project) {
+      dispatch(
+        fetchIssueAvailableAssignments({
+          projectId: project?.id,
+          id: initialFields.id,
+          callbacks: {},
+        }),
+      );
+    }
   }, [dispatch]);
 
   const handleCloseTimePopup = () => {
@@ -108,12 +115,15 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
     value: string | number,
   ) => {
     const updatedIssue = { id: initialFields.id, [fieldName]: value };
-    dispatch(
-      updateIssue({
-        updatedIssue,
-        callbacks: { onSuccess },
-      }),
-    );
+    if (project) {
+      dispatch(
+        updateIssue({
+          projectId: project?.id,
+          updatedIssue,
+          callbacks: {},
+        }),
+      );
+    }
   };
 
   const handleChangeStatus = (status: ISelectItem<IssueStatusType>) => {
@@ -305,22 +315,10 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
                 <div className={`${themeClass}__group`}>
                   <span className={`${themeClass}__groupTitle`}>Comments</span>
                   <div className={`${themeClass}__groupContent`}>
-                    <div className={`${themeClass}__attachments`}>
-                      <div className={`${themeClass}__activity`}>
-                        <TextQuillEditor
-                          placeholder={"Description..."}
-                          customHeight={45}
-                          isFooter
-                          value={description}
-                          onChange={handleChangeDescription}
-                          disabled={
-                            isLoading ||
-                            initialFields.description === description
-                          }
-                          handleSave={handleDescriptionSave}
-                        />
-                      </div>
-                    </div>
+                    <CommentsView
+                      issueId={initialFields.id}
+                      projectId={initialFields.projectId}
+                    />
                   </div>
                 </div>
               </div>
@@ -390,8 +388,10 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
                     content={
                       <TimeBar
                         value={
-                          (initialFields.time.estimated * 100) /
-                          initialFields.time.estimated
+                          initialFields.time.estimated === 0
+                            ? 0
+                            : (initialFields.time.estimated * 100) /
+                              initialFields.time.estimated
                         }
                         type={"estimated"}
                         label={initialFields.time.estimated}
@@ -403,8 +403,10 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
                     content={
                       <TimeBar
                         value={
-                          initialFields.time.logged >
-                          initialFields.time.estimated
+                          initialFields.time.logged === 0
+                            ? 0
+                            : initialFields.time.logged >
+                              initialFields.time.estimated
                             ? 100
                             : (initialFields.time.logged * 100) /
                               initialFields.time.estimated
@@ -419,8 +421,10 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
                     content={
                       <TimeBar
                         value={
-                          (initialFields.time.remaining * 100) /
-                          initialFields.time.estimated
+                          initialFields.time.estimated === 0
+                            ? 0
+                            : (initialFields.time.remaining * 100) /
+                              initialFields.time.estimated
                         }
                         type={"remaining"}
                         label={initialFields.time.remaining}
@@ -436,7 +440,6 @@ const IssueView: FC<IProps> = ({ initialFields, isLoading, onSuccess }) => {
       <IssueTimePopup
         isOpen={isTimePopupOpen}
         onClose={handleCloseTimePopup}
-        onSuccess={onSuccess}
         estimated={initialFields.time.estimated}
         issueId={initialFields.id}
       />

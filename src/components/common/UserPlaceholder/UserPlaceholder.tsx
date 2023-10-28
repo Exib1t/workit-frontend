@@ -6,9 +6,10 @@ import "./UserPlaceholder.styles.scss";
 interface IProps {
   first_name: string;
   last_name: string;
+  isPrimary?: boolean;
 }
 
-const UserPlaceholder: FC<IProps> = ({ first_name, last_name }) => {
+const UserPlaceholder: FC<IProps> = ({ first_name, last_name, isPrimary }) => {
   const themeClass = useThemeClass("b-userPlaceholder");
 
   return (
@@ -16,7 +17,9 @@ const UserPlaceholder: FC<IProps> = ({ first_name, last_name }) => {
       <AvatarCustom size="small">{`${first_name.charAt(0)}${last_name.charAt(
         0,
       )}`}</AvatarCustom>
-      <span className={`${themeClass}__assigneeText`}>
+      <span
+        className={`${themeClass}__assigneeText ${isPrimary ? "-primary" : ""}`}
+      >
         {first_name} {last_name}
       </span>
     </div>

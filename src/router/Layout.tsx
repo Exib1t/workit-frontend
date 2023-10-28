@@ -1,8 +1,8 @@
 import Header from "../components/common/Header/Header.tsx";
 import { Outlet } from "react-router-dom";
 import { useAppSelector } from "../store";
-import { Box } from "@mui/material";
 import ErrorModal from "../components/common/ErrorModal/ErrorModal.tsx";
+import { Box } from "@mui/material";
 import LinearDeterminate from "../components/control/LinearDeterminate/LinearDeterminate.tsx";
 
 const Layout = () => {
@@ -16,9 +16,16 @@ const Layout = () => {
   const { isLoading: isLoadingIssues } = useAppSelector(
     (state) => state.issues,
   );
+  const { isLoading: isLoadingComments } = useAppSelector(
+    (state) => state.comments,
+  );
 
   const isLoading =
-    isLoadingAuth || isLoadingProjects || isLoadingGlobal || isLoadingIssues;
+    isLoadingAuth ||
+    isLoadingProjects ||
+    isLoadingGlobal ||
+    isLoadingIssues ||
+    isLoadingComments;
 
   return (
     <>

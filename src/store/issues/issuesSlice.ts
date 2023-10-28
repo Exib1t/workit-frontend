@@ -13,6 +13,7 @@ import { IErrors } from "../../models/reducers/global.types.ts";
 
 interface IState {
   issues: IIssue[];
+  selectedIssue: IIssue | null;
   editorsData: {
     assignments: {
       loading: boolean;
@@ -20,7 +21,6 @@ interface IState {
       error: any | null;
     };
   };
-  projectId: number | null;
   errors: IErrors | null;
   isLoading: boolean;
   isFirstLoading: boolean;
@@ -28,7 +28,7 @@ interface IState {
 
 const initialState: IState = {
   issues: [],
-  projectId: null,
+  selectedIssue: null,
   editorsData: {
     assignments: {
       loading: false,
@@ -45,6 +45,9 @@ const issuesSlice = createSlice({
   name: "issues",
   initialState,
   reducers: {
+    setSelectedIssue: (state, action: PayloadAction<IIssue | null>) => {
+      state.selectedIssue = action.payload;
+    },
     setIssuesError: (state, action: PayloadAction<IErrors | null>) => {
       state.errors = action.payload;
     },
@@ -52,12 +55,10 @@ const issuesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchIssuesByProjectId.pending, (state) => {
       state.isLoading = true;
-      state.issues = [];
       state.errors = null;
     });
     builder.addCase(fetchIssuesByProjectId.fulfilled, (state, action) => {
-      state.issues = action.payload.issues || [];
-      state.projectId = action.payload.projectId;
+      state.issues = action.payload || [];
       state.errors = null;
       state.isLoading = false;
       state.isFirstLoading = false;
@@ -142,4 +143,4 @@ const issuesSlice = createSlice({
 });
 
 export default issuesSlice.reducer;
-export const { setIssuesError } = issuesSlice.actions;
+export const { setIssuesError, setSelectedIssue } = issuesSlice.actions;

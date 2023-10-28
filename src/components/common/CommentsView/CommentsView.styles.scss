@@ -1,0 +1,84 @@
+@import "../../../assets/styles/designVariables";
+
+.b-commentsView-dark,
+.b-commentsView-light {
+  display: flex;
+  flex-direction: column;
+  gap: $ref-spacing-16;
+
+  &_list {
+    display: flex;
+    flex-direction: column;
+    gap: $ref-spacing-8;
+  }
+
+  &_empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $ref-sizing-24;
+  }
+
+  &_footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    &_button {
+      align-items: center;
+      justify-content: center;
+      width: $ref-spacing-40;
+      height: $ref-spacing-40;
+      border-radius: $border-radius-100 !important;
+
+      .b-icon-dark,
+      .b-icon-light {
+        width: $ref-spacing-28;
+        height: $ref-spacing-28;
+      }
+    }
+  }
+}
+
+.b-commentsView-dark {
+  &_footer {
+    &_button {
+      background: $dark-primary;
+
+      svg path {
+        stroke: $dark-on-primary !important;
+      }
+
+      &:hover {
+        background: $dark-state-primary-press;
+      }
+    }
+  }
+
+  &_empty {
+    background: $dark-srf-default;
+    color: $dark-on-bgd-srf-3;
+  }
+}
+
+.b-commentsView-light {
+  &_footer {
+    &_button {
+      background: $light-primary;
+
+      svg path {
+        stroke: $light-on-primary !important;
+      }
+
+      &:hover {
+        background: $light-state-primary-press;
+      }
+    }
+  }
+
+  &_empty {
+    background: $light-srf-default;
+    color: $light-on-bgd-srf-3;
+  }
+}

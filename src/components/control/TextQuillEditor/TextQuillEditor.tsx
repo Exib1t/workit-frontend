@@ -21,7 +21,11 @@ interface IProps extends ReactQuillProps {
   isFooter?: boolean;
   disabled?: boolean;
   handleSave?: () => void;
-  customHeight: number;
+  handleCancel?: () => void;
+  customHeight?: number;
+  customButtonTitle?: string;
+  isPrimary?: boolean;
+  isCancel?: boolean;
 }
 
 const TextQuillEditor: FC<IProps> = (props) => {
@@ -36,10 +40,19 @@ const TextQuillEditor: FC<IProps> = (props) => {
         modules={modules}
       />
       <div className={`${themeClass}__footer`}>
+        {props.isCancel && !!props.handleCancel && (
+          <CustomButton
+            type={"tertiary"}
+            size={"sm"}
+            title={"Cancel"}
+            clickHandler={props.handleCancel}
+            className={`${themeClass}__button`}
+          />
+        )}
         <CustomButton
-          type={"selection-plain"}
+          type={props.isPrimary ? "primary" : "selection-plain"}
           size={"sm"}
-          title={"Save"}
+          title={props.customButtonTitle || "Save"}
           clickHandler={props.handleSave}
           disabled={props.disabled}
           className={`${themeClass}__button`}
