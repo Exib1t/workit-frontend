@@ -1,0 +1,11 @@
+@import "../../../assets/styles/designVariables";
+
+.b-projectPlanning-dark,
+.b-projectPlanning-light {
+  &_content {
+    display: flex;
+    flex-direction: column;
+    padding: $ref-sizing-24;
+    box-sizing: border-box;
+  }
+}
