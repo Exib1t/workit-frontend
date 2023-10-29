@@ -6,5 +6,6 @@ export const AppRoutes = {
   issues: "/projects/:projectLink/issues",
   issue: "/projects/:projectLink/issues/:issueLink",
   projectPlanning: "/projects/:projectLink/planning",
+  projectBacklog: "/projects/:projectLink/backlog",
   components: "/components",
 };

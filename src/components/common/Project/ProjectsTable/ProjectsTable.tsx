@@ -130,6 +130,7 @@ const ProjectsTable: FC<IProps> = ({ handleProjectEdit }) => {
         hideFooter
         disableRowSelectionOnClick
         onRowClick={handleRowClick}
+        classes={{ row: `${themeClass}__row` }}
       />
     </div>
   );

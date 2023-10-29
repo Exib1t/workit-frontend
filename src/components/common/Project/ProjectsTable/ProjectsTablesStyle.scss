@@ -16,6 +16,10 @@
     justify-content: flex-end;
     gap: $ref-spacing-4;
   }
+
+  &__row {
+    cursor: pointer;
+  }
 }
 
 .b-projectsTable-dark {

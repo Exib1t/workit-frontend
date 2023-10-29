@@ -7,8 +7,6 @@ import {
   IssueTypes,
 } from "../../../../models/IIssue/IIssue.ts";
 import { useParams } from "react-router-dom";
-
-import "./IssueCreateModalStyles.scss";
 import { fetchProjectUsers } from "../../../../store/projects/projectsThunks.ts";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import { ISelectItem } from "../../../../models/Select/Select.types.ts";
@@ -18,6 +16,8 @@ import useGetOneProject from "../../../../hooks/useGetOneProject.ts";
 import { issuePriorities, issueTypes } from "../../../../constants/issues.ts";
 import Icon, { IconTypes } from "../../../control/Icon/Icon.tsx";
 import DialogPopUp from "../../../control/DialogPopUp/DialogPopUp.tsx";
+
+import "./IssueCreateModalStyles.scss";
 
 interface IProps {
   isOpen: boolean;
@@ -78,6 +78,20 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose }) => {
       });
     }
   }, [issueErrors]);
+
+  const handleClose = () => {
+    onClose();
+    setNewIssue((prevState) => ({
+      ...prevState,
+      title: "",
+      assignee: 0,
+      type: "Task",
+      priority: "Medium",
+      time: {
+        estimated: "0",
+      },
+    }));
+  };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setErrors({
@@ -176,11 +190,11 @@ const IssueCreateModal: FC<IProps> = ({ isOpen, onClose }) => {
   return (
     <DialogPopUp
       open={isOpen}
-      onClose={onClose}
+      onClose={handleClose}
       title={"Issue Create"}
       secondaryText={"Cancel"}
       primaryText={"Create"}
-      handleOnSecondary={onClose}
+      handleOnSecondary={handleClose}
       handleOnPrimary={handleSubmit}
       dividedHeader
       paperMaxWidth={"1000px"}

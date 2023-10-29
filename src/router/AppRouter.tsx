@@ -18,6 +18,7 @@ import IssuesPage from "../components/pages/IssuesPage/IssuesPage.tsx";
 import IssuePage from "../components/pages/IssuePage/IssuePage.tsx";
 import { fetchUserById } from "../store/user/userThunks.ts";
 import { clearUser } from "../store/user/userSlice.ts";
+import BacklogPage from "../components/pages/BacklogPage/BacklogPage.tsx";
 
 const AppRouter = () => {
   const { isAuthenticated } = useAuthenticated();
@@ -68,6 +69,7 @@ const AppRouter = () => {
       <Route path={AppRoutes.project} element={<ProjectPage />} />
       <Route path={AppRoutes.issues} element={<IssuesPage />} />
       <Route path={AppRoutes.issue} element={<IssuePage />} />
+      <Route path={AppRoutes.projectBacklog} element={<BacklogPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </>
   );

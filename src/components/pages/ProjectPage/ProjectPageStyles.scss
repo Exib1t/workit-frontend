@@ -31,7 +31,7 @@
     justify-content: space-between;
     align-items: center;
     gap: $ref-spacing-8;
-    padding: $ref-spacing-12 $ref-spacing-20;
+    padding: $ref-spacing-8 $ref-spacing-24;
   }
 
   &__title {
@@ -66,7 +66,7 @@
   }
 
   &__header {
-    background: $dark-srf-default;
+    background: $dark-srf-variant;
   }
 
   &__title,
@@ -93,7 +93,7 @@
   }
 
   &__header {
-    background: $light-srf-default;
+    background: $light-srf-variant;
   }
 
   &__title,

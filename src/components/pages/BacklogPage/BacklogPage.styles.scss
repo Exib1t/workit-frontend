@@ -1,0 +1,72 @@
+@import "../../../assets/styles/designVariables";
+
+.b-backlogPage-dark,
+.b-backlogPage-light {
+  width: 100%;
+  height: 100%;
+  padding: $ref-spacing-12;
+
+  &_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: $border-radius-8;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+  }
+
+  &_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $ref-spacing-8 $ref-spacing-24;
+
+    &_left {
+      display: flex;
+      align-items: center;
+
+      &_text {
+        font-family: $typography-body-lg-font-family;
+        font-weight: $typography-body-lg-font-weight;
+        line-height: $typography-body-lg-line-height;
+        font-size: $typography-body-lg-font-size;
+        letter-spacing: $typography-body-lg-letter-spacing;
+      }
+
+      &_title {
+        font-family: $typography-label-lg-font-family;
+        font-weight: $typography-label-lg-font-weight;
+        line-height: $typography-label-lg-line-height;
+        font-size: $typography-label-lg-font-size;
+        letter-spacing: $typography-label-lg-letter-spacing;
+      }
+    }
+
+    &_controls {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: $ref-spacing-8;
+    }
+  }
+}
+
+.b-backlogPage-dark {
+  &_container {
+    border: 1px solid $dark-on-bgd-srf-5;
+  }
+
+  &_header {
+    background: $dark-srf-variant;
+
+    &_left {
+      &_text {
+        color: $dark-on-bgd-srf-1;
+      }
+      &_title {
+        color: $dark-primary;
+      }
+    }
+  }
+}

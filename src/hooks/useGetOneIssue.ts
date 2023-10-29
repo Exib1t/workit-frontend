@@ -18,7 +18,7 @@ export default function useGetOneIssue(
     if (project && !issues.length) {
       dispatch(fetchIssuesByProjectId(project.id));
     }
-  }, [issues, project]);
+  }, [issues, project, dispatch]);
 
   useEffect(() => {
     if (issues) {

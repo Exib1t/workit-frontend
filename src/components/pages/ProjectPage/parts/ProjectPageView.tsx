@@ -27,6 +27,11 @@ const ProjectPageView: FC<IProps> = ({ project }) => {
           to={AppRoutes.issues.replace(":projectLink", project.link)}
         />
         <ProjectCard
+          title={"Backlog"}
+          image={calendarImage}
+          to={AppRoutes.projectBacklog.replace(":projectLink", project.link)}
+        />
+        <ProjectCard
           title={"Planning"}
           image={calendarImage}
           to={AppRoutes.projectPlanning.replace(":projectLink", project.link)}
