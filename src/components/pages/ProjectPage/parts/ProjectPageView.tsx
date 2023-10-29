@@ -30,7 +30,6 @@ const ProjectPageView: FC<IProps> = ({ project }) => {
           title={"Planning"}
           image={calendarImage}
           to={AppRoutes.projectPlanning.replace(":projectLink", project.link)}
-          disabled
         />
       </div>
     </div>

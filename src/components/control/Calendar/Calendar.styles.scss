@@ -1,0 +1,94 @@
+@import "../../../assets/styles/designVariables";
+
+.b-calendar-dark,
+.b-calendar-light {
+  display: flex;
+  gap: $ref-sizing-8;
+  height: calc(100vh - 60px);
+  backdrop-filter: blur(5px);
+
+  &_taskList {
+    display: flex;
+    flex-direction: column;
+    gap: $ref-sizing-4;
+  }
+
+  &_taskItem {
+    width: 150px;
+    display: flex;
+    padding: $ref-sizing-4 $ref-sizing-12;
+    box-sizing: border-box;
+  }
+
+  &_headerCell > div {
+    height: $ref-sizing-40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fc-button {
+    border-radius: $border-radius-4;
+    border: none;
+    box-shadow: none !important;
+  }
+}
+
+.b-calendar-dark {
+  &_taskItem {
+    background: $dark-primary;
+    color: $dark-on-bgd-srf-1;
+  }
+
+  .fc-day {
+    border-color: $dark-on-bgd-srf-4;
+  }
+
+  .fc-scrollgrid,
+  .fc-scrollgrid td,
+  .fc-scrollgrid th {
+    border-color: $dark-on-bgd-srf-4;
+  }
+
+  .fc-button {
+    background: $dark-primary;
+    color: $dark-on-primary;
+
+    &:disabled {
+      background: $dark-state-primary-press;
+    }
+
+    &:hover {
+      background: $dark-state-primary-hover;
+    }
+  }
+
+  .fc-button-active {
+    background: $dark-state-primary-press !important;
+  }
+
+  .fc-toolbar-title {
+    color: $dark-on-bgd-srf-1;
+  }
+
+  .fc-scrollgrid-shrink-cushion {
+    color: $dark-on-bgd-srf-1;
+  }
+
+  .fc-day-today {
+    background: none !important;
+
+    .fc-daygrid-day-number,
+    .fc-col-header-cell-cushion {
+      color: $dark-primary;
+    }
+  }
+
+  &_cell {
+    color: $dark-on-bgd-srf-3;
+  }
+
+  &_headerCell {
+    color: $dark-on-bgd-srf-1;
+  }
+}
