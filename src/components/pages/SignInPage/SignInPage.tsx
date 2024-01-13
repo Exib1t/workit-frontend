@@ -111,6 +111,7 @@ const SignInPage = () => {
               error={errors.password}
               placeholder={"Enter your password"}
               name="password"
+              inputType={"password"}
               value={data.password}
               onChange={onChange}
             />

@@ -1,25 +1,22 @@
 @import "../../../assets/styles/designVariables";
 
-.b-iconButton-dark, .b-iconButton-light {
-  border-radius: 10px !important;
+.b-iconButton-dark,
+.b-iconButton-light {
+  border-radius: $border-radius-4;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
 }
 
 .b-iconButton-dark {
   &:hover {
-    background-color: $dark-state-bgd-variant-hover !important;
-  }
-
-  .MuiTouchRipple-ripple {
-    background: $dark-state-bgd-variant-hover;
+    background-color: $dark-state-srf-default-hover !important;
   }
 }
 
 .b-iconButton-light {
   &:hover {
-    background-color: $light-state-bgd-variant-hover !important;
-  }
-
-  .MuiTouchRipple-ripple {
-    background: $light-state-bgd-variant-hover;
+    background-color: $light-state-srf-default-hover !important;
   }
 }

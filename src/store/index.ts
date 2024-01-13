@@ -6,6 +6,7 @@ import projectsSlice from "./projects/projectsSlice.ts";
 import issuesSlice from "./issues/issuesSlice.ts";
 import userSlice from "./user/userSlice.ts";
 import commentsSlice from "./comments/commentsSlice.ts";
+import chatSlice from "./chat/chatSlice.ts";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     issues: issuesSlice,
     user: userSlice,
     comments: commentsSlice,
+    chat: chatSlice,
   },
 });
 

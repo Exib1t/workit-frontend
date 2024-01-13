@@ -17,13 +17,15 @@ import IssueMenu from "../IssueMenu/IssueMenu.tsx";
 import IssueSkeleton from "../IssueSkeleton/IssueSkeleton.tsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppRoutes } from "../../../../router/Routes.ts";
+import Icon from "../../../control/Icon/Icon.tsx";
 
 interface IProps {
   issues: IIssue[];
   isLoading: boolean;
+  isBacklog?: boolean;
 }
 
-const IssuesList: FC<IProps> = ({ issues, isLoading }) => {
+const IssuesList: FC<IProps> = ({ issues, isLoading, isBacklog }) => {
   const navigate = useNavigate();
   const { projectLink } = useParams();
   const [isMenuOpen, setIsMenuOpen] = useState<EventTarget | null>(null);
@@ -49,6 +51,16 @@ const IssuesList: FC<IProps> = ({ issues, isLoading }) => {
           .replace(":issueLink", String(params.row.link)),
       );
     }
+  };
+
+  const renderDragCell = (params: GridRenderCellParams<IIssue>) => {
+    const issue = params.row;
+
+    return (
+      <div onClick={(e) => e.stopPropagation()}>
+        <Icon type={"drag"} size={24} color={"secondary"} />
+      </div>
+    );
   };
 
   const renderTitleCell = (params: GridRenderCellParams<IIssue>) => {
@@ -107,6 +119,12 @@ const IssuesList: FC<IProps> = ({ issues, isLoading }) => {
 
   const columns: GridColDef[] = [
     {
+      field: "drag",
+      headerName: "Drag",
+      width: 100,
+      renderCell: renderDragCell,
+    },
+    {
       field: "title",
       headerName: "Title",
       flex: 1,
@@ -146,7 +164,9 @@ const IssuesList: FC<IProps> = ({ issues, isLoading }) => {
   return (
     <div className={themeClass}>
       <DatagridBasic
-        columns={columns}
+        columns={columns.filter((col) =>
+          !isBacklog ? col.field !== "drag" : true,
+        )}
         rows={issues}
         rowSelection={false}
         disableColumnMenu={true}

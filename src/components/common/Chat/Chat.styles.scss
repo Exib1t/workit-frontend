@@ -1,0 +1,109 @@
+@import "../../../assets/styles/designVariables";
+
+.b-chat-dark,
+.b-chat-light {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+
+  &_container {
+    width: $ref-sizing-400;
+    height: $ref-sizing-600;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: $ref-sizing-12;
+
+    &_title {
+      font-size: $typography-label-xxl-font-size;
+      font-weight: $typography-label-xxl-font-weight;
+      letter-spacing: $typography-label-xxl-letter-spacing;
+      line-height: $typography-label-xxl-line-height;
+    }
+  }
+
+  &_content {
+    height: 100%;
+    padding: $ref-sizing-12;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+
+    &_row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: $ref-sizing-8;
+    }
+  }
+
+  &_list {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $ref-sizing-6;
+  }
+
+  &_message {
+    display: flex;
+    flex-direction: column;
+    gap: $ref-sizing-4;
+    padding: $ref-sizing-8 $ref-spacing-0;
+
+    &_author {
+      font-size: $typography-label-lg-font-size;
+      font-weight: $typography-label-lg-font-weight;
+      letter-spacing: $typography-label-lg-letter-spacing;
+      line-height: $typography-label-lg-line-height;
+    }
+
+    &_text {
+      font-size: $typography-body-lg-font-size;
+      font-weight: $typography-body-lg-font-weight;
+      letter-spacing: $typography-body-lg-letter-spacing;
+      line-height: $typography-body-lg-line-height;
+    }
+  }
+
+  &_button,
+  &_button {
+    height: $ref-sizing-60 !important;
+    width: $ref-sizing-60;
+    border-radius: $border-radius-100;
+  }
+}
+
+.b-chat-dark {
+  &_container {
+    background: $dark-srf-default;
+    border: 1px solid $dark-on-bgd-srf-5;
+  }
+
+  &_header {
+    background: $dark-srf-variant;
+    &_title {
+      color: $dark-on-bgd-srf-1;
+    }
+  }
+
+  &_message {
+    &_author {
+      color: $dark-on-bgd-srf-3;
+
+      &.-assigned {
+        color: $dark-primary;
+      }
+    }
+
+    &_text {
+      color: $dark-on-bgd-srf-2;
+    }
+  }
+}

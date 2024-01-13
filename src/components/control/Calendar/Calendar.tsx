@@ -1,101 +1,85 @@
-import { useEffect, useRef, useState } from "react";
-import FullCalendar from "@fullcalendar/react";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin from "@fullcalendar/interaction";
 import useThemeClass from "../../../hooks/useThemeClass.ts";
-import { EventInput } from "@fullcalendar/core";
+import { CalendarConstants } from "./constants/calendar.constants.ts";
+import { useAppDispatch, useAppSelector } from "../../../store";
+import { useParams } from "react-router-dom";
+import useGetOneProject from "../../../hooks/useGetOneProject.ts";
+import { useCallback, useEffect, useState } from "react";
+import { fetchIssuesByProjectId } from "../../../store/issues/issuesThunks.ts";
+import { IIssue } from "../../../models/IIssue/IIssue.ts";
+import CalendarDay from "./parts/CalendarDay/CalendarDay.tsx";
 
 import "./Calendar.styles.scss";
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
 
 const Calendar = () => {
-  const [events, setEvents] = useState<EventInput[]>([
-    { title: "test drag", duration: 2, id: "12", date: new Date() },
-  ]);
-  const listRef = useRef(null);
+  const dispatch = useAppDispatch();
+  const { projectLink } = useParams();
+  const { project } = useGetOneProject(projectLink);
+
   const themeClass = useThemeClass("b-calendar");
 
+  const { issues } = useAppSelector((state) => state.issues);
+
+  const [currentIssues, setCurrentIssues] = useState<IIssue[]>([]);
+
+  const dateNow = new Date();
+  const currentMonth = CalendarConstants.monthNames[dateNow.getMonth()];
+  const currentDayOfWeek = CalendarConstants.dayOfWeekNames[dateNow.getDay()];
+  const currentYear = dateNow.getFullYear();
+  const lastDayOfMonth = new Date(currentYear, dateNow.getMonth() + 1, 0);
+  const numberOfDays = lastDayOfMonth.getDate();
+
+  const daysViewCount = [0, 1, 2, 3, 4, 5, 6];
+
+  const fetchIssues = useCallback(() => {
+    if (project) {
+      dispatch(fetchIssuesByProjectId(project.id));
+    }
+  }, [dispatch, project]);
+
   useEffect(() => {
-    const externalEvents = listRef.current.getElementsByClassName(
-      `${themeClass}_taskItem`,
-    );
-    const calendar = listRef.current.getElementsByClassName("fc-daygrid-event");
+    fetchIssues();
+  }, [fetchIssues]);
 
-    const enableDrag = () => {
-      for (const event of externalEvents) {
-        event.setAttribute("draggable", true);
-        event.addEventListener("dragstart", (e) => {
-          e.dataTransfer.setData("text/plain", e.target.innerText);
-        });
-      }
-    };
+  useEffect(() => {
+    setCurrentIssues(issues);
+  }, [issues]);
 
-    const enableDrop = () => {
-      for (const day of calendar) {
-        day.addEventListener("dragover", (e) => e.preventDefault());
-        day.addEventListener("drop", (e) => {
-          e.preventDefault();
-          const title = e.dataTransfer.getData("text/plain");
-          const date = new Date(day.getAttribute("data-date"));
-          const newEvent = { title, date };
-          setEvents([...events, newEvent]);
-        });
-      }
-    };
-
-    enableDrag();
-    enableDrop();
-  }, [events, themeClass]);
-
-  const renderEventContent = (eventInfo) => {
-    return (
-      <div
-        draggable
-        onDragStart={(e) => {
-          e.dataTransfer.setData("text/plain", eventInfo.event.title);
-        }}
-      >
-        {eventInfo.event.title}
-      </div>
+  const handleDragEnd = (event: DragEndEvent) => {
+    console.log(event);
+    setCurrentIssues((prevState) =>
+      prevState.map((item) => {
+        if (item.id === event?.active?.data?.current?.id) {
+          return { ...item, createdAt: event.over?.data?.current?.date };
+        } else {
+          return item;
+        }
+      }),
     );
   };
 
   return (
-    <div className={themeClass}>
-      <div className={`${themeClass}_taskList`} ref={listRef}>
-        <div className={`${themeClass}_taskItem`} draggable>
-          New task
+    <DndContext onDragEnd={handleDragEnd}>
+      <div className={themeClass}>
+        <div className={`${themeClass}_container`}>
+          <div className={`${themeClass}_header`}>
+            <span className={`${themeClass}_header_title`}>{currentMonth}</span>
+          </div>
+          <div className={`${themeClass}_timeline`}>
+            {daysViewCount.map((i) => (
+              <CalendarDay
+                key={`day-${i}`}
+                currentDayOfWeek={currentDayOfWeek}
+                currentIssues={currentIssues}
+                dateNow={dateNow}
+                index={i}
+              />
+            ))}
+          </div>
         </div>
       </div>
-      <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="timeGridWeek"
-        headerToolbar={{
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay",
-        }}
-        contentHeight={"auto"}
-        dayCellClassNames={`${themeClass}_cell`}
-        dayHeaderClassNames={`${themeClass}_headerCell`}
-        eventContent={renderEventContent}
-        events={events}
-        eventDrop={(info) => {
-          console.log(info, "drop");
-        }}
-        eventReceive={(info) => {
-          console.log(info, "receive");
-        }}
-        eventDragStop={(info) => {
-          console.log(info, "drag");
-        }}
-        editable
-        droppable
-        eventDurationEditable
-        slotMinTime={{ hour: 9 }}
-        slotMaxTime={{ hour: 18 }}
-      />
-    </div>
+    </DndContext>
   );
 };
+
 export default Calendar;

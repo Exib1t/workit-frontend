@@ -1,15 +1,15 @@
 import { FC } from "react";
 import useThemeClass from "../../../hooks/useThemeClass.ts";
-import { IconButton, IconButtonProps } from "@mui/material";
+import { IconButtonProps } from "@mui/material";
 import "./IconButtonStyles.scss";
 
 const MoreButton: FC<IconButtonProps> = (props) => {
   const themeClass = useThemeClass("b-iconButton");
 
   return (
-    <IconButton {...props} className={`${themeClass} ${props.className || ""}`}>
+    <button {...props} className={`${themeClass} ${props.className || ""}`}>
       {props.children}
-    </IconButton>
+    </button>
   );
 };
 export default MoreButton;

@@ -3,11 +3,12 @@ import useThemeClass from "../../../hooks/useThemeClass.ts";
 import { useParams } from "react-router-dom";
 import useGetOneProject from "../../../hooks/useGetOneProject.ts";
 import MoreButton from "../../common/MoreButton/MoreButton.tsx";
-import "./BacklogPage.styles.scss";
 import IssuesList from "../../common/Issue/IssuesList/IssuesList.tsx";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { useEffect } from "react";
 import { fetchIssuesByProjectId } from "../../../store/issues/issuesThunks.ts";
+
+import "./BacklogPage.styles.scss";
 
 const BacklogPage = () => {
   const { projectLink } = useParams();
@@ -55,7 +56,7 @@ const BacklogPage = () => {
             </div>
           </div>
           <div className={`${themeClass}_content`}>
-            <IssuesList issues={issues} isLoading={isLoadingIssues} />
+            <IssuesList issues={issues} isLoading={isLoadingIssues} isBacklog />
           </div>
         </div>
       </div>

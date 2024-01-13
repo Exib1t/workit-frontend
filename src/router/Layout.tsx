@@ -4,6 +4,7 @@ import { useAppSelector } from "../store";
 import ErrorModal from "../components/common/ErrorModal/ErrorModal.tsx";
 import { Box } from "@mui/material";
 import LinearDeterminate from "../components/control/LinearDeterminate/LinearDeterminate.tsx";
+import Chat from "../components/common/Chat/Chat.tsx";
 
 const Layout = () => {
   const { isLoading: isLoadingAuth } = useAppSelector((state) => state.auth);
@@ -36,6 +37,7 @@ const Layout = () => {
       <div className="outlet">
         <Outlet />
       </div>
+      <Chat />
       <ErrorModal />
     </>
   );
