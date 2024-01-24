@@ -2,12 +2,12 @@ import { FC } from "react";
 import useThemeClass from "../../../../hooks/useThemeClass.ts";
 import UserPlaceholder from "../../UserPlaceholder/UserPlaceholder.tsx";
 import { IComment } from "../../../../models/IComment/IComment.ts";
-import ReactHtmlParser from "react-html-parser";
-
-import "./IssueComment.styles.scss";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import SystemButton from "../../../control/SystemButton/SystemButton.tsx";
 import { deleteComment } from "../../../../store/comments/commentsThunk.ts";
+import parse from 'html-react-parser';
+
+import "./IssueComment.styles.scss";
 
 const millisecondsInMinute = 60 * 1000;
 const millisecondsInHour = 60 * millisecondsInMinute;
@@ -96,7 +96,7 @@ const IssueComment: FC<IProps> = ({
         </div>
       </div>
       <div className={`${themeClass}_content`}>
-        {ReactHtmlParser(comment.body)}
+        {parse(comment.body)}
       </div>
     </div>
   );
