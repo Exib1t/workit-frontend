@@ -28,6 +28,7 @@ const AppRouter = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const themeClass = useThemeClass("b-container");
 
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const theme = localStorage.getItem("theme");
