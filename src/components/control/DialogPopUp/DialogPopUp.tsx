@@ -118,7 +118,7 @@ const DialogPopUp = ({
                 className={cn(`${themeClass}_closeIcon`, {
                   ["hide"]: !!isHideRemoveIcon,
                 })}
-                onClick={onClose}
+                onClick={(e) => onClose(e, 'backdropClick')}
               >
                 <SystemButton
                   type={"close"}

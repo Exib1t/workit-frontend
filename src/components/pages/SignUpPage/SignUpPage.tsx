@@ -64,7 +64,7 @@ const SignUpPage = () => {
     }
   }, [authErrors]);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement> | any) => {
     setData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
     setErrors((prevState) => ({
       ...prevState,
