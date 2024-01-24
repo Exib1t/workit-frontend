@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Exib1t.github.io/workit-frontend/",
+  "homepage": "https://exib1t.github.io/workit-frontend/",
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc && vite build",
