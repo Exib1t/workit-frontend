@@ -80,7 +80,7 @@ const AppRouter = () => {
       <Route index element={<Navigate to={AppRoutes.signIn} />} />
       <Route path={AppRoutes.signIn} element={<SignInPage />} />
       <Route path={AppRoutes.signUp} element={<SignUpPage />} />
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="*" element={<Navigate to={AppRoutes.signIn} />} />
     </>
   );
 
