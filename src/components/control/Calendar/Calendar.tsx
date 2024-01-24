@@ -7,9 +7,9 @@ import { useCallback, useEffect, useState } from "react";
 import { fetchIssuesByProjectId } from "../../../store/issues/issuesThunks.ts";
 import { IIssue } from "../../../models/IIssue/IIssue.ts";
 import CalendarDay from "./parts/CalendarDay/CalendarDay.tsx";
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
 
 import "./Calendar.styles.scss";
-import { DndContext, DragEndEvent } from "@dnd-kit/core";
 
 const Calendar = () => {
   const dispatch = useAppDispatch();
