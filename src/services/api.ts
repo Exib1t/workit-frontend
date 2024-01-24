@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, {AxiosRequestHeaders} from "axios";
 import { Resources } from "./resources.ts";
 
 const token = localStorage.getItem("token");
@@ -12,7 +12,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  config.headers = config.headers ?? {};
+  config.headers = config.headers ?? {} as AxiosRequestHeaders;
   config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
   return config;
 });

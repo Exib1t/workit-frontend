@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { useAppDispatch, useAppSelector } from "../store";
 import { setChatData } from "../store/chat/chatSlice.ts";
+import {Resources} from "../services/resources.ts";
 
 export default function useChatSocket() {
   const [socket, setSocket] = useState<Socket>();
@@ -9,7 +10,7 @@ export default function useChatSocket() {
   const { data } = useAppSelector((state) => state.chat);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:8000");
+    const newSocket = io(Resources.BACKEND_URL);
     setSocket(newSocket);
   }, []);
 
