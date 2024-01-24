@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://exib1t.github.io/workit-frontend/",
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc && vite build",
@@ -21,6 +20,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
+    "firebase": "^10.7.2",
     "html-react-parser": "^5.1.1",
     "moment": "^2.29.4",
     "prettier": "^3.0.1",
