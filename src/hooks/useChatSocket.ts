@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
+import  {io, Socket } from "socket.io-client";
 import { useAppDispatch, useAppSelector } from "../store";
 import { setChatData } from "../store/chat/chatSlice.ts";
 import {Resources} from "../services/resources.ts";
@@ -8,11 +8,12 @@ export default function useChatSocket() {
   const [socket, setSocket] = useState<Socket>();
   const dispatch = useAppDispatch();
   const { data } = useAppSelector((state) => state.chat);
+  const { token } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    const newSocket = io(Resources.BACKEND_URL);
+    const newSocket = io(Resources.BACKEND_URL, {transports: ['websocket'], reconnectionAttempts: 5});
     setSocket(newSocket);
-  }, []);
+  }, [token]);
 
   const handleSend = (data: string) => {
     socket?.emit("chat-create", data);

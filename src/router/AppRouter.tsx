@@ -73,7 +73,7 @@ const AppRouter = () => {
       <Route path={AppRoutes.projectBacklog} element={<BacklogPage />} />
       <Route path={AppRoutes.issues} element={<IssuesPage />} />
       <Route path={AppRoutes.issue} element={<IssuePage />} />
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="*" element={<Navigate to={AppRoutes.projects} />} />
     </>
   );
   const authRoutes = () => (
