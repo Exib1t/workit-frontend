@@ -6,6 +6,7 @@ import {
 } from "../../models/IComment/IComment.ts";
 import api from "../../services/api.ts";
 import { AdditionalCallbacks } from "../../models/reducers/index.types.ts";
+import CommentsApi from "../../services/Api/comments/CommentsApi.ts";
 
 export const fetchCommentsByIssueId = createAsyncThunk<
   IComment[],
@@ -14,9 +15,7 @@ export const fetchCommentsByIssueId = createAsyncThunk<
   "comments/fetchCommentsByIssueId",
   async ({ issueId, projectId }, thunkAPI) => {
     try {
-      const response = await api.get(
-        `projects/${projectId}/issues/${issueId}/comments`,
-      );
+      const response = await CommentsApi.getCommentsByIssueId(projectId, issueId);
 
       return response.data;
     } catch (err: any) {
@@ -40,10 +39,7 @@ export const createComment = createAsyncThunk<
     thunkAPI,
   ) => {
     try {
-      const response = await api.post(
-        `projects/${projectId}/issues/${issueId}/comments`,
-        data,
-      );
+      const response = await CommentsApi.createComment(projectId, issueId, data);
       onSuccess && onSuccess();
       return response.data;
     } catch (err: any) {
@@ -68,10 +64,7 @@ export const updateComment = createAsyncThunk<
     thunkAPI,
   ) => {
     try {
-      const response = await api.patch(
-        `projects/${projectId}/issues/${issueId}/comments/${updatedComment.id}`,
-        updatedComment,
-      );
+      const response = await CommentsApi.updateComment(projectId, issueId, updatedComment.id, updatedComment);
       onSuccess && onSuccess();
       return response.data;
     } catch (err: any) {
@@ -96,9 +89,7 @@ export const deleteComment = createAsyncThunk<
     thunkAPI,
   ) => {
     try {
-      const response = await api.delete(
-        `projects/${projectId}/issues/${issueId}/comments/${commentId}`,
-      );
+      const response = await CommentsApi.deleteComment(projectId, issueId, commentId);
       onSuccess && onSuccess();
       return response.data;
     } catch (err: any) {

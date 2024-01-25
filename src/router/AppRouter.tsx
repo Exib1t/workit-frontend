@@ -13,7 +13,6 @@ import ProjectsPage from "../components/pages/ProjectsPage/ProjectsPage.tsx";
 import { setTheme } from "../store/global/globalSlice.ts";
 import ComponentsPage from "../components/pages/ComponentsPage/ComponentsPage.tsx";
 import ProjectPage from "../components/pages/ProjectPage/ProjectPage.tsx";
-import NotFoundPage from "../components/pages/NotFoundPage/NotFoundPage.tsx";
 import IssuesPage from "../components/pages/IssuesPage/IssuesPage.tsx";
 import IssuePage from "../components/pages/IssuePage/IssuePage.tsx";
 import { fetchUserById } from "../store/user/userThunks.ts";
